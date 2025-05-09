@@ -10,7 +10,7 @@ import { User } from '@/types';
 
 
 const REPO: string = "data"; // Repo name
-const OWNER: string = "StageUNIPD"; // Owner of the repo
+const OWNER: string = "orlifera"; // Owner of the repo
 const FILE_PATH: string = "data/users.json"; // Path to the JSON file
 const BRANCH: string = "main"; // Branch name
 
