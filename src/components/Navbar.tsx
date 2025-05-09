@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
 import Toggle from '@/components/ui/Toggle'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { notFound, usePathname } from 'next/navigation'
 import { SquareArrowOutUpRight } from 'lucide-react'
 import Avatar from '@/components/Avatar'
 import useUser from '@/context/UserContext'
@@ -29,9 +29,9 @@ function Navbar() {
     const { user } = useUser() //passo il contesto per l'avatar e il login
 
     const pathname = usePathname() //per controllare dove sono 
-
     const currentPage: string = pathname.split('/')[1]; // Ottieni la pagina corrente
 
+    console.log('Current page:', currentPage);
 
     const isActive = (path: string) => pathname === path
 

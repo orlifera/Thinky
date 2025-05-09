@@ -5,14 +5,12 @@ import { fetchUsers, updateUsersAuto } from "@/helper/gh";
 import { User } from "@/types";
 import Loader from "@/components/ui/loader";
 import useUser from "@/context/UserContext";
-// import { motion } from "motion/react";
-// import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User | null>(null);
-  const { setUser: setUserCtx } = useUser(); // prendi setUser dal context
+  const { setUser: setUserCtx } = useUser(); // prendi setUser dal contesto
   const [loading, setLoading] = useState(true);
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -32,7 +30,7 @@ export default function Home() {
           );
           if (exists) {
             setUser(parsed);
-            setUserCtx(parsed); // ✅ aggiorna il contesto
+            setUserCtx(parsed); // aggiorna il contesto
           } else {
             sessionStorage.removeItem("user");
           }
@@ -49,7 +47,8 @@ export default function Home() {
         console.error("Errore nel caricamento utenti:", err);
         setLoading(false);
       });
-  }, [setUserCtx]); // dipendenza necessaria
+  }, [setUserCtx]);
+
 
   const handleConfirm = async (username: string, school: string, date: string) => {
     const newUser: User = { username, school, date };
@@ -69,7 +68,7 @@ export default function Home() {
 
       sessionStorage.setItem("user", JSON.stringify(newUser));
       setUser(newUser);
-      setUserCtx(newUser); // ✅ aggiorna il contesto
+      setUserCtx(newUser); // aggiorna il contesto del nuovo utente
     } catch (error) {
       console.error("Errore nel salvataggio dell’utente:", error);
       alert("Errore nel salvataggio. Riprova.");
@@ -92,7 +91,6 @@ export default function Home() {
       {
         user && !loading && (
           <>
-            {/* <BC currentPage={null} /> */}
             <div className="h-[150em] w-full rounded-lg">
             </div>
             <p id="main-content" className="mb-5">
