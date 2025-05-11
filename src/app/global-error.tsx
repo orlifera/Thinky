@@ -30,6 +30,13 @@ export default function GlobalError({
                 <Button onClick={() => reset()} className="mt-4">
                     Prova di nuovo
                 </Button>
+                <div className="mt-4">
+                    More info:
+                    {error.message}
+                    {error.stack}
+                    {error.name}
+                    {error.digest}
+                </div>
             </body>
         </html>
     )
