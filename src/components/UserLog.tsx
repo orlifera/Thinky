@@ -107,7 +107,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                 <Label htmlFor="school" className="block mb-2">
                     Scuola di provenienza
                     <Select onValueChange={setSchool} defaultValue="">
-                        <SelectTrigger id="school" className="w-full mt-2 bg-white text-black p-2 rounded">
+                        <SelectTrigger id="school" className="w-full mt-2 bg-white p-2 rounded">
                             <SelectValue placeholder="La tua scuola" />
                         </SelectTrigger>
                         <SelectContent>
@@ -115,7 +115,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                                 <SelectItem
                                     key={index}
                                     value={school}
-                                    className="bg-white text-black p-2 rounded"
+                                    className="bg-white text-black hover:text-white p-2 rounded"
                                 >
                                     {school}
                                 </SelectItem>
@@ -139,7 +139,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
 
                 <Button
                     onClick={handleSubmit}
-                    className="bg-white text-primary px-4 py-2 rounded w-full"
+                    className="bg-white text-primary hover:text-white px-4 py-2 rounded w-full"
                     type="button"
                 >
                     Inizia
