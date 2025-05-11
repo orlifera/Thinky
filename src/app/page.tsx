@@ -90,13 +90,13 @@ export default function Home() {
       }
       {
         user && !loading && (
-          <>
-            <div className="h-[150em] w-full rounded-lg">
+          <main className="flex mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-[calc(100vh-4rem)]">
+            <h1 className="flex pt-8 font-extrabold text-4xl text-center text-foreground"> Benvenuto in Thinky {user.username}!</h1>
+            <div id="main-content" className="h-full w-full flex flex-col items-center justify-center gap-4">
+
+
             </div>
-            <p id="main-content" className="mb-5">
-              Questo è un placeholder per lo skip al maincontent
-            </p>
-          </>
+          </main >
         )
       }
     </>

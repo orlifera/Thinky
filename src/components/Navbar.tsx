@@ -176,7 +176,7 @@ function Navbar() {
                 <BC currentPage={currentPage} />
             </>) :
             (
-                <nav aria-roledescription='navbar' aria-label='nav bar' className='text-white flex items-center justify-between p-4 fixed bottom-0 w-full bg-primary'>
+                <nav aria-roledescription='navbar' aria-label='nav bar' className='text-white flex items-center justify-between p-4 z-50 fixed bottom-0 w-full bg-primary'>
                     <ul aria-label='nav list' className='w-full flex items-center justify-between text-center'>
                         <li aria-label='nav item'>
                             <Link href='/' className={`w-full h-full p-3 rounded-md transition ${isActive('/') ? 'bg-white text-primary font-bold' : ''

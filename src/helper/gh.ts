@@ -12,7 +12,7 @@ import { User } from '@/types';
 const REPO: string = "data"; // Repo name
 const OWNER: string = "orlifera"; // Owner of the repo
 const FILE_PATH: string = "data/users.json"; // Path to the JSON file
-const BRANCH: string = "main"; // Branch name
+const BRANCH: string = "master"; // Branch name
 
 // Check for required environment variable
 if (!process.env.NEXT_PUBLIC_GITHUB_TOKEN) {
