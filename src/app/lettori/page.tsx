@@ -1,6 +1,5 @@
 
 import React from 'react'
-import BC from '@/components/BC'
 
 
 function page() {

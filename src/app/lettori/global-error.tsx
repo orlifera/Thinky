@@ -24,7 +24,7 @@ export default function GlobalError({
                     <AlertCircle className="h-4 w-4" />
                     <AlertTitle>Error</AlertTitle>
                     <AlertDescription>
-                        C'è stato un errore, per favore prova di nuovo.
+                        C&apos;è stato un errore, per favore prova di nuovo.
                     </AlertDescription>
                 </Alert>
                 <Button onClick={() => reset()} className="mt-4">
