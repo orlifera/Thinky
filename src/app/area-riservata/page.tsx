@@ -13,7 +13,7 @@ export default async function areaRiservata() {
     return (
         <div>
             <h1>Benvenuta prof!</h1>
-            <p>Questa è l'area riservata</p>
+            <p>Questa è l&apos;area riservata</p>
         </div>
     )
 }

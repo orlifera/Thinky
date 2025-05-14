@@ -58,7 +58,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
             setError("Compila tutti i campi.");
         } else if (existingUsernames.map(u => u.toLowerCase()).includes(trimmed.toLowerCase()) && date == formatDate(data)) {
             setError("Questo nome è già stato preso.");
-        } else if (username.includes(badWords[0]) || filter.isProfane(trimmed)) {
+        } else if (username.includes(badWords[0]) || filter.isProfane(sanitized)) {
             setError("Il nome utente contiene parole non appropriate.");
         } else {
             sessionStorage.setItem("user", JSON.stringify({ username: trimmed, school, date }));
