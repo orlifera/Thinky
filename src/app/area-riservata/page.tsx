@@ -1,10 +1,19 @@
-import React from 'react'
 
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-function page() {
+export default async function areaRiservata() {
+    const cookieStore = await cookies()
+    const isAuthed = cookieStore.get('prof_auth')?.value === 'ok'
+
+    if (!isAuthed) {
+        redirect('/accesso')  // Reindirizza se non autenticato
+    }
+
     return (
-        <div>page</div>
+        <div>
+            <h1>Benvenuta prof!</h1>
+            <p>Questa è l'area riservata</p>
+        </div>
     )
 }
-
-export default page

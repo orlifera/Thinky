@@ -6,14 +6,13 @@ import { formatDate } from "@/helper/formatDate";
 import { randomUsername, schools, badWords } from "@/data/index";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
+// import {
+//     Select,
+//     SelectContent,
+//     SelectItem,
+//     SelectTrigger,
+//     SelectValue,
+// } from "@/components/ui/select"
 /**
  * @description Componente del popup per la registrazione dell'utente.
  * 
@@ -57,9 +56,9 @@ export default function UserLog({ existingUsernames, onConfirm }: {
 
         if (!trimmed || !school) {
             setError("Compila tutti i campi.");
-        } else if (existingUsernames.map(u => u.toLowerCase()).includes(trimmed.toLowerCase())) {
-            setError("Questo nome è già usato.");
-        } else if (filter.isProfane(sanitized)) {
+        } else if (existingUsernames.map(u => u.toLowerCase()).includes(trimmed.toLowerCase()) && date == formatDate(data)) {
+            setError("Questo nome è già stato preso.");
+        } else if (username.includes(badWords[0]) || filter.isProfane(trimmed)) {
             setError("Il nome utente contiene parole non appropriate.");
         } else {
             sessionStorage.setItem("user", JSON.stringify({ username: trimmed, school, date }));
@@ -78,39 +77,54 @@ export default function UserLog({ existingUsernames, onConfirm }: {
         >
             <div className="bg-primary/60 dark:bg-primary/50 p-6 rounded-xl w-[90%] max-w-md shadow-xl text-white">
                 <h2 id="userlog-title" className="text-xl font-semibold mb-4">
-                    Benvenuto!<span role="decoration">🎉</span> Scegli il tuo nome
+                    Benvenuto!<span aria-hidden>🎉</span> Scegli il tuo nome
                 </h2>
+                <form>
+                    <Label htmlFor="username-label" className="block">
+                        Nome utente
+                    </Label>
 
-                <Label htmlFor="username" className="block">
-                    Nome utente
                     <Input
-                        id="username"
+                        id="username-label"
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
-                        className="bg-white text-black p-2 w-full mt-2 rounded"
+                        className="bg-white  p-2 w-full mt-2 rounded"
                         placeholder="Es. Gatto Rosso"
                         aria-describedby="username-desc"
                     />
-                </Label>
 
-                <Button
-                    onClick={() => setUsername(getRandomUsername())}
-                    className="text-sm text-blue-300 underline mb-4 p-0"
-                    type="button"
-                    id="username-desc"
-                    variant="link"
-                >
-                    Genera un nome casuale
-                </Button>
+                    <Button
+                        onClick={() => setUsername(getRandomUsername())}
+                        className="text-sm text-blue-300 underline mb-4 p-0"
+                        type="button"
+                        id="username-desc"
+                        variant="link"
+                    >
+                        Genera un nome casuale
+                    </Button>
 
-                <Label htmlFor="school" className="block mb-2">
-                    Scuola di provenienza
-                    <Select onValueChange={setSchool} defaultValue="">
-                        <SelectTrigger id="school" className="w-full mt-2 bg-white p-2 rounded">
+                    <Label htmlFor="school" className="block mb-2">
+                        Scuola di provenienza
+                        <select onChange={(e) => setSchool(e.target.value)} id="school" className="flex w-full bg-input/20 rounded border-[1px] border-white/85% text-white p-2">
+                            <option value="">La tua scuola </option>
+                            {schools.map((school, index) => (
+                                <option key={index} value={school}>
+                                    {school}
+                                </option>
+                            ))}
+                        </select>
+                    </Label>
+
+                    {/* <Label htmlFor="school-label" className="block mb-2">
+                        Scuola di provenienza
+                    </Label>
+
+                    <Select onValueChange={setSchool} defaultValue="" aria-labelledby="school-label">
+                        <SelectTrigger className="w-full mt-2 bg-white p-2 rounded" id="school-label" >
                             <SelectValue placeholder="La tua scuola" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent id="school">
                             {schools.map((school, index) => (
                                 <SelectItem
                                     key={index}
@@ -121,8 +135,8 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                                 </SelectItem>
                             ))}
                         </SelectContent>
-                    </Select>
-                </Label>
+                    </Select> */}
+                </form>
 
                 {error && (
                     <div
@@ -133,7 +147,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                         aria-live="assertive"
                     >
                         <OctagonX aria-hidden="true" />
-                        <p className="text-sm">{error}</p>
+                        <p className="text-sm flex items-baseline justify-center">{error} <span aria-hidden>😢</span></p>
                     </div>
                 )}
 
