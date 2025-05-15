@@ -6,13 +6,13 @@ import { formatDate } from "@/helper/formatDate";
 import { randomUsername, schools, badWords } from "@/data/index";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-// import {
-//     Select,
-//     SelectContent,
-//     SelectItem,
-//     SelectTrigger,
-//     SelectValue,
-// } from "@/components/ui/select"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 /**
  * @description Componente del popup per la registrazione dell'utente.
  * 
@@ -96,7 +96,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
 
                     <Button
                         onClick={() => setUsername(getRandomUsername())}
-                        className="text-sm text-blue-300 underline mb-4 p-0"
+                        className="text-sm text-blue-300 underline mb-2 p-0"
                         type="button"
                         id="username-desc"
                         variant="link"
@@ -104,24 +104,25 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                         Genera un nome casuale
                     </Button>
 
-                    <Label htmlFor="school" className="block mb-2">
+                    <Label htmlFor="school" className="block mb-2 sr-only">
                         Scuola di provenienza
-                        <select onChange={(e) => setSchool(e.target.value)} id="school" className="flex w-full bg-input/20 rounded border-[1px] border-white/85% text-white p-2">
-                            <option value="">La tua scuola </option>
-                            {schools.map((school, index) => (
-                                <option key={index} value={school}>
-                                    {school}
-                                </option>
-                            ))}
-                        </select>
                     </Label>
 
-                    {/* <Label htmlFor="school-label" className="block mb-2">
+                    <select onChange={(e) => setSchool(e.target.value)} id="school" className="sr-only flex w-full bg-input/20 rounded border-[1px] border-white/85% text-white p-2">
+                        <option value="">La tua scuola </option>
+                        {schools.map((school, index) => (
+                            <option key={index} value={school}>
+                                {school}
+                            </option>
+                        ))}
+                    </select>
+
+                    <Label htmlFor="school-label" className="block mb-2">
                         Scuola di provenienza
                     </Label>
 
                     <Select onValueChange={setSchool} defaultValue="" aria-labelledby="school-label">
-                        <SelectTrigger className="w-full mt-2 bg-white p-2 rounded" id="school-label" >
+                        <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
                             <SelectValue placeholder="La tua scuola" />
                         </SelectTrigger>
                         <SelectContent id="school">
@@ -135,7 +136,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                                 </SelectItem>
                             ))}
                         </SelectContent>
-                    </Select> */}
+                    </Select>
                 </form>
 
                 {error && (
@@ -153,7 +154,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
 
                 <Button
                     onClick={handleSubmit}
-                    className="bg-white text-primary hover:text-white px-4 py-2 rounded w-full"
+                    className="bg-white text-primary hover:text-white px-4 py-2 rounded w-full mt-4"
                     type="button"
                 >
                     Inizia
