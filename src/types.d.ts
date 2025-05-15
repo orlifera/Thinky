@@ -4,7 +4,7 @@
  * @author [Orlando Ferazzani]
  */
 
-export type TODO = any;
+// export type TODO = any;
 
 // tipo definito per gli user
 export type User = {
