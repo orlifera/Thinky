@@ -23,7 +23,7 @@ export default function Container({
     return (
         <div
             ref={setNodeRef}
-            className="flex h-full min-h-40 flex-col rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800/50"
+            className="flex h-full flex-col rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800/50"
         >
             <h3 className="mb-2 font-medium text-gray-700 dark:text-gray-200">{title}</h3>
             <div className="flex-1">
