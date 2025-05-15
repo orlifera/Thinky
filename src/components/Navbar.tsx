@@ -79,6 +79,9 @@ function Navbar() {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
+    if (!isMounted) {
+        return null; // Non renderizzare nulla finché il componente non è montato
+    }
 
     return (
         width > 768 ?

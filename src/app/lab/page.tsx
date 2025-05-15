@@ -12,7 +12,7 @@ import {
     useSensor,
     useSensors,
     closestCorners,
-    DragOverlay
+    // DragOverlay
 } from "@dnd-kit/core"
 
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
