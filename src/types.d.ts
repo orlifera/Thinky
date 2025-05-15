@@ -4,6 +4,8 @@
  * @author [Orlando Ferazzani]
  */
 
+export type TODO = any;
+
 // tipo definito per gli user
 export type User = {
     username: string;
@@ -24,4 +26,19 @@ export type AvatarProps = {
 export type UserContextType = {
     user: User | null
     setUser: (user: User | null) => void
+}
+
+
+export interface Item {
+    id: string
+    content: string
+}
+
+export interface Container {
+    id: string
+    items: Item[]
+}
+export interface Item {
+    id: string
+    content: string
 }

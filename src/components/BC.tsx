@@ -4,7 +4,7 @@ import { BCProps } from "@/types"
 
 export default function BC({ currentPage }: BCProps) {
     return (
-        <div className=" sm:mx-2 sm:rounded-b-lg p-2 flex bg-primary/30 items-baseline gap-2 justify-start"
+        <div className=" md:mx-2 md:rounded-b-lg p-2 flex bg-primary/30 items-baseline gap-2 justify-start"
             aria-label='Breadcrumb'
         >
             <p className="text-sm">Ti trovi in:</p>

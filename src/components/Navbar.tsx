@@ -79,11 +79,6 @@ function Navbar() {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    // Se il componente non è ancora montato, non renderizzare nulla
-    if (!isMounted) {
-        return null; // O puoi mettere un caricamento
-    }
-
 
     return (
         width > 768 ?
@@ -202,7 +197,12 @@ function Navbar() {
                         {user &&
                             <li className='group' onClick={() => isMobile && setIsVisible(!isVisible)}>
                                 <Avatar username={user.username} />
-                                <div className={`absolute text-center right-12 bottom-8 ${isMobile ? (isVisible ? 'block' : 'hidden') : `'hidden group-hover:block'`} bg-ring p-4 min-w-[10em] min-h-[5em] rounded-t-md rounded-bl-md text-white`}>
+                                <div
+                                    className={`absolute  ${isMobile ? (isVisible ? 'block' : 'hidden') : 'hidden group-hover:block group-focus-within:block'} right-0 md:top-full md:mt-2 bottom-full mb-2 md:bottom-auto md:mb-0 bg-ring p-4 min-w-[15em] rounded-md text-white z-50`}
+                                    role="menu"
+                                    aria-hidden={!isVisible}
+                                >
+
                                     <p>Ciao {user.username}, benvenuto! <span role="decoration">🎉</span></p>
                                     <p>{user.school}</p>
                                     <Link href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze' target='_blank' className="flex items-center justify-center text-center underline rounded-md visited:text-purple-700 transition ">
