@@ -89,7 +89,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
-                        className="bg-white  p-2 w-full mt-2 rounded"
+                        className="bg-white text-black dark:text-white  p-2 w-full mt-2 rounded"
                         placeholder="Es. Gatto Rosso"
                         aria-describedby="username-desc"
                     />

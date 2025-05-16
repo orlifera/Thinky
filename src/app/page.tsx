@@ -5,14 +5,22 @@ import { fetchUsers, updateUsersAuto } from "@/helper/gh";
 import { User } from "@/types";
 import Loader from "@/components/ui/loader";
 import useUser from "@/context/UserContext";
-import { Button } from "@/components/ui/button";
+import { Link as LinkIcon } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
 
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
-  const [user, setUser] = useState<User | null>(null);
-  const { setUser: setUserCtx } = useUser(); // prendi setUser dal contesto
   const [loading, setLoading] = useState(true);
+  const { user, setUser } = useUser(); // Get user and setUser from context
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -30,16 +38,13 @@ export default function Home() {
             (u) => u.username === parsed.username && u.school === parsed.school
           );
           if (exists) {
-            setUser(parsed);
-            setUserCtx(parsed); // aggiorna il contesto
+            setUser(parsed); // update context only
           } else {
             sessionStorage.removeItem("user");
           }
         }
 
-        if (firstVisit) {
-          await sleep(500);
-        }
+        if (firstVisit) await sleep(500);
 
         sessionStorage.setItem("hasVisited", "true");
         setLoading(false);
@@ -48,8 +53,7 @@ export default function Home() {
         console.error("Errore nel caricamento utenti:", err);
         setLoading(false);
       });
-  }, [setUserCtx]);
-
+  }, [setUser]);
 
   const handleConfirm = async (username: string, school: string, date: string) => {
     const newUser: User = { username, school, date };
@@ -68,8 +72,7 @@ export default function Home() {
       }
 
       sessionStorage.setItem("user", JSON.stringify(newUser));
-      setUser(newUser);
-      setUserCtx(newUser); // aggiorna il contesto del nuovo utente
+      setUser(newUser); // update context only
     } catch (error) {
       console.error("Errore nel salvataggio dell’utente:", error);
       alert("Errore nel salvataggio. Riprova.");
@@ -91,22 +94,85 @@ export default function Home() {
       }
       {
         user && !loading && (
-          <main className="flex md:mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-[calc(100vh-4rem)]">
-            <h1 className="flex pt-8 font-extrabold text-4xl text-center text-foreground"> Benvenuto in Thinky {user.username}!</h1>
+          <main className="flex md:mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-auto min-h-screen">
+            <div className="relative  w-full h-[25em] md:h-[35em] flex items-center justify-center text-white overflow-hidden ">
+              {/* Background image */}
+              <div className="absolute mb-8 inset-0 z-0 w-full">
+                <Image
+                  src="/thinky.png" // use your Thinky-style banner
+                  alt="Background"
+                  layout="fill"
+                  objectFit="cover"
+                  className="brightness-30"
+                />
+              </div>
+
+              {/* Text content */}
+              <div className="relative z-20 text-center px-6 max-w-4xl">
+                <h1 className="text-5xl font-extrabold mb-4">BENVENUTO IN THINKY {user.username}</h1>
+                <p className="text-lg font-light leading-relaxed">
+                  La prima piattaforma interattiva per farti conoscere il mondo della programmazione interamente sviluppata da UniPD.
+                </p>
+              </div>
+            </div>
+
             <div id="main-content" className="h-full w-full flex flex-col items-center justify-center gap-4">
 
-              <Button
-                variant="default"
-                className="w-1/2 md:w-1/3 lg:w-1/4"
-                onClick={() => {
-                  window.location.href = "/lab";
-                }}
-              >
-                Vai al laboratorio
-              </Button>
 
+              <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">
+                <div className="bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex flex-col justify-center">
+                  <p className="w-[60%]">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis perferendis et, totam aliquam quam voluptatibus autem numquam eligendi! Dolorem provident animi esse illum voluptatibus voluptatem cumque officiis officia molestias dolore!
+                  </p>
+                  {/* <Image /> */}
+                </div>
+                <div className="bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex flex-col justify-center">
+                  <p className="w-[60%]">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis perferendis et, totam aliquam quam voluptatibus autem numquam eligendi! Dolorem provident animi esse illum voluptatibus voluptatem cumque officiis officia molestias dolore!
+                  </p>
+                  {/* <Image /> */}
+                </div>
+                <div className="bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex flex-col justify-center">
+                  <p className="w-[60%]">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis perferendis et, totam aliquam quam voluptatibus autem numquam eligendi! Dolorem provident animi esse illum voluptatibus voluptatem cumque officiis officia molestias dolore!
+                  </p>
+                  {/* <Image /> */}
+                </div>
+              </div>
 
             </div>
+            <div id="">
+              <h3 className="text-2xl font-bold text-white mt-4">Inizia subito!</h3>
+              <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl from-white/30 to-primary/70 hover:bg-gradient-to-br hover:from-white/50 hover:to-primary/50 hover:translate-1 text-white items-center justify-center">
+                <LinkIcon className="m-1" /> Inizia
+              </Link>
+            </div>
+
+
+            <div id="faq" className="flex flex-col items-center justify-center gap-4 w-full max-w-2xl m-4 p-4">
+              <Accordion type="single" collapsible className="w-full max-w-2xl p-4 text-lg bg-secondary/50 rounded-lg shadow-md m-4">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="w-full">È accessibile?</AccordionTrigger>
+                  <AccordionContent>
+                    Si! Thinky è completamente accessibile rispettndo gli standard WCAG 2.1 e le linee guida WAI-ARIA.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>FAQ 2?</AccordionTrigger>
+                  <AccordionContent>
+                    Risposta FAQ2
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>FAQ 3?</AccordionTrigger>
+                  <AccordionContent>
+                    Risposta FAQ3
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+
+            </div>
+
           </main >
         )
       }
