@@ -14,6 +14,8 @@ import {
     closestCorners,
     // DragOverlay
 } from "@dnd-kit/core"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import DroppableContainer from "@/app/lab/components/DroppableContainer"
 import { Item } from "@/app/lab/components/DroppableContainer"
@@ -84,7 +86,7 @@ export default function page() {
     }, []);
 
 
-    const existingCode = ["`typescript bruh`", "`typescript bruh`", , `console.log("bruh")`]
+    const existingCode = ["` bruh`", "` bruh`", "`console.log('bruh')`"]
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -200,6 +202,8 @@ export default function page() {
     //     }
     // }
 
+    console.log(existingCode);
+
 
     return (
         <div className="mx-auto w-full h-screen">
@@ -218,37 +222,81 @@ export default function page() {
                 >
                     <div className="flex mx-[2em] justify-between gap-4 items-start">
 
-                        <div className=" md:w-[45%] w-[80%] m-auto gap-4 flex flex-col">
-                            <DroppableContainer
-                                id={containers[0].id}
-                                title={containers[0].title}
-                                items={containers[0].items}
-                            />
+                        {width >= 768 ?
+                            <>
+                                <div className=" w-[45%]  m-auto gap-4 flex flex-col">
+                                    <DroppableContainer
+                                        id={containers[0].id}
+                                        title={containers[0].title}
+                                        items={containers[0].items}
+                                    />
 
-                            <MarkDown content={existingCode[1] ?? ""} />
+                                    <MarkDown content={existingCode[1] ?? ""} />
 
 
-                            <p>
-                                CODICE ESEMPIO
-                            </p>
+                                    <p>
+                                        CODICE ESEMPIO
+                                    </p>
 
-                            <DroppableContainer
-                                id={containers[1].id}
-                                title={containers[1].title}
-                                items={containers[1].items}
-                            />
-                        </div>
-                        <div className="md:block hidden md:w-[45%] md:sticky md:right-10 md:self-start ">
-                            <DroppableContainer
-                                id={containers[2].id}
-                                title={containers[2].title}
-                                items={containers[2].items}
-                            />
-                        </div>
-                        <div className="md:hidden block">
+                                    <DroppableContainer
+                                        id={containers[1].id}
+                                        title={containers[1].title}
+                                        items={containers[1].items}
+                                    />
+                                </div>
+                                <div className=" w-[45%] sticky right-10 self-start ">
+                                    <DroppableContainer
+                                        id={containers[2].id}
+                                        title={containers[2].title}
+                                        items={containers[2].items}
+                                    />
+                                </div>
+                            </> :
+                            <>
+                                <ul className="w-full m-auto gap-4 flex flex-col h-auto">
+                                    <li> <MarkDown content={existingCode[1] ?? ""} /></li>
+                                    <li> <Select defaultValue="" aria-labelledby="school-label">
+                                        <SelectTrigger className="w-full text-black dark:text-white bg-white p-8 rounded" >
+                                            <SelectValue placeholder="La tua scelta" />
+                                        </SelectTrigger>
+                                        <SelectContent id="school">
+                                            {containers[2].items.map((item, index) => (
+                                                <SelectItem
+                                                    key={index}
+                                                    value={item.content}
+                                                    className="bg-white text-black hover:text-white p-2 m-2 rounded"
+                                                >
+                                                    <MarkDown content={item.content} />
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    </li>
+                                    <li> <MarkDown content={existingCode[2] ?? ""} /></li>
+                                    <li> <Select defaultValue="" aria-labelledby="school-label">
+                                        <SelectTrigger className="w-full text-black dark:text-white bg-white p-8 rounded" >
+                                            <SelectValue placeholder="La tua scelta" />
+                                        </SelectTrigger>
+                                        <SelectContent id="school">
+                                            {containers[2].items.map((item, index) => (
+                                                <SelectItem
+                                                    key={index}
+                                                    value={item.content}
+                                                    className="bg-white text-black hover:text-white p-2 m-2 rounded"
+                                                >
+                                                    <MarkDown content={item.content} />
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    </li>
 
-                        </div>
+
+                                </ul>
+                            </>
+                        }
                     </div>
+
 
                     {/* <DragOverlay>
                     <ItemOverlay>
@@ -256,8 +304,8 @@ export default function page() {
                     </ItemOverlay>
                 </DragOverlay> */}
                 </DndContext>
-            </div>
-        </div>
+            </div >
+        </div >
 
     )
 }
