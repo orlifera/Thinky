@@ -28,21 +28,21 @@ export default function MarkDown({ content }: { content: string }) {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]}
                 components={{
-                    p: ({ node, children }) => <div>{children}</div>,
-                    code: ({ className, children, ...props }: { className?: string; children?: ReactNode }) => {
-                        const [copied, setCopied] = useState(false);
+                    p: ({ children }) => <div>{children}</div>,
+                    code: ({ children, ...props }: { children?: ReactNode }) => {
+                        // const [copied, setCopied] = useState(false);
 
                         // Extract plain text from children
-                        const extractText = (node: ReactNode): string => {
-                            if (typeof node === "string") return node;
-                            if (Array.isArray(node)) return node.map(extractText).join("");
-                            if (React.isValidElement(node) && node.props && typeof node.props === "object" && "children" in node.props) {
-                                return extractText(node.props.children as ReactNode);
-                            }
-                            return "";
-                        };
+                        // const extractText = (node: ReactNode): string => {
+                        //     if (typeof node === "string") return node;
+                        //     if (Array.isArray(node)) return node.map(extractText).join("");
+                        //     if (React.isValidElement(node) && node.props && typeof node.props === "object" && "children" in node.props) {
+                        //         return extractText(node.props.children as ReactNode);
+                        //     }
+                        //     return "";
+                        // };
 
-                        const codeString = extractText(children);
+                        // const codeString = extractText(children);
                         // const isInline = !className && !codeString.includes("\n");
 
                         // // if (isInline) {

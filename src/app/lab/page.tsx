@@ -14,7 +14,6 @@ import {
     closestCorners,
     // DragOverlay
 } from "@dnd-kit/core"
-import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import DroppableContainer from "@/app/lab/components/DroppableContainer"
@@ -23,7 +22,6 @@ import MarkDown from "./components/MarkDown"
 
 interface Container {
     id: string
-    title: string
     items: Item[]
 }
 
@@ -38,25 +36,22 @@ interface Container {
 //     )
 // }
 
-export default function page() {
+export default function Page() {
     const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
     void activeId;
     const [containers, setContainers] = useState<Container[]>([
         {
             id: "prima",
-            title: "Prima Domanda",
             items: [
 
             ],
         },
         {
             id: "seconda",
-            title: "Seconda Domanda",
             items: [],
         },
         {
             id: "risposte",
-            title: "Risposte",
             items: [
                 { id: "task-5", content: "`Risposta 1`" },
                 { id: "task-1", content: "`Risposta 2`" },
