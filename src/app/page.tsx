@@ -5,6 +5,7 @@ import { fetchUsers, updateUsersAuto } from "@/helper/gh";
 import { User } from "@/types";
 import Loader from "@/components/ui/loader";
 import useUser from "@/context/UserContext";
+import { Button } from "@/components/ui/button";
 
 
 export default function Home() {
@@ -90,9 +91,19 @@ export default function Home() {
       }
       {
         user && !loading && (
-          <main className="flex mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-[calc(100vh-4rem)]">
+          <main className="flex md:mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-[calc(100vh-4rem)]">
             <h1 className="flex pt-8 font-extrabold text-4xl text-center text-foreground"> Benvenuto in Thinky {user.username}!</h1>
             <div id="main-content" className="h-full w-full flex flex-col items-center justify-center gap-4">
+
+              <Button
+                variant="default"
+                className="w-1/2 md:w-1/3 lg:w-1/4"
+                onClick={() => {
+                  window.location.href = "/lab";
+                }}
+              >
+                Vai al laboratorio
+              </Button>
 
 
             </div>

@@ -58,11 +58,11 @@ export default function page() {
             id: "risposte",
             title: "Risposte",
             items: [
-                { id: "task-5", content: "`Setup project`" },
-                { id: "task-1", content: "Research @dnd-kit" },
-                { id: "task-2", content: "Create basic example" },
-                { id: "task-3", content: "Write tutorial" },
-                { id: "task-4", content: "Record demo video" },
+                { id: "task-5", content: "`Risposta 1`" },
+                { id: "task-1", content: "`Risposta 2`" },
+                { id: "task-2", content: "`Risposta 3`" },
+                { id: "task-3", content: "`Risposta 4`" },
+                { id: "task-4", content: "`Risposta 5`" },
             ],
         },
     ])
@@ -86,7 +86,7 @@ export default function page() {
     }, []);
 
 
-    const existingCode = ["` bruh`", "` bruh`", "`console.log('bruh')`"]
+    const existingCode = ["` const primaPartediCodice: string = 'Ciao'`", "` let secondaParteDiCodice: string = 'Ciao'`", "`let terzaParteDiCodice: string = 'Ciao'`"]
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -225,6 +225,7 @@ export default function page() {
                         {width >= 768 ?
                             <>
                                 <div className=" w-[45%]  m-auto gap-4 flex flex-col">
+                                    <MarkDown content={existingCode[0] ?? ""} />
                                     <DroppableContainer
                                         id={containers[0].id}
                                         title={containers[0].title}
@@ -233,16 +234,13 @@ export default function page() {
 
                                     <MarkDown content={existingCode[1] ?? ""} />
 
-
-                                    <p>
-                                        CODICE ESEMPIO
-                                    </p>
-
                                     <DroppableContainer
                                         id={containers[1].id}
                                         title={containers[1].title}
                                         items={containers[1].items}
                                     />
+
+                                    <MarkDown content={existingCode[2] ?? ""} />
                                 </div>
                                 <div className=" w-[45%] sticky right-10 self-start ">
                                     <DroppableContainer
@@ -254,7 +252,7 @@ export default function page() {
                             </> :
                             <>
                                 <ul className="w-full m-auto gap-4 flex flex-col h-auto">
-                                    <li> <MarkDown content={existingCode[1] ?? ""} /></li>
+                                    <li> <MarkDown content={existingCode[0] ?? ""} /></li>
                                     <li> <Select defaultValue="" aria-labelledby="school-label">
                                         <SelectTrigger className="w-full text-black dark:text-white bg-white p-8 rounded" >
                                             <SelectValue placeholder="La tua scelta" />
@@ -277,7 +275,7 @@ export default function page() {
                                         <SelectTrigger className="w-full text-black dark:text-white bg-white p-8 rounded" >
                                             <SelectValue placeholder="La tua scelta" />
                                         </SelectTrigger>
-                                        <SelectContent id="school">
+                                        <SelectContent id="items">
                                             {containers[2].items.map((item, index) => (
                                                 <SelectItem
                                                     key={index}
