@@ -228,7 +228,6 @@ export default function page() {
                                     <MarkDown content={existingCode[0] ?? ""} />
                                     <DroppableContainer
                                         id={containers[0].id}
-                                        title={containers[0].title}
                                         items={containers[0].items}
                                     />
 
@@ -236,7 +235,6 @@ export default function page() {
 
                                     <DroppableContainer
                                         id={containers[1].id}
-                                        title={containers[1].title}
                                         items={containers[1].items}
                                     />
 
@@ -245,7 +243,6 @@ export default function page() {
                                 <div className=" w-[45%] sticky right-10 self-start ">
                                     <DroppableContainer
                                         id={containers[2].id}
-                                        title={containers[2].title}
                                         items={containers[2].items}
                                     />
                                 </div>

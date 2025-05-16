@@ -11,11 +11,9 @@ export interface Item {
 
 export default function Container({
     id,
-    title,
     items,
 }: {
     id: string
-    title: string
     items: Item[]
 }) {
     const { setNodeRef } = useDroppable({ id })

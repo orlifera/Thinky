@@ -2,7 +2,6 @@ import React, { useState, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
-import { Copy, Check } from "lucide-react";
 import "highlight.js/styles/github-dark.css";
 
 export default function MarkDown({ content }: { content: string }) {
@@ -44,20 +43,20 @@ export default function MarkDown({ content }: { content: string }) {
                         };
 
                         const codeString = extractText(children);
-                        const isInline = !className && !codeString.includes("\n");
+                        // const isInline = !className && !codeString.includes("\n");
 
-                        // if (isInline) {
-                        //     return <code className="bg-gray-800 text-white px-1  rounded">{children}</code>;
-                        // }
+                        // // if (isInline) {
+                        // //     return <code className="bg-gray-800 text-white px-1  rounded">{children}</code>;
+                        // // }
 
-                        const match = /language-(\w+)/.exec(className || "");
-                        const language = match ? match[1].toUpperCase() : "TXT";
+                        // const match = /language-(\w+)/.exec(className || "");
+                        // const language = match ? match[1].toUpperCase() : "TXT";
 
-                        const handleCopy = () => {
-                            navigator.clipboard.writeText(codeString);
-                            setCopied(true);
-                            setTimeout(() => setCopied(false), 2000);
-                        };
+                        // const handleCopy = () => {
+                        //     navigator.clipboard.writeText(codeString);
+                        //     setCopied(true);
+                        //     setTimeout(() => setCopied(false), 2000);
+                        // };
 
                         return (
                             <div className="relative group w-full">
