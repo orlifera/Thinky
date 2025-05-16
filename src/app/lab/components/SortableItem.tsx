@@ -3,6 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
+import MarkDown from "./MarkDown";
 
 export default function Answer({ id, content }: { id: UniqueIdentifier; content: string }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
@@ -22,7 +23,7 @@ export default function Answer({ id, content }: { id: UniqueIdentifier; content:
         >
             <div className="flex items-center gap-3">
                 <span className="text-gray-500 dark:text-gray-400">⋮</span>
-                <span className="dark:text-gray-200">{content}</span>
+                <MarkDown content={content} />
             </div>
         </li>
     )

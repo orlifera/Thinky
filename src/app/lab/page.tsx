@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
     DndContext,
     DragEndEvent,
@@ -14,11 +14,10 @@ import {
     closestCorners,
     // DragOverlay
 } from "@dnd-kit/core"
-
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
-
 import DroppableContainer from "@/app/lab/components/DroppableContainer"
 import { Item } from "@/app/lab/components/DroppableContainer"
+import MarkDown from "./components/MarkDown"
 
 interface Container {
     id: string
@@ -37,7 +36,7 @@ interface Container {
 //     )
 // }
 
-export default function MultipleContainers() {
+export default function page() {
     const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
     void activeId;
     const [containers, setContainers] = useState<Container[]>([
@@ -57,20 +56,41 @@ export default function MultipleContainers() {
             id: "risposte",
             title: "Risposte",
             items: [
-                { id: "task-5", content: "Setup project" },
+                { id: "task-5", content: "`Setup project`" },
                 { id: "task-1", content: "Research @dnd-kit" },
                 { id: "task-2", content: "Create basic example" },
                 { id: "task-3", content: "Write tutorial" },
-                { id: "task-4", content: "Record demo video" }
+                { id: "task-4", content: "Record demo video" },
             ],
         },
     ])
+    const [width, setWidth] = useState<number>(0); // Iniziamo con valore 0 (indefinito)
+    useEffect(() => {
+        // Funzione che aggiorna la larghezza
+        const handleResize = () => {
+            setWidth(window.innerWidth);
+        };
+
+        // Aggiungiamo un listener per il resize
+        window.addEventListener("resize", handleResize);
+
+        // Impostiamo la larghezza iniziale subito dopo il montaggio del componente
+        handleResize();
+
+        // Cleanup del listener
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+
+    const existingCode = ["`typescript bruh`", "`typescript bruh`", , `console.log("bruh")`]
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
                 tolerance: 5,
-                delay: 100,
+                delay: 50,
             },
         }),
         useSensor(KeyboardSensor, {
@@ -94,7 +114,12 @@ export default function MultipleContainers() {
         const activeContainerId = findContainerId(active.id)
         const overContainerId = findContainerId(over.id)
 
-        if (!activeContainerId || !overContainerId || activeContainerId === overContainerId) return
+        if (!activeContainerId || !overContainerId || activeContainerId === overContainerId) return //se non sono nello stesso container ritorna lo stato come è
+
+        const isSingleSlot = ["prima", "seconda"].includes(overContainerId.toString()) //se l'id del container è uno di quelli delle domande, limita il numero di items che ci possono essere inseriti a uno
+
+        const overContainer = containers.find((c) => c.id === overContainerId)
+        if (isSingleSlot && overContainer && overContainer.items.length >= 1) return //se il container ha già un item ritorna lo stato come è
 
         setContainers((prev) => {
             const activeContainer = prev.find((c) => c.id === activeContainerId)!
@@ -178,49 +203,61 @@ export default function MultipleContainers() {
 
     return (
         <div className="mx-auto w-full h-screen">
-            <h2 className="mb-4 text-xl font-bold dark:text-white">Kanban Board</h2>
-            <DndContext
-                sensors={sensors}
-                collisionDetection={closestCorners}
-                onDragStart={handleDragStart}
-                onDragOver={handleDragOver}
-                onDragEnd={handleDragEnd}
-            >
-                <div className="flex mx-[5em] justify-between gap-4">
-                    <div className=" w-[45%] gap-4 md:grid-cols-3 flex flex-col">
-                        <p>
-                            CODICE ESEMPIO
-                        </p>
-                        <DroppableContainer
-                            id={containers[0].id}
-                            title={containers[0].title}
-                            items={containers[0].items}
-                        />
+            <h2 className="m-4 text-2xl font-bold dark:text-white text-center">Mettiti alla prova! </h2>
+            <p className="text-center m-2">Adesso dovrai leggere bene il codice sulla sinistra, e scegliere quale delle risposte disponibili a destra vanno nei corretti slot.
+            </p>
 
-                        <p>
-                            CODICE ESEMPIO
-                        </p>
+            <p className="text-center">Mi raccomando, leggi bene, Ogni slot accetta al massimo una risposta!</p>
+            <div className="mt-8">
+                <DndContext
+                    sensors={sensors}
+                    collisionDetection={closestCorners}
+                    onDragStart={handleDragStart}
+                    onDragOver={handleDragOver}
+                    onDragEnd={handleDragEnd}
+                >
+                    <div className="flex mx-[2em] justify-between gap-4 items-start">
 
-                        <DroppableContainer
-                            id={containers[1].id}
-                            title={containers[1].title}
-                            items={containers[1].items}
-                        />
+                        <div className=" md:w-[45%] w-[80%] m-auto gap-4 flex flex-col">
+                            <DroppableContainer
+                                id={containers[0].id}
+                                title={containers[0].title}
+                                items={containers[0].items}
+                            />
+
+                            <MarkDown content={existingCode[1] ?? ""} />
+
+
+                            <p>
+                                CODICE ESEMPIO
+                            </p>
+
+                            <DroppableContainer
+                                id={containers[1].id}
+                                title={containers[1].title}
+                                items={containers[1].items}
+                            />
+                        </div>
+                        <div className="md:block hidden md:w-[45%] md:sticky md:right-10 md:self-start ">
+                            <DroppableContainer
+                                id={containers[2].id}
+                                title={containers[2].title}
+                                items={containers[2].items}
+                            />
+                        </div>
+                        <div className="md:hidden block">
+
+                        </div>
                     </div>
-                    <div className="w-[45%]">
-                        <DroppableContainer
-                            id={containers[2].id}
-                            title={containers[2].title}
-                            items={containers[2].items}
-                        />
-                    </div>
-                </div>
-                {/* <DragOverlay>
+
+                    {/* <DragOverlay>
                     <ItemOverlay>
                         {getActiveItem()?.content}
                     </ItemOverlay>
                 </DragOverlay> */}
-            </DndContext>
+                </DndContext>
+            </div>
         </div>
+
     )
 }
