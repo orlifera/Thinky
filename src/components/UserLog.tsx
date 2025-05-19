@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { OctagonX } from "lucide-react";
+import { InfoIcon, OctagonX } from "lucide-react";
 import { Button } from "./ui/button";
 import { Filter } from 'bad-words';
 import { randomUsername, schools, badWords } from "@/data/index";
@@ -19,6 +19,8 @@ import { User } from "@/types";
  * @returns {JSX.Element} UserLog component
  */
 
+
+
 export default function UserLog({ existingUsernames, onConfirm }: {
     existingUsernames: User[]; onConfirm: (username: string, school: string, ISODate: string) => void;
 }) {
@@ -27,6 +29,8 @@ export default function UserLog({ existingUsernames, onConfirm }: {
     const [school, setSchool] = useState("");
     const [error, setError] = useState("");
     const errorRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false); //setta lo stato di visibilità
+
 
     // Inizializza il filtro per le parole cattive
     const filter = new Filter();
@@ -93,8 +97,27 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                     Benvenuto!<span aria-hidden>🎉</span> Scegli il tuo nome
                 </h2>
                 <form>
-                    <Label htmlFor="username-label" className="block">
+                    <Label htmlFor="username-label" className="flex">
                         Nome utente
+                        <div className="group touch-auto md:block hidden">
+                            <InfoIcon className="inline ml-1 text-gray-400 touch-auto" size={16} />
+                            <div className={`absolute hidden group-hover:block bottom-[42em] md:bottom-[56em] bg-gray-800 text-white text-xs text-wrap w-[20%] rounded p-2 mt-1`}>
+                                <p>Il tuo nome utente può essere qualsiasi cosa tu voglia, non per forza devi inserire il tuo nome anagrafico. Ricorda di essere rispettoso, il tuo username sarà visibile agli organizzatori</p>
+                            </div>
+                        </div>
+                        <button
+                            className="group touch-auto block md:hidden"
+                            onClick={() => setIsVisible(!isVisible)}
+                            aria-hidden={!isVisible}
+                            type="button"
+                        >
+                            <InfoIcon className="inline ml-1 text-gray-400 touch-auto" size={16} />
+                            {isVisible && (
+                                <div className="absolute bg-gray-800 text-white text-xs text-wrap w-[80%] left-[10%] rounded p-2 mt-1 z-50">
+                                    <p>Il tuo nome utente può essere qualsiasi cosa tu voglia, non per forza devi inserire il tuo nome anagrafico. Ricorda di essere rispettoso, il tuo username sarà visibile agli organizzatori</p>
+                                </div>
+                            )}
+                        </button>
                     </Label>
 
                     <Input
@@ -150,7 +173,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                             ))}
                         </SelectContent>
                     </Select>
-                </form>
+                </form >
 
                 {error && (
                     <div
@@ -163,7 +186,8 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                         <OctagonX aria-hidden="true" />
                         <p className="text-sm flex items-baseline justify-center">{error} <span aria-hidden>😢</span></p>
                     </div>
-                )}
+                )
+                }
 
                 <Button
                     onClick={handleSubmit}
@@ -172,7 +196,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
                 >
                     Inizia
                 </Button>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

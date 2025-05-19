@@ -120,29 +120,52 @@ export default function Home() {
 
 
               <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">
-                <div className="bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex flex-col justify-center">
-                  <p className="w-[60%]">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis perferendis et, totam aliquam quam voluptatibus autem numquam eligendi! Dolorem provident animi esse illum voluptatibus voluptatem cumque officiis officia molestias dolore!
+                <div className="bg-gradient-to-r h-full from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex items-center justify-center">
+                  <p className="w-[60%] items-center mx-2">
+                    Hai mai desiderato capire come funziona il mondo dell&apos;informatica? Con il nostro percorso interattivo scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo. Non serve esperienza: basta curiosità!
                   </p>
-                  {/* <Image /> */}
+                  <div className="flex w-[40%] h-full items-center justify-center">
+                    <Image
+                      src="/first.png"
+                      alt="Il primo passo"
+                      width={250}
+                      height={100}
+                    />
+                  </div>
                 </div>
-                <div className="bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex flex-col justify-center">
-                  <p className="w-[60%]">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis perferendis et, totam aliquam quam voluptatibus autem numquam eligendi! Dolorem provident animi esse illum voluptatibus voluptatem cumque officiis officia molestias dolore!
+                <div className="bg-gradient-to-r h-full from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex items-center justify-center">
+                  <p className="w-[60%] items-center mx-2">
+                    Metti alla prova le tue abilità con esercizi pratici: trascina blocchi, completa pseudocodice e risolvi sfide pensate per te. Ogni passo ti avvicina al mondo reale dello sviluppo software!
                   </p>
-                  {/* <Image /> */}
+                  <div className="flex w-[40%] h-full items-center justify-center">
+                    <Image
+                      src="/second.png" // use your Thinky-style banner
+                      alt="mettiti alla prova"
+                      width={250}
+                      height={100}
+                    />
+                  </div>
+
                 </div>
-                <div className="bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex flex-col justify-center">
-                  <p className="w-[60%]">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis perferendis et, totam aliquam quam voluptatibus autem numquam eligendi! Dolorem provident animi esse illum voluptatibus voluptatem cumque officiis officia molestias dolore!
+                <div className="bg-gradient-to-r h-full from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex items-center justify-center">
+                  <p className="w-[60%] items-center mx-2">
+                    Thinky è la prima piattaforma interattiva per farti conoscere il mondo della programmazione completamente sviluppata dall&apos;ateneo. Scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo risolvendo problemi classici. Non serve esperienza: basta curiosità!
                   </p>
-                  {/* <Image /> */}
+                  <div className="flex w-[40%] h-full items-center justify-center">
+                    <Image
+                      src="/third.png" // use your Thinky-style banner
+                      alt="Thinky"
+                      width={250}
+                      height={100}
+                    />
+                  </div>
+
                 </div>
               </div>
 
             </div>
             <div id="">
-              <h3 className="text-2xl font-bold text-white mt-4">Inizia subito!</h3>
+              <h2 className="text-2xl font-bold text-white mt-4">Inizia subito!</h2>
               <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl from-white/30 to-primary/70 hover:bg-gradient-to-br hover:from-white/50 hover:to-primary/50 hover:translate-1 text-white items-center justify-center">
                 <LinkIcon className="m-1" /> Inizia
               </Link>
@@ -158,15 +181,15 @@ export default function Home() {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>FAQ 2?</AccordionTrigger>
+                  <AccordionTrigger>Funziona anche su telefono?</AccordionTrigger>
                   <AccordionContent>
-                    Risposta FAQ2
+                    Si! Thinky è completamente responsive e funziona su tutti i dispositivi.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
-                  <AccordionTrigger>FAQ 3?</AccordionTrigger>
+                  <AccordionTrigger>Durante il login viene conservato qualche dato personale?</AccordionTrigger>
                   <AccordionContent>
-                    Risposta FAQ3
+                    Non proprio. Viene conservato il tuo nome utente e la tua scuola, ma non vengono divulgati a terze parti.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
