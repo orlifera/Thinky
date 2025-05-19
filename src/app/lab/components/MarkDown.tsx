@@ -23,45 +23,18 @@ export default function MarkDown({ content }: { content: string }) {
     const processedContent = preprocessContent(content || "");
 
     return (
-        <div className="prose w-full h-full break-words overflow-wrap prose-strong:font-bold">
+        <div className=" w-full h-full ">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]}
                 components={{
                     p: ({ children }) => <div>{children}</div>,
                     code: ({ children, ...props }: { children?: ReactNode }) => {
-                        // const [copied, setCopied] = useState(false);
-
-                        // Extract plain text from children
-                        // const extractText = (node: ReactNode): string => {
-                        //     if (typeof node === "string") return node;
-                        //     if (Array.isArray(node)) return node.map(extractText).join("");
-                        //     if (React.isValidElement(node) && node.props && typeof node.props === "object" && "children" in node.props) {
-                        //         return extractText(node.props.children as ReactNode);
-                        //     }
-                        //     return "";
-                        // };
-
-                        // const codeString = extractText(children);
-                        // const isInline = !className && !codeString.includes("\n");
-
-                        // // if (isInline) {
-                        // //     return <code className="bg-gray-800 text-white px-1  rounded">{children}</code>;
-                        // // }
-
-                        // const match = /language-(\w+)/.exec(className || "");
-                        // const language = match ? match[1].toUpperCase() : "TXT";
-
-                        // const handleCopy = () => {
-                        //     navigator.clipboard.writeText(codeString);
-                        //     setCopied(true);
-                        //     setTimeout(() => setCopied(false), 2000);
-                        // };
 
                         return (
-                            <div className="relative group w-full">
-                                <pre className="overflow-auto bg-[#1e1e1e] w-full text-white p-4 rounded-lg border border-gray-700 relative shadow-lg">
-                                    <code className="block overflow-auto" {...props}>{children}</code>
+                            <div className="w-full">
+                                <pre className=" bg-[#1e1e1e] w-full text-white p-4 rounded-lg border border-gray-700 relative shadow-lg text-wrap">
+                                    <code className="block w-full" {...props}>{children}</code>
                                 </pre>
                             </div>
                         );

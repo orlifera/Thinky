@@ -53,11 +53,11 @@ export default function Page() {
         {
             id: "risposte",
             items: [
-                { id: "task-5", content: "`Risposta 1`" },
-                { id: "task-1", content: "`Risposta 2`" },
-                { id: "task-2", content: "`Risposta 3`" },
-                { id: "task-3", content: "`Risposta 4`" },
-                { id: "task-4", content: "`Risposta 5`" },
+                { id: "task-5", content: "`console.log(djdj)`" },
+                { id: "task-1", content: "`console.log(djdj)`" },
+                { id: "task-2", content: "`console.log(djdj)`" },
+                { id: "task-3", content: "`console.log(djdj)`" },
+                { id: "task-4", content: "`console.log(djdj)`" },
             ],
         },
     ])
@@ -254,7 +254,7 @@ export default function Page() {
                                                 <SelectItem
                                                     key={index}
                                                     value={item.content}
-                                                    className="bg-white text-black hover:text-white p-2 m-2 rounded"
+                                                    className=" bg-accent my-2 rounded"
                                                 >
                                                     <MarkDown content={item.content} />
                                                 </SelectItem>
@@ -274,6 +274,7 @@ export default function Page() {
                                                     value={item.content}
                                                     className="bg-white text-black hover:text-white p-2 m-2 rounded"
                                                 >
+
                                                     <MarkDown content={item.content} />
                                                 </SelectItem>
                                             ))}

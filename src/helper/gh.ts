@@ -40,7 +40,7 @@ export const fetchUsers = async (): Promise<User[]> => {
         // Trasformiamo 'date' in un oggetto Date se necessario
         return content.map((user: User) => ({
             ...user,
-            date: new Date(user.date), // Converti la stringa ISO in un oggetto Date
+            date: user.date,
         }));
     } catch (error) {
         console.error("Failed to fetch users:", error);
