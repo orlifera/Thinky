@@ -53,11 +53,11 @@ export default function Page() {
         {
             id: "risposte",
             items: [
-                { id: "task-5", content: "`console.log(djdj)`" },
-                { id: "task-1", content: "`console.log(djdj)`" },
-                { id: "task-2", content: "`console.log(djdj)`" },
-                { id: "task-3", content: "`console.log(djdj)`" },
-                { id: "task-4", content: "`console.log(djdj)`" },
+                { id: "task-5", content: "`console.log(1)`" },
+                { id: "task-1", content: "`console.log(2)`" },
+                { id: "task-2", content: "`console.log(3)`" },
+                { id: "task-3", content: "`console.log(4)`" },
+                { id: "task-4", content: "`console.log(5)`" },
             ],
         },
     ])
