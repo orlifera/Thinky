@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { fetchUsers } from '@/helper/gh'
 // import { formatDate } from '@/helper/formatDate' // You may need to create this utility
 import { User } from '@/types' // Adjust the import path as necessary
+import { formatDate } from '@/helper/formatDate'
 
 export default async function AreaRiservata() {
     const cookieStore = await cookies()
@@ -17,23 +18,23 @@ export default async function AreaRiservata() {
     try {
         users = await fetchUsers();
         // Sort users by date (most recent first)
-        users.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        users.sort((a, b) => new Date(b.date).getTime() + new Date(a.date).getTime());
     } catch (error) {
         console.error("Failed to fetch users:", error);
     }
 
     if (users.length === 0) {
         return (
-            <div> Non ci sono utenti registrati</div>
+            <main className='flex flex-col items-center justify-center h-[calc(100dvh-22rem)] w-full mt-10'>
+                <h1 className='text-3xl font-bold m-4'>Benvenuto nell&apos;area riservata</h1>
+                <p className='text-lg'>Nessun utente registrato al momento.😢</p>
+                <p className='text-lg'>Controlla più tardi.</p>
+            </main>
         )
     }
 
-    console.log(users);
-    console.log(typeof users[0]?.date, users[0].date);
-
-
     return (
-        <main className='flex flex-col items-center h-full w-full mt-10'>
+        <main className='flex flex-col items-center min-h-[calc(100svh-22em)] h-full w-full mt-10'>
             <h1 className='text-3xl font-bold m-4'>Benvenuto nell&apos;area riservata</h1>
             {/* <ul>
                     {users.map((user, index) => (
@@ -57,23 +58,22 @@ export default async function AreaRiservata() {
                     </div>
                 ))}
             </div> */}
-            <table className='w- text-center border border-gray-300'>
+            <table className='w-[90%] m-2 text-center h-[10em] border border-gray-300'>
                 <thead className='bg-muted-foreground text-white dark:text-black'>
                     <tr className='border-b border-gray-300 '>
-                        <th className='border-r border-r-gray-300 w-[10%]'>#</th>
-                        <th className='border-r border-r-gray-300 w-[30%]'>Nome Utente</th>
-                        <th className='border-r border-r-gray-300 w-[30%]'>Scuola</th>
-                        <th className='border-r border-r-gray-300 w-[30%]'>Data di Registrazione</th>
+                        <th className='border-r  p-2 border-r-gray-300 w-[10%]'>#</th>
+                        <th className='border-r  p-2 border-r-gray-300 w-[30%]'>Nome Utente</th>
+                        <th className='border-r  p-2 border-r-gray-300 w-[30%]'>Scuola</th>
+                        <th className='border-r  p-2 border-r-gray-300 w-[30%]'>Data di Registrazione</th>
                     </tr>
                 </thead>
-                <tbody>
-
+                <tbody className='max-h-[50%] overflow-y-auto'>
                     {users.map((user, index) => (
-                        <tr key={index} >
-                            <td className='border-r border-gray-300'>{index + 1}</td>
-                            <td className='border-r border-gray-300'>{user.username}</td>
-                            <td className='border-r border-gray-300'>{user.school}</td>
-                            <td className='border-r border-gray-300'>{user.date}</td>
+                        <tr key={index} className='border-b border-gray-300 p-2'>
+                            <td className='border-r p-2 border-gray-300'>{index + 1}</td>
+                            <td className='border-r p-2 border-gray-300'>{user.username}</td>
+                            <td className='border-r p-2 border-gray-300'>{user.school}</td>
+                            <td className='border-r p-2 border-gray-300'>{formatDate(user.date)}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -81,3 +81,35 @@ export default async function AreaRiservata() {
         </main >
     )
 }
+
+//html to makle it scrollable, but two <table></table> ??? ask prof. 
+
+// <div className="w-[90%] m-2 border border-gray-300">
+//     <table className="w-full text-center">
+//         <thead className="bg-muted-foreground text-white dark:text-black">
+//             <tr className="border-b border-gray-300">
+//                 <th className="border-r p-2 border-gray-300 w-[10%]">#</th>
+//                 <th className="border-r p-2 border-gray-300 w-[30%]">Nome Utente</th>
+//                 <th className="border-r p-2 border-gray-300 w-[30%]">Scuola</th>
+//                 <th className="border-r p-2 border-gray-300 w-[30%]">Data di Registrazione</th>
+//             </tr>
+//         </thead>
+//     </table>
+
+//     {/* Scrollable tbody wrapper */}
+//     <div className="max-h-[10em] overflow-y-auto">
+//         <table className="w-full text-center">
+//             <tbody>
+//                 {users.map((user, index) => (
+//                     <tr key={index} className="border-b border-gray-300">
+//                         <td className="border-r p-2 border-gray-300">{index + 1}</td>
+//                         <td className="border-r p-2 border-gray-300">{user.username}</td>
+//                         <td className="border-r p-2 border-gray-300">{user.school}</td>
+//                         <td className="border-r p-2 border-gray-300">{formatDate(user.date)}</td>
+//                     </tr>
+//                 ))}
+//             </tbody>
+//         </table>
+//     </div>
+// </div>
+

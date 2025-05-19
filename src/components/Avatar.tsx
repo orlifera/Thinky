@@ -17,7 +17,7 @@ export default function AvatarDemo({ username }: AvatarProps) {
         if (!username || randomUsername.includes(username)) {
             // Use official avatar
             const officialUrl = username
-                ? `https://raw.githubusercontent.com/StageUNIPD/data/main/avatars/${username.replace(" ", "").toLowerCase()}.png`
+                ? `https://raw.githubusercontent.com/orlifera/data/master/avatars/${username.replace(" ", "").toLowerCase()}.png`
                 : fallbackAvatarUrl;
             setAvatarUrl(officialUrl);
         } else {
@@ -26,11 +26,11 @@ export default function AvatarDemo({ username }: AvatarProps) {
             const stored = sessionStorage.getItem(key);
 
             if (stored) {
-                setAvatarUrl(`https://raw.githubusercontent.com/StageUNIPD/data/main/avatars/${stored}`);
+                setAvatarUrl(`https://raw.githubusercontent.com/orlifera/data/master/avatars/${stored}`);
             } else {
                 const randomAvatar = randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
                 sessionStorage.setItem(key, randomAvatar);
-                setAvatarUrl(`https://raw.githubusercontent.com/StageUNIPD/data/main/avatars/${randomAvatar}`);
+                setAvatarUrl(`https://raw.githubusercontent.com/orlifera/data/master/avatars/${randomAvatar}`);
             }
         }
     }, [username]);

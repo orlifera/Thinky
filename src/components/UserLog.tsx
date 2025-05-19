@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { OctagonX } from "lucide-react";
 import { Button } from "./ui/button";
 import { Filter } from 'bad-words';
-import { formatDate } from "@/helper/formatDate";
 import { randomUsername, schools, badWords } from "@/data/index";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -13,15 +12,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { User } from "@/types";
 /**
  * @description Componente del popup per la registrazione dell'utente.
  * 
  * @returns {JSX.Element} UserLog component
  */
 
-
 export default function UserLog({ existingUsernames, onConfirm }: {
-    existingUsernames: string[]; onConfirm: (username: string, school: string, date: string) => void;
+    existingUsernames: User[]; onConfirm: (username: string, school: string, ISODate: string) => void;
 }) {
 
     const [username, setUsername] = useState("");
@@ -39,34 +38,48 @@ export default function UserLog({ existingUsernames, onConfirm }: {
         }
     }, [error]);
 
+    // Extract username strings from User array
+    const existingUsernamesList = existingUsernames.map(user => user.username);
 
     //ritorna un nome casuale tra quelli della lista che non sia già in uso
     const getRandomUsername = () => {
-        const available = randomUsername.filter(u => !existingUsernames.includes(u)); //qua controlla quelli disponibili
+        const available = randomUsername.filter(u => !existingUsernamesList.includes(u)); // compare strings
         return available[Math.floor(Math.random() * available.length)];
     };
 
+    console.log("Existing usernames:", existingUsernames);
 
-    const data = new Date().toISOString() // ISO per salvataggio preciso
-    const date = formatDate(data);
+    const ISODate = new Date().toISOString() // ISO per salvataggio preciso
+    console.log("ISODate", ISODate)
+    const now = new Date();
+    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000).toISOString(); // ora attuale - 1 ora
+    console.log("oneHourAgo", oneHourAgo)
+
+    const trimmed = username.trim();
+    const sanitized = trimmed.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    function checkUsers(): boolean {
+        return existingUsernames.some(user => {
+            return user.username === trimmed && user.date > oneHourAgo;
+        });
+    }
+
+
 
     const handleSubmit = () => {
-        const trimmed = username.trim();
-        const sanitized = trimmed.toLowerCase().replace(/[^a-z0-9]/g, '');
-
         if (!trimmed || !school) {
             setError("Compila tutti i campi.");
-        } else if (existingUsernames.map(u => u.toLowerCase()).includes(trimmed.toLowerCase()) && date == formatDate(data)) {
+        } else if (
+            checkUsers()
+        ) {
             setError("Questo nome è già stato preso.");
         } else if (username.includes(badWords[0]) || filter.isProfane(sanitized)) {
             setError("Il nome utente contiene parole non appropriate.");
         } else {
-            sessionStorage.setItem("user", JSON.stringify({ username: trimmed, school, date }));
-            onConfirm(trimmed, school, date);
+            sessionStorage.setItem("user", JSON.stringify({ username: trimmed, school, ISODate }));
+            onConfirm(trimmed, school, ISODate);
         }
     };
-
-
 
     return (
         <div

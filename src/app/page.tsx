@@ -86,7 +86,7 @@ export default function Home() {
         !user && !loading && (
           <div className="w-full h-screen flex items-center justify-center">
             <UserLog
-              existingUsernames={users.map((u) => u.username)}
+              existingUsernames={users}
               onConfirm={handleConfirm}
             />
           </div>
