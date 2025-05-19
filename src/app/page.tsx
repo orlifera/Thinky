@@ -116,7 +116,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div id="main-content" className="h-full w-full flex flex-col items-center justify-center gap-4">
+            <div className="h-full w-full flex flex-col items-center justify-center gap-4">
 
 
               <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">

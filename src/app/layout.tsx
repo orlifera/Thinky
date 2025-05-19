@@ -47,7 +47,7 @@ export default function RootLayout({
                 <Header />
               </div>
               <Navbar />
-              <main tabIndex={-1}>
+              <main id="main-content" tabIndex={-1}>
                 {children}
               </main>
               <BackToTop />
