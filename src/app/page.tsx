@@ -17,8 +17,6 @@ import {
 import Banner from "@/components/Banner";
 
 
-throw new Error();
-
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
