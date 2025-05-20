@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import DroppableContainer from "@/app/lab/components/DroppableContainer"
 import { Item } from "@/app/lab/components/DroppableContainer"
-import MarkDown from "./components/MarkDown"
+import MarkDown from "@/components/MarkDown"
 
 interface Container {
     id: string

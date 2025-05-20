@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { UniqueIdentifier } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
-import MarkDown from "./MarkDown";
+import MarkDown from "@/components/MarkDown";
 
 export default function Answer({ id, content }: { id: UniqueIdentifier; content: string }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })

@@ -23,6 +23,13 @@ export type AvatarProps = {
 
 }
 
+export type BannerProps = {
+    source: string;
+    title: string;
+    text: string;
+    username?: string;
+}
+
 export type UserContextType = {
     user: User | null
     setUser: (user: User | null) => void

@@ -14,8 +14,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Banner from "@/components/Banner";
 
 
+throw new Error();
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
@@ -94,33 +96,18 @@ export default function Home() {
       }
       {
         user && !loading && (
-          <main className="flex md:mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-auto min-h-screen">
-            <div className="relative  w-full h-[25em] md:h-[35em] flex items-center justify-center text-white overflow-hidden ">
-              {/* Background image */}
-              <div className="absolute mb-8 inset-0 z-0 w-full">
-                <Image
-                  src="/thinky.png" // use your Thinky-style banner
-                  alt="Background"
-                  layout="fill"
-                  objectFit="cover"
-                  className="brightness-30"
-                />
-              </div>
-
-              {/* Text content */}
-              <div className="relative z-20 text-center px-6 max-w-4xl">
-                <h1 className="text-5xl font-extrabold mb-4">BENVENUTO IN THINKY {user.username}</h1>
-                <p className="text-lg font-light leading-relaxed">
-                  La prima piattaforma interattiva per farti conoscere il mondo della programmazione interamente sviluppata da UniPD.
-                </p>
-              </div>
-            </div>
-
+          <div className="flex md:mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-auto min-h-screen">
+            <Banner
+              source="/thinky.png"
+              title="BENVENUTO IN THINKY"
+              text=" La prima piattaforma interattiva per farti conoscere il mondo della programmazione interamente sviluppata da UniPD."
+              username={user.username}
+            />
             <div className="h-full w-full flex flex-col items-center justify-center gap-4">
 
 
               <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">
-                <div className="bg-gradient-to-r h-full from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex items-center justify-center">
+                <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
                   <p className="w-[60%] items-center mx-2">
                     Hai mai desiderato capire come funziona il mondo dell&apos;informatica? Con il nostro percorso interattivo scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo. Non serve esperienza: basta curiosità!
                   </p>
@@ -133,7 +120,7 @@ export default function Home() {
                     />
                   </div>
                 </div>
-                <div className="bg-gradient-to-r h-full from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex items-center justify-center">
+                <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
                   <p className="w-[60%] items-center mx-2">
                     Metti alla prova le tue abilità con esercizi pratici: trascina blocchi, completa pseudocodice e risolvi sfide pensate per te. Ogni passo ti avvicina al mondo reale dello sviluppo software!
                   </p>
@@ -147,7 +134,7 @@ export default function Home() {
                   </div>
 
                 </div>
-                <div className="bg-gradient-to-r h-full from-primary/50 to-secondary/50 rounded-lg shadow-md p-4 md:min-h-[10em] flex items-center justify-center">
+                <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
                   <p className="w-[60%] items-center mx-2">
                     Thinky è la prima piattaforma interattiva per farti conoscere il mondo della programmazione completamente sviluppata dall&apos;ateneo. Scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo risolvendo problemi classici. Non serve esperienza: basta curiosità!
                   </p>
@@ -196,7 +183,7 @@ export default function Home() {
 
             </div>
 
-          </main >
+          </div>
         )
       }
     </>
