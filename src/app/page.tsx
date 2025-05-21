@@ -106,7 +106,7 @@ export default function Home() {
 
               <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">
                 <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
-                  <p className="w-[60%] items-center mx-2">
+                  <p className="w-[60%] items-center mx-2 text-size-lg">
                     Hai mai desiderato capire come funziona il mondo dell&apos;informatica? Con il nostro percorso interattivo scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo. Non serve esperienza: basta curiosità!
                   </p>
                   <div className="flex w-[40%] h-full items-center justify-center">
@@ -151,7 +151,7 @@ export default function Home() {
             </div>
             <div id="">
               <h2 className="text-2xl font-bold text-white mt-4">Inizia subito!</h2>
-              <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl from-white/30 to-primary/70 hover:bg-gradient-to-br hover:from-white/50 hover:to-primary/50 hover:translate-1 text-white items-center justify-center">
+              <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl bg-primary hover:bg-gradient-to-br hover:from-white/50 hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg text-white items-center justify-center visited:text-white">
                 <LinkIcon className="m-1" /> Inizia
               </Link>
             </div>

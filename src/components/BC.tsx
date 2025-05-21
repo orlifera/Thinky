@@ -11,7 +11,7 @@ export default function BC({ currentPage }: BCProps) {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/" className="text-destructive">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/" className="underline text-black dark:text-white">Home</BreadcrumbLink>
                     </BreadcrumbItem>
 
                     {currentPage && (

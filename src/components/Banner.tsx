@@ -19,7 +19,7 @@ export default function Banner({ source, title, text, username }: BannerProps) {
             {/* Text content */}
             <div className="relative z-20 text-center px-6 max-w-4xl">
                 <h1 className="text-4xl font-extrabold mb-4">{title} {username?.toUpperCase()}</h1>
-                <p className="text-lg w-[50%] m-auto font-light leading-relaxed">
+                <p className="text-lg w-[70%] m-auto font-light leading-relaxed">
                     {text}
                 </p>
             </div>

@@ -136,17 +136,17 @@ function Navbar() {
                                         className={`absolute ${isMobile
                                             ? (isVisible ? 'block' : 'hidden')
                                             : 'hidden group-hover:block group-focus-within:block'
-                                            } right-0 ${width > 768 ? 'top-full mt-2' : 'bottom-full mb-2'
-                                            } bg-ring p-4 min-w-[15em] rounded-md text-white z-50`}
+                                            } -right-4 ${width > 768 ? 'top-full mt-2' : 'bottom-full mb-2'
+                                            } bg-ring p-4 min-w-[18em] rounded-md text-white z-50`}
                                         role="menu"
                                         aria-hidden={!isVisible}
                                     >
-                                        <p>Ciao {user.username}, benvenuto! <span role="img" aria-hidden="true">🎉</span></p>
+                                        <p className=''>Ciao {user.username}, benvenuto! <span role="img" aria-hidden="true">🎉</span></p>
                                         <p>{user.school}</p>
                                         <Link
                                             href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze'
                                             target='_blank'
-                                            className="flex items-center justify-center text-center underline rounded-md visited:text-purple-700 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                                            className="flex items-center justify-center text-center underline rounded-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                                             tabIndex={0}
                                         >
                                             Dai un sguardo al corso

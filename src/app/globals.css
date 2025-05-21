@@ -164,6 +164,6 @@
   }
 }
 
-a:not(nav a, #inizia):visited {
+a:not(#inizia, nav a):visited {
   color: purple;
 }
