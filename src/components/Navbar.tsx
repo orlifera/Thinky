@@ -136,7 +136,7 @@ function Navbar() {
                                         className={`absolute ${isMobile
                                             ? (isVisible ? 'block' : 'hidden')
                                             : 'hidden group-hover:block group-focus-within:block'
-                                            } -right-4 ${width > 768 ? 'top-full mt-2' : 'bottom-full mb-2'
+                                            } -right-4 ${width > 768 ? 'top-5 mt-2' : 'bottom-full mb-2'
                                             } bg-ring p-4 min-w-[18em] rounded-md text-white z-50`}
                                         role="menu"
                                         aria-hidden={!isVisible}
