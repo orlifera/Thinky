@@ -10,7 +10,7 @@
 import React, { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-// import rehypeHighlight from "rehype-highlight";
+import rehypeHighlight from "rehype-highlight";
 // import { Copy, Check } from "lucide-react"; //uncomment for the copy icon
 import "highlight.js/styles/github-dark.css";
 
@@ -38,7 +38,7 @@ export default function MarkDown({ content }: { content: string }) {
         <div className="prose w-auto h-full break-words overflow-wrap prose-strong:font-bold">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                // rehypePlugins={[rehypeHighlight]} // uncomment for syntax highlighting
+                rehypePlugins={[rehypeHighlight]} // uncomment for syntax highlighting
                 components={{
                     p: ({ children }) => <div>{children}</div>,
                     code: ({ className, children, ...props }: { className?: string; children?: ReactNode }) => {

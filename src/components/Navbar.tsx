@@ -95,6 +95,15 @@ function Navbar() {
                             </li>
                             <li>
                                 <Link
+                                    href="/sync"
+                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/sync') ? 'bg-white text-primary font-bold' : ''
+                                        }`}
+                                >
+                                    Problemi di sync
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     href="/lettori"
                                     className={`flex w-full h-full p-3 rounded-md transition ${isActive('/lettori') ? 'bg-white text-primary font-bold' : ''
                                         }`}
@@ -102,7 +111,7 @@ function Navbar() {
                                     Problema dei lettori
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link
                                     href="/filosofi"
                                     className={`flex w-full h-full p-3 rounded-md transition ${isActive('/filosofi') ? 'bg-white text-primary font-bold' : ''
@@ -110,7 +119,7 @@ function Navbar() {
                                 >
                                     Problema dei filosofi
                                 </Link>
-                            </li>
+                            </li> */}
                             {user && (
                                 <li className='group relative flex items-baseline'>
                                     <button

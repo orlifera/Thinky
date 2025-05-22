@@ -1,6 +1,6 @@
 /**
  * 
- * @description Pagina del problema dei lettori
+ * @description Pagina del problema di sincronizzazione dei processi
  */
 
 
@@ -9,18 +9,7 @@ import React from 'react'
 import MarkDown from '@/components/MarkDown'
 import Banner from '@/components/Banner'
 
-const markdown = [
-    `
-\`\`\`
-cpp
-// Semaforo binario
-Semaforo scrittura, mutex;
-
-// Contatore dei lettori inizializzato a 0
-int numLettori = 0;
-\`\`\`
-`,
-    `
+const markdown = [`
 \`\`\`
 cpp
 do {
@@ -36,12 +25,24 @@ do {
 `,
     `
 \`\`\`
+import React from 'react';
+import { Copy, Check } from "lucide-react";
+import { useState, useEffect } from 'react';
+
+const MarkDown = ({ content }: { content: string }) => {
+  return <div>{content}</div>;
+};
+\`\`\`
+`,
+
+    `
+\`\`\`
 cpp
 do {
     wait(mutex);
     numLettori++;
     if (numLettori == 1) {
-        wait(scrittura);
+        wait(scrittora);
     }
     signal(mutex);
 
@@ -68,34 +69,20 @@ function page() {
             <div className='flex md:mx-2 flex-col justify-center items-center'>
                 <Banner
                     source='/lettori.png'
-                    title='Lettori'
-                    text='Il problema di sincronizzazione dei lettori e degli scrittori è un classico problema di sincronizzazione'
+                    title='Problemi di sincronizzazione'
+                    text='I problemi di sincronizzazione avvengono quando più processi o thread devono accedere a risorse condivise'
                 />
             </div>
             <div className='flex flex-col items-center justify-center w-full min-h-[calc(100dvh-19em)] h-full'>
 
-
-                <article className='w-[90%] p-4 m-4'>
-                    <p>
-                        Il problema dei lettori e degli scrittori è un classico problema di sincronizzazione dei processi, utilizzato per gestire l&apos;accesso concorrente a una risorsa condivisa.</p>
-                    <p>
-                        Si consideri una base di dati da condividere tra processi concorrenti. Alcuni di questi sono lettori, quindi accedono alla risorsa senza modificarla, altri sono scrittori, quindi accedono a tale base modificando una certa risorsa.
-                    </p>
-
-                    <p>
-                        Se due lettori accedono contemporaneamente alla base di dati, non accade nulla. Al contrario, se un scrittore e un altro qualsivoglia processo accedono alla risorsa contemporaneamente, si ottiene un conflitto. Questo perché il lettore potrebbe leggere un valore non aggiornato mentre lo scrittore sta modificando la base di dati. Oppure, nel caso di due scrittori, uno dei due potrebbe sovrascrivere il lavoro dell&apos;altro.
-                    </p>
-
-                    <p>
-                        Per evitare questo problema, è necessario implementare un meccanismo di sincronizzazione che consenta agli scrittori di accedere alla base di dati in modo esclusivo, ma impedisca l&apos;accesso simultaneo a un lettore e a uno scrittore (o a due scrittori).
-                    </p>
+                <article className='w-[90%] p-4 m-4 text-lg'>
+                    Partiamo dal definire cosa è un processo:
+                    <p className='text-justify mb-4'>Un processo è un programma in esecuzione, che può essere composto da più thread. Ogni processo ha il proprio spazio di memoria e le proprie risorse, ma può anche condividere risorse con altri processi. I processi possono essere in esecuzione in parallelo o in modo concorrente, a seconda del sistema operativo e dell&apos;architettura hardware.</p>
+                    I problemi di sincronizzazione si verificano quando più processi o thread devono accedere a risorse condivise, come la memoria o i file. Se non vengono gestiti correttamente, questi problemi possono portare a <span className='italic'>race condition</span>, deadlock e altri comportamenti indesiderati.
                 </article>
                 <div className='w-full flex m-4 p-4 '>
                     <div className=' flex items-center justify-center w-[50%] min-h-[10em] text-wrap'>
-                        <p className='w-[80%]'>
-                            Una prima variante di questo problema implica che consiste nel che nessun lettore attenda a meno che uno scrittore non abbia già ottenuto l&apos;accesso alla base di dati. Questa soluzione però non è immune alla starvation (attesa infinita), in quanto un lettore potrebbe essere bloccato indefinitamente da uno scrittore che non rilascia mai il suo accesso alla base di dati.
-
-                            Una soluzione a questa variante prevede l&apos;utilizzo  di un semaforo binario e di un contatore.
+                        <p className='w-[80%]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores itaque quia adipisci alias mollitia corrupti perferendis quos cumque, laudantium quae consequuntur ipsam suscipit enim est veniam nobis ipsa repellendus deserunt!
                         </p>
                     </div>
                     <div className='min-h-[10em] w-[50%] p-4'>
