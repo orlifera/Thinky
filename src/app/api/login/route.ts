@@ -10,7 +10,7 @@ export async function POST(request: Request) {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
-            maxAge: 86400 // 24 hours
+            maxAge: 3600 //un'ora
         })
         return NextResponse.json({ success: true })
     }
