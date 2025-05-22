@@ -8,7 +8,7 @@ export default function Banner({ source, title, text, username }: BannerProps) {
         <div className="relative mx-2 px-2 w-full h-[25em] md:h-[35em] flex items-center justify-center text-white">
             <div className="absolute mb-8 inset-0 z-0 w-full" >
                 <Image
-                    src={source} // use your Thinky-style banner
+                    src={source}
                     alt="Background"
                     layout="fill"
                     objectFit="cover"

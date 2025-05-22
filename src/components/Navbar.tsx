@@ -20,7 +20,7 @@ import BC from '@/components/BC'
 
 function Navbar() {
 
-    const [width, setWidth] = useState<number>(0); // Iniziamo con valore 0 (indefinito)
+    const [width, setWidth] = useState<number>(0); // Iniziamo con valore 0 
     const [isMounted, setIsMounted] = useState<boolean>(false); // Stato per verificare se il componente è montato
     const [isMobile, setIsMobile] = useState(false); //controlla se è mobile per l'avatar
     const [isVisible, setIsVisible] = useState(false); //setta lo stato di visibilità
@@ -113,7 +113,6 @@ function Navbar() {
                             </li>
                             {user && (
                                 <li className='group relative flex items-baseline'>
-                                    {/* Avatar as a focusable button */}
                                     <button
                                         className="focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
                                         onClick={() => setIsVisible(!isVisible)}
@@ -126,7 +125,6 @@ function Navbar() {
                                         aria-haspopup="true"
                                         aria-expanded={isVisible}
                                         aria-label={`User menu for ${user.username}`}
-                                    // No explicit tabIndex (uses natural order)
                                     >
                                         <Avatar username={user.username} />
                                     </button>

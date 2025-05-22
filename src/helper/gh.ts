@@ -8,18 +8,18 @@ import { User } from '@/types';
  * @author [Orlando Ferazzani]
  */
 
-
 const REPO: string = "data"; // Repo name
 const OWNER: string = "orlifera"; // Owner of the repo
 const FILE_PATH: string = "data/users.json"; // Path to the JSON file
 const BRANCH: string = "master"; // Branch name
+const MAX_RETRIES: number = 3; // Maximum number of retry attempts for handling conflicts
 
-// Check for required environment variable
+// controlla se la variabile d'ambiente è definita
 if (!process.env.NEXT_PUBLIC_GITHUB_TOKEN) {
     throw new Error("GitHub token is missing. Make sure NEXT_PUBLIC_GITHUB_TOKEN is set.");
 }
 
-// Axios instance configured for GitHub API
+// crea un'istanza di axios per l'API di GitHub
 const githubApi = axios.create({
     baseURL: "https://api.github.com",
     headers: {
@@ -34,10 +34,8 @@ const githubApi = axios.create({
 export const fetchUsers = async (): Promise<User[]> => {
     try {
         const response = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
-        console.log(response.data); // Log the full response data
 
         const content = JSON.parse(atob(response.data.content)); // Decode Base64
-        // Trasformiamo 'date' in un oggetto Date se necessario
         return content.map((user: User) => ({
             ...user,
             date: user.date,
@@ -48,19 +46,18 @@ export const fetchUsers = async (): Promise<User[]> => {
     }
 };
 
-
-
 /**
- * Updates users.json on the GitHub repository.
+ * aggiorna il file users.json con i nuovi dati degli utenti.
  *
  * @param users - Updated user data
- * @param sha - The current SHA of the file (required by GitHub API to update)
+ * @param sha - SHA del file da aggiornare
  */
 export const updateUsers = async (users: User[], sha: string): Promise<{ newSha: string }> => {
     const content = btoa(JSON.stringify(users.map(user => ({
         ...user,
-        date: user.date, // Converte Date in stringa ISO
+        date: user.date,
     }))));
+
     try {
         const response = await githubApi.put(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`, {
             message: "Update users.json",
@@ -71,23 +68,64 @@ export const updateUsers = async (users: User[], sha: string): Promise<{ newSha:
         return { newSha: response.data.content.sha };
     } catch (error) {
         console.error("Failed to update users:", error);
-        throw new Error("Could not update users");
+        throw error;
     }
 };
 
-
 /**
- * Helper function: Automatically fetches the current SHA and updates users.json
+ * Helper function: prende automaticamente il file users.json e lo aggiorna con un nuovo utente.
  *
- * @param newUsers - The new user data to write
+ * @param newUser - The new user to add to the list
  */
-export const updateUsersAuto = async (newUsers: User[]): Promise<void> => {
-    try {
-        const file = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
-        const sha = file.data.sha;
-        await updateUsers(newUsers, sha);
-    } catch (error) {
-        console.error("Failed to update users automatically:", error);
-        throw new Error("Automatic update failed");
-    }
+export const addUser = async (newUser: User): Promise<User> => {
+    let retryCount = 0;
+
+    const attemptUpdate = async (): Promise<User> => {
+        try {
+            // Get the latest file data and SHA
+            const fileResponse = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
+            const currentSha = fileResponse.data.sha;
+            const currentContent = JSON.parse(atob(fileResponse.data.content));
+
+            // Check if username already exists in the latest data
+            const usernameExists = currentContent.some(
+                (user: User) => user.username === newUser.username && user.school === newUser.school
+            );
+
+            if (usernameExists) {
+                throw new Error("Username already exists and was created recently");
+            }
+
+            // Add the new user to the current list
+            const updatedContent = [...currentContent, newUser];
+
+            // Update the file with optimistic locking (SHA)
+            await updateUsers(updatedContent, currentSha);
+
+            return newUser;
+        } catch (error) {
+            // Handle conflict errors (HTTP 409)
+            if (
+                typeof error === "object" &&
+                error !== null &&
+                "response" in error &&
+                typeof (error).response === "object" &&
+                (error).response !== null &&
+                "status" in (error).response &&
+                (error).response.status === 409 &&
+                retryCount < MAX_RETRIES
+            ) {
+                retryCount++;
+                console.log(`Conflict detected, retrying... (Attempt ${retryCount} of ${MAX_RETRIES})`);
+                // Wait a small random amount of time before retrying to reduce chance of another conflict
+                await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 700));
+                return attemptUpdate();
+            }
+
+            // Rethrow any error so it propagates properly
+            throw error;
+        }
+    };
+
+    return attemptUpdate();
 };

@@ -2,8 +2,8 @@
 //lista di possibili parole da censurare nell'username
 export const badWords = [
     "gesù", "gesu", "cristo", "dio", "porco", "troia", "puttana", "figa",
-    "suca", "scop", "culo", "vagina", "pompino", "mastur", "turbato", "masturbato",
-    "coglione", "merda", "bastardo", "zoccola", "minchia", "boia", "d10", "d1o", "m4donn4", "m4donna", "madonn4", "putt4n4", "puttan4", "putt4na", "c4n3", "c4ne", "can3",
+    "suca", "scopare", "culo", "vagina", "pompino", "mastur", "turbato", "masturbato",
+    "coglione", "merda", "bastardo", "zoccola", "minchia", "boia", "d10", "d1o", "m4donn4", "m4donna", "madonn4", "putt4n4", "puttan4", "putt4na", "c4n3", "c4ne", "can3", "diocane", "dio c4ne", "dio c4ne", "dio cane", "dio cane", "diomerda",
 ];
 
 

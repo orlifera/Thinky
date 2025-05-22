@@ -17,7 +17,6 @@ export default function GlobalError({
     reset: () => void
 }) {
     return (
-        // global-error must include html and body tags
         <html>
             <body className="h-screen flex flex-col bg-white items-center justify-center">
                 <div className="flex flex-col items-center">

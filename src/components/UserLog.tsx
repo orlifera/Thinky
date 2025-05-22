@@ -22,7 +22,8 @@ import { User } from "@/types";
 
 
 export default function UserLog({ existingUsernames, onConfirm }: {
-    existingUsernames: User[]; onConfirm: (username: string, school: string, ISODate: string) => void;
+    existingUsernames: User[];
+    onConfirm: (username: string, school: string, ISODate: string) => Promise<boolean>;
 }) {
 
     const [username, setUsername] = useState("");
@@ -31,8 +32,6 @@ export default function UserLog({ existingUsernames, onConfirm }: {
     const errorRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false); //setta lo stato di visibilità
 
-
-    // Inizializza il filtro per le parole cattive
     const filter = new Filter();
     filter.addWords(...badWords);
 
@@ -53,14 +52,19 @@ export default function UserLog({ existingUsernames, onConfirm }: {
 
     console.log("Existing usernames:", existingUsernames);
 
-    const ISODate = new Date().toISOString() // ISO per salvataggio preciso
+    const ISODate = new Date().toISOString()
     console.log("ISODate", ISODate)
     const now = new Date();
     const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000).toISOString(); // ora attuale - 1 ora
     console.log("oneHourAgo", oneHourAgo)
 
     const trimmed = username.trim();
-    const sanitized = trimmed.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const lower = trimmed.toLowerCase();
+    const isProfane =
+        filter.isProfane(lower) ||
+        lower.split(/\s+/).some(word => filter.isProfane(word));
+
+
 
     function checkUsers(): boolean {
         return existingUsernames.some(user => {
@@ -70,18 +74,24 @@ export default function UserLog({ existingUsernames, onConfirm }: {
 
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!trimmed || !school) {
             setError("Compila tutti i campi.");
-        } else if (
-            checkUsers()
-        ) {
+        } else if (checkUsers()) {
             setError("Questo nome è già stato preso.");
-        } else if (username.includes(badWords[0]) || filter.isProfane(sanitized)) {
+        } else if (isProfane) {
             setError("Il nome utente contiene parole non appropriate.");
         } else {
-            sessionStorage.setItem("user", JSON.stringify({ username: trimmed, school, ISODate }));
-            onConfirm(trimmed, school, ISODate);
+            try {
+                const success = await onConfirm(trimmed, school, ISODate);
+
+                if (!success) {
+                    setError("Questo nome è già stato preso. Riprova con un altro nome.");
+                }
+            } catch (error) {
+                console.error("Error during user confirmation:", error);
+                setError("Errore durante la registrazione. Riprova.");
+            }
         }
     };
 

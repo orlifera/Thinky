@@ -15,13 +15,12 @@ export default function AvatarDemo({ username }: AvatarProps) {
 
     useEffect(() => {
         if (!username || randomUsername.includes(username)) {
-            // Use official avatar
+            // Usa avatar animale se il nome è random
             const officialUrl = username
                 ? `https://raw.githubusercontent.com/orlifera/data/master/avatars/${username.replace(" ", "").toLowerCase()}.png`
                 : fallbackAvatarUrl;
             setAvatarUrl(officialUrl);
         } else {
-            // Check sessionStorage for cached random avatar
             const key = `avatar-for-${username}`;
             const stored = sessionStorage.getItem(key);
 

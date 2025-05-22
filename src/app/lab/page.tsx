@@ -25,17 +25,6 @@ interface Container {
     items: Item[]
 }
 
-// function ItemOverlay({ children }: { children: React.ReactNode }) {
-//     return (
-//         <div className="cursor-grabbing touch-none rounded border bg-white p3 shadow-md ">
-//             <div className="flex items-center gap-3">
-//                 <span className="text-gray-500 dark:text-gray-400">⋮</span>
-//                 <span className="dark:text-gray-200">{children}</span>
-//             </div>
-//         </div>
-//     )
-// }
-
 export default function Page() {
     const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
     void activeId;
@@ -188,15 +177,6 @@ export default function Page() {
         setActiveId(null)
     }
 
-    // const getActiveItem = () => {
-    //     for (const container of containers) {
-    //         const item = container.items.find((i) => i.id === activeId)
-    //         if (item) {
-    //             return item
-    //         }
-    //     }
-    // }
-
     console.log(existingCode);
 
 
@@ -287,13 +267,6 @@ export default function Page() {
                             </>
                         }
                     </div>
-
-
-                    {/* <DragOverlay>
-                    <ItemOverlay>
-                        {getActiveItem()?.content}
-                    </ItemOverlay>
-                </DragOverlay> */}
                 </DndContext>
             </div >
         </div >

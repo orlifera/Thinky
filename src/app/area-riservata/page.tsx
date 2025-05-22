@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { fetchUsers } from '@/helper/gh'
-import { User } from '@/types' // Adjust the import path as necessary
+import { User } from '@/types'
 import UserTable from './components/UserTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Test from './components/Test'
@@ -16,11 +16,10 @@ export default async function AreaRiservata() {
         redirect('/accesso')  // Reindirizza se non autenticato
     }
 
-    // Fetch users from GitHub
     let users: User[] = [];
     try {
         users = await fetchUsers();
-        // Sort users by date (most recent first)
+        // ordina gli utenti in base alla data di registrazione
         users.sort((a, b) => new Date(b.date).getTime() + new Date(a.date).getTime());
     } catch (error) {
         console.error("Failed to fetch users:", error);
