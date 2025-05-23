@@ -71,7 +71,7 @@ export default function MarkDown({ content }: { content: string }) {
 
                         return (
                             <div className="relative group">
-                                <pre className="overflow-auto bg-muted dark:text-white p-4 rounded-lg border border-gray-700 relative shadow-lg">
+                                <pre className="overflow-auto bg-muted dark:text-white p-4 rounded-lg border border-gray-700 text-wrap relative shadow-lg">
                                     {/* uncomment for prog. Language Label */}
                                     {/* <div className="flex justify-between items-center bg-gray-800 text-xs font-bold rounded">
                                         <p className="ml-3">{language}</p>
