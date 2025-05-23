@@ -13,6 +13,9 @@ export type User = {
     date: string;
 }
 
+export type Step = {
+    currentStep: number;
+}
 
 export type BCProps = {
     currentPage: string | null;

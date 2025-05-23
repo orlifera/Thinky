@@ -5,6 +5,7 @@ import { User } from '@/types'
 import UserTable from './components/UserTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Test from './components/Test'
+import StepPage from './components/StepPage'
 
 
 export default async function AreaRiservata() {
@@ -29,10 +30,12 @@ export default async function AreaRiservata() {
         <div id='main-s' className='flex flex-col items-center min-h-[calc(100svh-22em)] h-full w-full mt-10'>
             <h1 className='text-3xl font-bold m-4'>Benvenuto nell&apos;area riservata</h1>
 
-            <Tabs defaultValue="account" className="w-full">
+            <Tabs defaultValue="table" className="w-full">
                 <TabsList className='w-[80%] bg-primary flex m-auto'>
                     <TabsTrigger value="table">Tabella Utenti</TabsTrigger>
-                    <TabsTrigger value="test">Laboratorio</TabsTrigger>
+                    <TabsTrigger value="video">Video</TabsTrigger>
+                    <TabsTrigger value="step">Step & Grafico</TabsTrigger>
+
                 </TabsList>
                 <TabsContent value="table">
                     {
@@ -46,8 +49,11 @@ export default async function AreaRiservata() {
                             </div>
                     }
                 </TabsContent>
-                <TabsContent value='test'>
+                <TabsContent value='video'>
                     <Test />
+                </TabsContent>
+                <TabsContent value='step'>
+                    <StepPage />
                 </TabsContent>
             </Tabs>
 
