@@ -158,11 +158,11 @@ export default function Home() {
 
 
             <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">
-              <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
-                <p className="w-[60%] items-center mx-2 text-size-lg">
+              <div className="md:w-[80%] md:min-h-[10em] m-auto bg-gradient-to-r  from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 flex flex-col md:flex-row md:items-center md:justify-center">
+                <p className="md:w-[60%] items-center mx-2 text-size-lg">
                   Hai mai desiderato capire come funziona il mondo dell&apos;informatica? Con il nostro percorso interattivo scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo. Non serve esperienza: basta curiosità!
                 </p>
-                <div className="flex w-[40%] h-full items-center justify-center">
+                <div className="flex md:w-[40%] h-full items-center justify-center">
                   <Image
                     src="/first.png"
                     alt="Il primo passo"
@@ -171,11 +171,11 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
-                <p className="w-[60%] items-center mx-2">
+              <div className="md:w-[80%] md:min-h-[10em] m-auto bg-gradient-to-r  from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 flex flex-col md:flex-row md:items-center md:justify-center">
+                <p className="w-full md:w-[60%] items-center md:mx-2">
                   Metti alla prova le tue abilità con esercizi pratici: trascina blocchi, completa pseudocodice e risolvi sfide pensate per te. Ogni passo ti avvicina al mondo reale dello sviluppo software!
                 </p>
-                <div className="flex w-[40%] h-full items-center justify-center">
+                <div className="flex md:w-[40%] h-full items-center justify-center">
                   <Image
                     src="/second.png"
                     alt="mettiti alla prova"
@@ -185,11 +185,11 @@ export default function Home() {
                 </div>
 
               </div>
-              <div className="bg-gradient-to-r w-[80%] m-auto h-full from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 md:min-h-[10em] flex items-center justify-center">
-                <p className="w-[60%] items-center mx-2">
+              <div className="md:w-[80%] md:min-h-[10em] m-auto bg-gradient-to-r  from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 flex flex-col md:flex-row md:items-center md:justify-center">
+                <p className="md:w-[60%] items-center mx-2">
                   Thinky è la prima piattaforma interattiva per farti conoscere il mondo della programmazione completamente sviluppata dall&apos;ateneo. Scoprirai i concetti fondamentali della programmazione concorrente in modo semplice, visivo e intuitivo risolvendo problemi classici. Non serve esperienza: basta curiosità!
                 </p>
-                <div className="flex w-[40%] h-full items-center justify-center">
+                <div className="flex md:w-[40%] h-full items-center justify-center">
                   <Image
                     src="/third.png"
                     alt="Thinky"
