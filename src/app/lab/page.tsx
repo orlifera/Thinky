@@ -4,6 +4,7 @@ import StepZero from './components/steps/StepZero'
 import StepOne from './components/steps/StepOne'
 import StepTwo from './components/steps/StepTwo'
 import StepThree from './components/steps/StepThree'
+import StepFour from './components/steps/StepFour'
 
 //qua ci sono i vari step in base a currentStep
 export default async function page() {
@@ -12,6 +13,8 @@ export default async function page() {
         <StepOne key={1} />,
         <StepTwo key={2} />,
         <StepThree key={3} />,
+        <StepFour key={4} />,
+
     ]
 
     let currentStep = 0;

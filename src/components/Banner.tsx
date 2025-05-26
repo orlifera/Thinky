@@ -2,37 +2,39 @@ import React from 'react'
 import Image from 'next/image'
 import { BannerProps } from '@/types'
 const colorMap: Record<string, string> = {
-    Blu: 'blue-500',
-    Rosso: 'red-500',
-    Viola: 'purple-500',
-    Verde: 'green-500',
-    Arancione: 'orange-500',
-    Gialla: 'yellow-500',
-    Grigio: 'gray-400',
-    Bianco: 'white',
-    Marrone: 'amber-950',
-    Nero: 'black',
-    Celeste: 'sky-500',
-    Dorato: 'amber-400',
-    Rossa: 'red-500',
-    Turchese: 'teal-500',
-    Beige: 'stone-500',
-    Lilla: 'fuchsia-500',
-    Argento: 'zinc-500',
-    Indaco: 'indigo-500',
-    Lime: 'lime-500',
-    Rosa: 'pink-500',
-    Fucsia: 'fuchsia-500',
-    Sabbia: 'stone-500',
-    Bianca: 'white',
+    Blu: 'bg-blue-500',
+    Rosso: 'bg-red-500',
+    Viola: 'bg-purple-500',
+    Verde: 'bg-green-500',
+    Arancione: 'bg-orange-500',
+    Gialla: 'bg-yellow-500',
+    Grigio: 'bg-gray-400',
+    Bianco: 'bg-white',
+    Marrone: 'bg-amber-950',
+    Nero: 'bg-gray-600',
+    Celeste: 'bg-sky-500',
+    Dorato: 'bg-amber-400',
+    Rossa: 'bg-red-500',
+    Turchese: 'bg-teal-500',
+    Beige: 'bg-stone-500',
+    Lilla: 'bg-fuchsia-500',
+    Argento: 'bg-zinc-500',
+    Indaco: 'bg-indigo-500',
+    Lime: 'bg-lime-500',
+    Rosa: 'bg-pink-500',
+    Fucsia: 'bg-fuchsia-500',
+    Sabbia: 'bg-stone-500',
+    Bianca: 'bg-white',
 };
+
 
 // Get Tailwind class from full username
 function getTailwindColorClass(username?: string): string {
     const parts = username ? username.split(' ') : undefined;
     const rawColor = parts ? parts[1] : undefined;
     const tailwindColor = rawColor ? colorMap[rawColor] : undefined;
-    return tailwindColor ? `text-${tailwindColor}` : 'text-red-500'; // fallback
+    return tailwindColor ? tailwindColor : 'bg-red-500';
+
 }
 
 
@@ -53,7 +55,10 @@ export default function Banner({ source, title, text, username }: BannerProps) {
 
             {/* Text content */}
             <div className="relative z-20 text-center px-6 max-w-4xl">
-                <h1 className="text-4xl font-extrabold mb-4">{title} <span className={textColor}>{username?.toUpperCase()}</span></h1>
+                <h1 className="text-4xl font-extrabold">{title} </h1>
+                <h2 className={`${textColor} text-4xl font-bold p-2 min-w-[5em] m-auto max-w-[70%]`}>
+                    {username?.toUpperCase()}
+                </h2>
                 <p className="text-lg w-[70%] m-auto font-light leading-relaxed">
                     {text}
                 </p>
