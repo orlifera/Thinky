@@ -39,16 +39,20 @@ export type UserContextType = {
 }
 
 
-export interface Item {
+export type Item = {
     id: string
     content: string
 }
 
-export interface Container {
+export type Container = {
     id: string
     items: Item[]
 }
-export interface Item {
+export type Item = {
     id: string
     content: string
+}
+
+export type Hint = {
+    id: string
 }

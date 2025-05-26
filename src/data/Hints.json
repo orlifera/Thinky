@@ -1,0 +1,18 @@
+[
+    {
+        "id": "first-radio",
+        "content": "Primo Hint"
+    },
+    {
+        "id": "second-radio",
+        "content": "Secondo Hint."
+    },
+    {
+        "id": "first-check",
+        "content": "Terzo Hint."
+    },
+    {
+        "id": "second-checl",
+        "content": "Quarto Hint."
+    }
+]
