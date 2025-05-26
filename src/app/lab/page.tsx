@@ -7,6 +7,7 @@ import StepOne from './components/steps/StepOne'
 import StepTwo from './components/steps/StepTwo'
 import StepThree from './components/steps/StepThree'
 import StepFour from './components/steps/StepFour'
+import { Progress } from '@/components/ui/progress'
 
 export default function Page() {
     const [currentStep, setCurrentStep] = useState<number | null>(null)
@@ -45,9 +46,11 @@ export default function Page() {
         <StepFour key={4} />,
 
     ]
+    console.log("Current Step:", currentStep)
 
     return (
         <div>
+            <div className='flex justify-center items-center align-middle'> 0% <Progress value={currentStep * 25} className="m-4 w-[70%] flex flex-col" /> 100%</div>
             {steps[currentStep] || <div>Step non trovato</div>}
         </div>
     )

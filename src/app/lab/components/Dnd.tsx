@@ -243,23 +243,24 @@ export default function Page() {
                                     </Select>
                                     </li>
                                     <li> <MarkDown content={existingCode[2] ?? ""} /></li>
-                                    <li> <Select defaultValue="" aria-labelledby="school-label">
-                                        <SelectTrigger className="w-full text-black dark:text-white bg-white p-8 rounded" >
-                                            <SelectValue placeholder="La tua scelta" />
-                                        </SelectTrigger>
-                                        <SelectContent id="items">
-                                            {containers[2].items.map((item, index) => (
-                                                <SelectItem
-                                                    key={index}
-                                                    value={item.content}
-                                                    className="bg-white text-black hover:text-white p-2 m-2 rounded"
-                                                >
+                                    <li>
+                                        <Select defaultValue="" aria-labelledby="school-label">
+                                            <SelectTrigger className="w-full text-black dark:text-white bg-white p-8 rounded" >
+                                                <SelectValue placeholder="La tua scelta" />
+                                            </SelectTrigger>
+                                            <SelectContent id="items">
+                                                {containers[2].items.map((item, index) => (
+                                                    <SelectItem
+                                                        key={index}
+                                                        value={item.content}
+                                                        className="bg-white text-black hover:text-white p-2 m-2 rounded"
+                                                    >
 
-                                                    <MarkDown content={item.content} />
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
+                                                        <MarkDown content={item.content} />
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
                                     </li>
 
 
