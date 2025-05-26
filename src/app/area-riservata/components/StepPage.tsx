@@ -1,25 +1,28 @@
+'use client'
 
-import React from "react"
+import { useEffect, useState } from "react"
 import { fetchStep } from "@/helper/gh"
 import StepUpdateButton from "./StepUpdateButton"
 
+export default function StepPage() {
+    const [currentStep, setCurrentStep] = useState<number | null>(null)
 
+    useEffect(() => {
+        const loadStep = async () => {
+            try {
+                const step = await fetchStep()
+                setCurrentStep(step)
+            } catch (error) {
+                console.error("Errore nel caricamento dello step:", error)
+            }
+        }
 
-export default async function StepPage() {
+        loadStep()
+    }, [])
 
-    let currentStep = 0;
-    try {
-        currentStep = await fetchStep();
-        console.log("Step corrente:", currentStep, "tipo:", typeof currentStep);
+    if (currentStep === null) {
+        return <p>Caricamento...</p>
     }
-    catch (error) {
-        console.error("Failed to fetch step:", error);
-    }
-    console.log("Step corrente:", currentStep, "tipo:", typeof currentStep);
 
-    return (
-
-        <StepUpdateButton currentStep={currentStep} />
-
-    )
+    return <StepUpdateButton currentStep={currentStep} />
 }
