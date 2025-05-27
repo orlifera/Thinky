@@ -1,55 +1,46 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import {
-    DndContext,
-    DragEndEvent,
-    DragOverEvent,
-    DragStartEvent,
-    KeyboardSensor,
-    PointerSensor,
-    UniqueIdentifier,
-    useSensor,
-    useSensors,
-    closestCorners,
-    // DragOverlay
-} from "@dnd-kit/core"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
-import DroppableContainer from "@/app/lab/components/DroppableContainer"
-import { Item } from "@/app/lab/components/DroppableContainer"
 import MarkDown from "@/components/MarkDown"
+import { useEffect, useState } from "react"
+import { useDnD } from "@/helper/useDnd"
+import { KeyboardSensor, PointerSensor, useSensor, useSensors, closestCorners, DndContext } from "@dnd-kit/core"
+import { sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@radix-ui/react-select"
+import DroppableContainer from "./DroppableContainer"
 
-interface Container {
-    id: string
-    items: Item[]
-}
+const initialContainers = [
+    { id: "prima", items: [] },
+    { id: "seconda", items: [] },
+    {
+        id: "risposte",
+        items: [
+            { id: "task-5", content: "`console.log(1)`" },
+            { id: "task-1", content: "`console.log(2)`" },
+            { id: "task-2", content: "`console.log(3)`" },
+            { id: "task-3", content: "`console.log(4)`" },
+            { id: "task-4", content: "`console.log(5)`" },
+        ],
+    },
+]
 
 export default function Page() {
-    const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
-    void activeId;
-    const [containers, setContainers] = useState<Container[]>([
-        {
-            id: "prima",
-            items: [
+    const {
+        containers,
+        handleDragStart,
+        handleDragOver,
+        handleDragEnd,
+    } = useDnD(initialContainers)
 
-            ],
-        },
-        {
-            id: "seconda",
-            items: [],
-        },
-        {
-            id: "risposte",
-            items: [
-                { id: "task-5", content: "`console.log(1)`" },
-                { id: "task-1", content: "`console.log(2)`" },
-                { id: "task-2", content: "`console.log(3)`" },
-                { id: "task-3", content: "`console.log(4)`" },
-                { id: "task-4", content: "`console.log(5)`" },
-            ],
-        },
-    ])
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                tolerance: 5,
+                delay: 50,
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    )
+
     const [width, setWidth] = useState<number>(0); // Iniziamo con valore 0 (indefinito)
     useEffect(() => {
         // Funzione che aggiorna la larghezza
@@ -69,115 +60,7 @@ export default function Page() {
         };
     }, []);
 
-
-    const existingCode = ["` const primaPartediCodice: string = 'Ciao'`", "` let secondaParteDiCodice: string = 'Ciao'`", "`let terzaParteDiCodice: string = 'Ciao'`"]
-
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                tolerance: 5,
-                delay: 50,
-            },
-        }),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
-        })
-    )
-
-    const findContainerId = (itemId: UniqueIdentifier): UniqueIdentifier | undefined => {
-        if (containers.some((c) => c.id === itemId)) return itemId
-        return containers.find((c) => c.items.some((item) => item.id === itemId))?.id
-    }
-
-    const handleDragStart = (e: DragStartEvent) => {
-        setActiveId(e.active.id)
-    }
-
-    const handleDragOver = (e: DragOverEvent) => {
-        const { active, over } = e
-        if (!over) return
-
-        const activeContainerId = findContainerId(active.id)
-        const overContainerId = findContainerId(over.id)
-
-        if (!activeContainerId || !overContainerId || activeContainerId === overContainerId) return //se non sono nello stesso container ritorna lo stato come è
-
-        const isSingleSlot = ["prima", "seconda"].includes(overContainerId.toString()) //se l'id del container è uno di quelli delle domande, limita il numero di items che ci possono essere inseriti a uno
-
-        const overContainer = containers.find((c) => c.id === overContainerId)
-        if (isSingleSlot && overContainer && overContainer.items.length >= 1) return //se il container ha già un item ritorna lo stato come è
-
-        setContainers((prev) => {
-            const activeContainer = prev.find((c) => c.id === activeContainerId)!
-            const activeItem = activeContainer.items.find((i) => i.id === active.id)!
-            return prev.map((container) => {
-                if (container.id === activeContainerId) {
-                    return { ...container, items: container.items.filter((i) => i.id !== active.id) }
-                }
-                if (container.id === overContainerId) {
-                    const overIndex = container.items.findIndex((i) => i.id === over.id)
-                    if (overIndex !== -1) {
-                        return {
-                            ...container,
-                            items: [
-                                ...container.items.slice(0, overIndex),
-                                activeItem,
-                                ...container.items.slice(overIndex),
-                            ],
-                        }
-                    }
-                    return { ...container, items: [...container.items, activeItem] }
-                }
-                return container
-            })
-        })
-    }
-
-    const handleDragEnd = (e: DragEndEvent) => {
-        const { active, over } = e
-
-        if (!over) {
-            setActiveId(null)
-            return
-        }
-
-        const activeContainerId = findContainerId(active.id)
-        const overContainerId = findContainerId(over.id)
-
-        if (!activeContainerId || !overContainerId) {
-            setActiveId(null)
-            return
-        }
-
-        if (activeContainerId === overContainerId && active.id !== over.id) {
-            const containerIndex = containers.findIndex((c) => c.id === activeContainerId)
-
-            if (containerIndex === -1) {
-                setActiveId(null)
-                return
-            }
-
-            const container = containers[containerIndex];
-            const activeIndex = container.items.findIndex((i) => i.id === active.id)
-            const overIndex = container.items.findIndex((i) => i.id === over.id)
-
-            if (activeIndex === -1 || overIndex === -1) {
-                const newItems = arrayMove(container.items, activeIndex, overIndex)
-                setContainers((containers) => {
-                    return containers.map((c, index) => {
-                        if (index === containerIndex) {
-                            return { ...c, items: newItems }
-                        }
-                        return c
-                    }
-                    )
-                })
-            }
-        }
-        setActiveId(null)
-    }
-
-    console.log(existingCode);
+    const existingCode = ["`const primaPartediCodice: string = 'Ciao'`", "`let secondaParteDiCodice: string = 'Ciao'`", "`let terzaParteDiCodice: string = 'Ciao'`"]
 
 
     return (

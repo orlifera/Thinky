@@ -1,22 +1,74 @@
 [
     {
         "id": "1",
-        "content": "The capital of France is Paris."
+        "content": "Accede ad un file senza modificarlo.",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
     },
     {
         "id": "2",
-        "content": "The capital of Germany is Berlin."
+        "content": "Deve attendere che nessun altro processo stia leggendo",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
     },
     {
         "id": "3",
-        "content": "The capital of Italy is Rome."
+        "content": "Può lavorare contemporaneamente con altri processi uguali.",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
     },
     {
         "id": "4",
-        "content": "The capital of Spain is Madrid."
+        "content": "Deve bloccare altri processi mentre lavora",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
     },
     {
         "id": "5",
-        "content": "The capital of Portugal is Lisbon."
+        "content": "Può causare incoerenza se non sincronizzato",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
+    },
+    {
+        "id": "6",
+        "content": "Può leggere contemporaneamente ad uno scrittore",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
+    },
+    {
+        "id": "7",
+        "content": "Richiede accesso esclusivo alla risorsa.",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
+    },
+    {
+        "id": "8",
+        "content": "Aumenta la velocità del sistema se usati correttamente.",
+        "answer": [
+            "Lettore",
+            "Scrittore",
+            "Nessuno"
+        ]
     }
 ]

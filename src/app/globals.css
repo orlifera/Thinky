@@ -171,3 +171,21 @@
 a:not(nav a):visited {
   color: purple;
 }
+
+@keyframes borderPulse {
+
+  0%,
+  100% {
+    border-color: #e32e2e;
+    /* red-400 */
+  }
+
+  50% {
+    border-color: #fca5a564;
+    /* red-300 */
+  }
+}
+
+.border-pulse {
+  animation: borderPulse 1.5s ease-in-out infinite;
+}
