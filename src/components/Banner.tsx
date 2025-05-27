@@ -56,9 +56,12 @@ export default function Banner({ source, title, text, username }: BannerProps) {
             {/* Text content */}
             <div className="relative z-20 text-center px-6 max-w-4xl">
                 <h1 className="text-4xl font-extrabold">{title} </h1>
-                <h2 className={`${textColor} text-4xl font-bold p-2 min-w-[5em] m-auto max-w-[70%]`}>
+                {username ? <h2 className={`${textColor} text-4xl font-bold p-2 min-w-[5em] m-auto max-w-[70%]`}>
                     {username?.toUpperCase()}
                 </h2>
+                    :
+                    null
+                }
                 <p className="text-lg w-[70%] m-auto font-light leading-relaxed">
                     {text}
                 </p>
