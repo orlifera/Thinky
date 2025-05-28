@@ -7,6 +7,8 @@ import StepOne from './components/steps/StepOne'
 import StepTwo from './components/steps/StepTwo'
 import StepThree from './components/steps/StepThree'
 import StepFour from './components/steps/StepFour'
+import StepFive from './components/steps/StepFive'
+import StepSix from './components/steps/StepSix'
 import { Progress } from '@/components/ui/progress'
 
 export default function Page() {
@@ -44,14 +46,23 @@ export default function Page() {
         <StepTwo key={2} />,
         <StepThree key={3} />,
         <StepFour key={4} />,
+        <StepFive key={5} />,
+        <StepSix key={6} />,
+        // Aggiungi altri step qui se necessario
 
     ]
-    console.log("Current Step:", currentStep)
+
+    const percentage: number = Number((currentStep * 16.67).toFixed())
 
     return (
-        <div>
-            <div className='flex justify-center items-center align-middle'> 0% <Progress value={currentStep * 25} className="m-4 w-[70%] flex flex-col" /> 100%</div>
+        <>
+            <div className='flex flex-col justify-center items-center align-middle'>
+                <div className='flex justify-center items-center align-middle w-full'>
+                    0% <Progress value={currentStep * 16.67} className="m-4 w-[70%] flex flex-col" /> 100%
+                </div>
+                {percentage < 100 ? <h2>Laboratorio completato: {percentage} %</h2> : <h2 className='font-semibold text-lg'>Laboratorio completato! <span aria-hidden>🎉</span></h2>}
+            </div>
             {steps[currentStep] || <div>Step non trovato</div>}
-        </div>
+        </>
     )
 }

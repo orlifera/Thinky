@@ -8,8 +8,6 @@ import { XIcon } from 'lucide-react';
 
 export default function Hint({ id }: Hint) {
     const [isVisible, setIsVisible] = useState(false);
-    void id;
-    console.log(Hints);
     if (isVisible) {
         return (
             <div className='w-full bg-chart-2 rounded p-8 flex flex-col items-center mt-16'>
@@ -31,10 +29,10 @@ export default function Hint({ id }: Hint) {
 
 
     return (
-        <Button className='w-[50%] flex m-auto bg-primary text-white hover:bg-primary/80 ' onClick={() => {
+        <Button className='w-[50%] flex m-auto bg-primary text-white hover:bg-primary/80 my-4' onClick={() => {
             setIsVisible(true);
         }}>
-            Clicca per visualizzare il suggerimento
+            Suggerimento
         </Button>
     )
 }

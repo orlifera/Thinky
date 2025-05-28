@@ -3,9 +3,10 @@ import { redirect } from 'next/navigation'
 import { fetchUsers } from '@/helper/gh'
 import { User } from '@/types'
 import UserTable from './components/UserTable'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Test from './components/Test'
+import Video from './components/Video'
 import StepPage from './components/StepPage'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 
 
 export default async function AreaRiservata() {
@@ -50,7 +51,7 @@ export default async function AreaRiservata() {
                     }
                 </TabsContent>
                 <TabsContent value='video'>
-                    <Test />
+                    <Video />
                 </TabsContent>
                 <TabsContent value='step'>
                     <StepPage />

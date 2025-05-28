@@ -1,6 +1,7 @@
 import answers from '@/data/answer.json'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
+import Hint from '@/app/lab/components/steps/Hint'
 import React from 'react'
 
 
@@ -33,6 +34,9 @@ export default function StepTwo() {
                                 ))}
                             </SelectContent>
                         </Select>
+                        <div className='mt-2 w-full'>
+                            <Hint id={answer.id} />
+                        </div>
                     </div>
                 ))}
                 {/* <Select defaultValue="">

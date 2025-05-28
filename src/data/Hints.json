@@ -12,7 +12,39 @@
         "content": "Terzo Hint."
     },
     {
-        "id": "second-checl",
+        "id": "second-check",
         "content": "Quarto Hint."
+    },
+    {
+        "id": "1",
+        "content": "Quinto Hint."
+    },
+    {
+        "id": "2",
+        "content": "Sesto Hint."
+    },
+    {
+        "id": "3",
+        "content": "Settimo Hint."
+    },
+    {
+        "id": "4",
+        "content": "Ottavo Hint."
+    },
+    {
+        "id": "5",
+        "content": "Nono Hint."
+    },
+    {
+        "id": "6",
+        "content": "Decimo Hint."
+    },
+    {
+        "id": "7",
+        "content": "Undicesimo Hint."
+    },
+    {
+        "id": "8",
+        "content": "Dodicesimo Hint."
     }
 ]

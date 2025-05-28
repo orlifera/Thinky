@@ -19,11 +19,10 @@ export default function Container({
     const { setNodeRef } = useDroppable({ id })
 
     return (
-
+        //removed p-3 from first div
         <div
             ref={setNodeRef}
-            className="flex h-full flex-col rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800/50"
-        >
+            className="flex h-full flex-col rounded-md border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/50">
             <div className="flex-1">
                 <SortableContext items={items.map((item) => item.id)} strategy={verticalListSortingStrategy}>
                     <ul className="flex flex-col gap-2">

@@ -35,7 +35,7 @@ export default function MarkDown({ content }: { content: string }) {
     const processedContent = preprocessContent(content || "");
 
     return (
-        <div className="prose w-auto h-full break-words overflow-wrap prose-strong:font-bold">
+        <div className="prose w-full h-full break-words overflow-wrap prose-strong:font-bold">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]} // uncomment for syntax highlighting
@@ -71,7 +71,7 @@ export default function MarkDown({ content }: { content: string }) {
 
                         return (
                             <div className="relative group">
-                                <pre className="overflow-auto bg-muted dark:text-white p-4 rounded-lg border border-gray-700 text-wrap relative shadow-lg">
+                                <pre className="dark:bg-muted bg-gray-700 w-full text-white p-4 rounded-lg border border-gray-700 text-wrap relative shadow-lg">
                                     {/* uncomment for prog. Language Label */}
                                     {/* <div className="flex justify-between items-center bg-gray-800 text-xs font-bold rounded">
                                         <p className="ml-3">{language}</p>
@@ -82,7 +82,7 @@ export default function MarkDown({ content }: { content: string }) {
                                             {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
                                         </button>
                                     </div> */}
-                                    <code className="block overflow-auto" {...props}>{children}</code>
+                                    <code className="block overflow-auto w-full" {...props}>{children}</code>
                                 </pre>
                             </div>
                         );

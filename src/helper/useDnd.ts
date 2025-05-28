@@ -42,7 +42,7 @@ export function useDnD(initialContainers: Container[]) {
 
         if (!activeContainerId || !overContainerId || activeContainerId === overContainerId) return
 
-        const isSingleSlot = ["prima", "seconda"].includes(overContainerId.toString())
+        const isSingleSlot = ["prima", "seconda", "terza", "quarta", "quinta", "sesta"].includes(overContainerId.toString())
         const overContainer = containers.find((c) => c.id === overContainerId)
         if (isSingleSlot && overContainer && overContainer.items.length >= 1) return
 

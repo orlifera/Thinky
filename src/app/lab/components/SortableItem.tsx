@@ -19,10 +19,10 @@ export default function Answer({ id, content }: { id: UniqueIdentifier; content:
             {...listeners}
             {...attributes}
             style={style}
-            className="rounded border bg-white p-3 dark:border-gray-700 dark:bg-gray-700"
-        >
+            className="rounded border bg-white dark:border-gray-700 dark:bg-gray-700"
+        >{/* p-3 can be removed */}
             <div className="flex items-center gap-3">
-                <span className="text-gray-500 dark:text-gray-400">⋮</span>
+                <span className="m-2 text-gray-500 dark:text-gray-400">⋮</span>
                 <MarkDown content={content} />
             </div>
         </li>
