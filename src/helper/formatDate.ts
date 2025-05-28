@@ -7,6 +7,7 @@ export const formatDate = (date: string): string => {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false,
+        timeZone: 'Europe/Rome', // fusorario italiano
     };
 
     const italianFormatter = new Intl.DateTimeFormat('it-IT', options);
