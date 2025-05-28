@@ -18,7 +18,7 @@ function Footer() {
                         Dipartimento di Matematica
                     </li>
                     <li>
-                        Via trieste 63, Padova, 35129
+                        Via Trieste 63, Padova, 35129
                     </li>
                     <li>
                         <Link href="/area-riservata" className='text-blue-600 underline visited:text-purple-600'>Area riservata</Link>
