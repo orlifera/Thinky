@@ -1,9 +1,12 @@
 import React from 'react'
-import Dnd from '@/app/lab/components/Dnd'
 
 
-export default function StepSix() {
+
+export default function StepSeven() {
     return (
-        <Dnd />
+        <div>
+            <h1 className='text-2xl font-bold text-center mb-4'>Congratulazioni!</h1>
+            <p className='text-lg text-center mb-4'>Hai completato il laboratorio. </p>
+        </div>
     )
 }

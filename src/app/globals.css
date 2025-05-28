@@ -164,6 +164,10 @@
   }
 }
 
+#inizia {
+  color: white
+}
+
 #inizia:visited:hover {
   color: var(--primary);
   text-decoration: none;

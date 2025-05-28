@@ -8,9 +8,9 @@ import StepTwo from './components/steps/StepTwo'
 import StepThree from './components/steps/StepThree'
 import StepFour from './components/steps/StepFour'
 import StepFive from './components/steps/StepFive'
-import StepSix from './components/steps/StepSix'
 import { Progress } from '@/components/ui/progress'
-import StepSeven from './components/steps/StepSeven'
+import StepSix from './components/steps/StepSix'
+// import DndStep from './components/steps/DndStep'
 
 export default function Page() {
     const [currentStep, setCurrentStep] = useState<number | null>(null)
@@ -49,12 +49,12 @@ export default function Page() {
         <StepFour key={4} />,
         <StepFive key={5} />,
         <StepSix key={6} />,
-        <StepSeven key={7} />,
+        // <DndStep key={6} />, da aggiungere se si vule complicare il gioco con il dnd completo di entrambi i processi insieme
         // Aggiungi altri step qui se necessario
 
     ]
 
-    const percentage: number = Number((currentStep * 14.28).toFixed())
+    const percentage: number = Number((currentStep * 16.67).toFixed())
 
     return (
         <>

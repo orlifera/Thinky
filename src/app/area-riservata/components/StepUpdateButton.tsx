@@ -39,7 +39,7 @@ export default function StepUpdateButton({ currentStep }: Step) {
         }
     }
 
-    const disabled = step >= 7; //diminuibile a 4 o 5 se troppo lungo. 
+    const disabled = step >= 6; //diminuibile a 4 o 5 se troppo lungo. 
     const text = disabled ? "Ultimo step raggiunto" : `Avanza allo step ${step + 1}`;
     return (
         <div className="flex flex-col items-center justify-center h-full gap-8">
