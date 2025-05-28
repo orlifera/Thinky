@@ -10,6 +10,7 @@ import StepFour from './components/steps/StepFour'
 import StepFive from './components/steps/StepFive'
 import StepSix from './components/steps/StepSix'
 import { Progress } from '@/components/ui/progress'
+import StepSeven from './components/steps/StepSeven'
 
 export default function Page() {
     const [currentStep, setCurrentStep] = useState<number | null>(null)
@@ -48,17 +49,18 @@ export default function Page() {
         <StepFour key={4} />,
         <StepFive key={5} />,
         <StepSix key={6} />,
+        <StepSeven key={7} />,
         // Aggiungi altri step qui se necessario
 
     ]
 
-    const percentage: number = Number((currentStep * 16.67).toFixed())
+    const percentage: number = Number((currentStep * 14.28).toFixed())
 
     return (
         <>
             <div className='flex flex-col justify-center items-center align-middle'>
                 <div className='flex justify-center items-center align-middle w-full'>
-                    0% <Progress value={currentStep * 16.67} className="m-4 w-[70%] flex flex-col" /> 100%
+                    0% <Progress value={percentage} className="m-4 w-[70%] flex flex-col" /> 100%
                 </div>
                 {percentage < 100 ? <h2>Laboratorio completato: {percentage} %</h2> : <h2 className='font-semibold text-lg'>Laboratorio completato! <span aria-hidden>🎉</span></h2>}
             </div>
