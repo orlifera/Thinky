@@ -164,6 +164,11 @@
   }
 }
 
+#inizia:visited:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
 #inizia:visited {
   color: white;
 }

@@ -204,7 +204,7 @@ export default function Home() {
           </div>
           <div id="">
             <h2 className="text-2xl font-bold text-white mt-4 text-center">Inizia subito!</h2>
-            <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl bg-primary hover:bg-gradient-to-br hover:from-white/50 hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg text-white items-center justify-center visited:text-white">
+            <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl bg-primary hover:bg-gradient-to-br hover:from-white/50 hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg  items-center justify-center visited:hover:text-primary">
               <LinkIcon className="m-1" /> Vai al laboratorio
             </Link>
           </div>
