@@ -41,20 +41,26 @@ export default function UserLog({ existingUsernames, onConfirm }: {
         }
     }, [error]);
 
-    // Extract username strings from User array
-    const existingUsernamesList = existingUsernames.map(user => user.username);
-
     //ritorna un nome casuale tra quelli della lista che non sia già in uso
     const getRandomUsername = () => {
-        const available = randomUsername.filter(u => !existingUsernamesList.includes(u)); // compare strings
+        const now = new Date();
+        const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+
+        const recentlyUsed = existingUsernames
+            .filter(user => {
+                if (!user.username || !user.date) return false;
+                const userDate = new Date(user.date);
+                return userDate > twoHoursAgo;
+            })
+            .map(user => user.username.trim().toLowerCase());
+
+        const available = randomUsername.filter(u => !recentlyUsed.includes(u.trim().toLowerCase()));
+        console.log("Available usernames:", available);
+        if (available.length === 0) return "UtenteRandom"; // fallback value
         return available[Math.floor(Math.random() * available.length)];
     };
 
-    console.log("Existing usernames:", existingUsernames);
-
     const ISODate = new Date().toISOString()
-    const now = new Date();
-    const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(); // ora attuale - 2 ore
     const trimmed = username.trim();
     const lower = trimmed.toLowerCase();
     const isProfane =
@@ -62,15 +68,17 @@ export default function UserLog({ existingUsernames, onConfirm }: {
         lower.split(/\s+/).some(word => filter.isProfane(word));
 
     function checkUsers(): boolean {
+        // Only block usernames used in the last 2 hours (case-insensitive)
+        const now = new Date();
+        const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+
         return existingUsernames.some(user => {
+            if (!user.username || !user.date) return false;
             const userDate = new Date(user.date);
-            const twoHoursAgoDate = new Date(twoHoursAgo);
-            console.log(
-                `Checking username: ${user.username}, userDate: ${userDate}, twoHoursAgo: ${twoHoursAgoDate}, match: ${user.username === trimmed && userDate > twoHoursAgoDate}`
-            );
+            // Compare usernames case-insensitively
             return (
-                user.username === trimmed &&
-                userDate > twoHoursAgoDate
+                user.username.trim().toLowerCase() === (username ?? "").trim().toLowerCase() &&
+                userDate > twoHoursAgo
             );
         });
     }

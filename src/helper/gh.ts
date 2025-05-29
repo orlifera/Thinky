@@ -93,9 +93,9 @@ export const addUser = async (newUser: User): Promise<User> => {
 
             const usernameExists = currentContent.some(
                 (user: User) =>
-                    user.username === newUser.username &&
+                    user.username.trim().toLowerCase() === newUser.username.trim().toLowerCase() &&
                     user.school === newUser.school &&
-                    new Date(user.date).getTime() > twoHoursAgo.getTime()
+                    new Date(user.date) > twoHoursAgo
             );
 
             if (usernameExists) {

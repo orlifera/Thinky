@@ -35,6 +35,8 @@ export default function GlobalError({
                     More info:
                     {error.name}
                     {error.digest}
+                    {error.message}
+                    {error.stack}
                 </div>
             </body>
         </html>
