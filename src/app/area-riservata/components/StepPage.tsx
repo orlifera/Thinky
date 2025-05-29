@@ -24,5 +24,5 @@ export default function StepPage() {
         return <p>Caricamento...</p>
     }
 
-    return <StepUpdateButton currentStep={currentStep} />
+    return <StepUpdateButton currentStep={currentStep} onStepChange={setCurrentStep} />
 }
