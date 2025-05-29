@@ -1,50 +1,82 @@
 [
     {
         "id": "first-radio",
-        "content": "Primo Hint"
+        "content": "💡 Pensa al tipo di operazione che fa un lettore: cambia i dati o li osserva soltanto?"
     },
     {
         "id": "second-radio",
-        "content": "Secondo Hint."
+        "content": "💡 Cosa potrebbe succedere se due processi scrivono contemporaneamente nello stesso spazio di memoria?"
     },
     {
         "id": "first-check",
-        "content": "Terzo Hint."
+        "content": "💡 Prova a capire quali operazioni possono avvenire in parallelo senza causare conflitti."
     },
     {
         "id": "second-check",
-        "content": "Quarto Hint."
+        "content": "💡 Lo scopo è gestire l'accesso a dati condivisi: cosa bisogna evitare quando più processi lavorano sugli stessi dati?"
     },
     {
         "id": "1",
-        "content": "Quinto Hint."
+        "content": "💡 Chi lavora su dati senza cambiarli?"
     },
     {
         "id": "2",
-        "content": "Sesto Hint."
+        "content": "💡 Chi ha bisogno di esclusività per evitare conflitti?."
     },
     {
         "id": "3",
-        "content": "Settimo Hint."
+        "content": "💡 Chi non crea problemi se lavora insieme ad altri dello stesso tipo?"
     },
     {
         "id": "4",
-        "content": "Ottavo Hint."
+        "content": "💡 Chi rischia di causare problemi se qualcuno accede contemporaneamente?"
     },
     {
         "id": "5",
-        "content": "Nono Hint."
+        "content": "💡 Chi modifica i dati e quindi deve essere ben controllato?"
     },
     {
         "id": "6",
-        "content": "Decimo Hint."
+        "content": "💡 Pensa: scrivere e leggere insieme è mai sicuro?"
     },
     {
         "id": "7",
-        "content": "Undicesimo Hint."
+        "content": "💡 Chi ha bisogno di essere l'unico attivo sulla risorsa per funzionare correttamente?"
     },
     {
         "id": "8",
-        "content": "Dodicesimo Hint."
+        "content": "💡 Chi può lavorare in parallelo senza creare conflitti?"
+    },
+    {
+        "id": "9",
+        "content": "💡 Cosa succede se due processi cercano di cambiare la stessa cosa insieme?"
+    },
+    {
+        "id": "10",
+        "content": "💡 Leggere cambia qualcosa?"
+    },
+    {
+        "id": "11",
+        "content": "💡 Serve evitare conflitti tra chi legge e chi scrive?"
+    },
+    {
+        "id": "12",
+        "content": "💡 Cosa rischia di leggere il lettore in questo caso?"
+    },
+    {
+        "id": "13",
+        "content": "💡 È sicuro, ma stai usando bene le risorse?"
+    },
+    {
+        "id": "14",
+        "content": "💡 Il lettore può leggere se non rischia di leggere dati in fase di modifica."
+    },
+    {
+        "id": "15",
+        "content": "💡 Per evitare conflitti, serve esclusività totale"
+    },
+    {
+        "id": "16",
+        "content": "💡 Serve capire se si può bloccare l’accesso per scrivere."
     }
 ]

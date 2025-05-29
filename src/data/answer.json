@@ -70,5 +70,80 @@
             "Scrittore",
             "Nessuno"
         ]
+    },
+    {
+        "id": "9",
+        "content": "Due scrittori scrivono contemporaneamente",
+        "answer": [
+            "Pericoloso",
+            "Sicuro",
+            "Neutro"
+        ]
+    },
+    {
+        "id": "10",
+        "content": "Due lettori leggono contemporaneamente.",
+        "answer": [
+            "Pericoloso",
+            "Sicuro",
+            "Neutro"
+        ]
+    },
+    {
+        "id": "11",
+        "content": "Uno scrittore aspetta che nessuno legga prima di scrivere.",
+        "answer": [
+            "Pericoloso",
+            "Sicuro",
+            "Neutro"
+        ]
+    },
+    {
+        "id": "12",
+        "content": "Un lettore legge mentre uno scrittore scrive.",
+        "answer": [
+            "Pericoloso",
+            "Sicuro",
+            "Neutro"
+        ]
+    },
+    {
+        "id": "13",
+        "content": "Lettori che leggono in sequenza uno alla volta.",
+        "answer": [
+            "Pericoloso",
+            "Sicuro",
+            "Neutro"
+        ]
+    },
+    {
+        "id": "14",
+        "content": "Un lettore può accedere alla risorsa quando...",
+        "answer": [
+            "nessun altro è attivo",
+            " non ci sono scrittori",
+            "è il primo nel turno",
+            "ha il lock globale"
+        ]
+    },
+    {
+        "id": "15",
+        "content": "Uno scrittore può accedere alla risorsa solo se...",
+        "answer": [
+            "ci sono lettori",
+            "nessuno sta leggendo o scrivendo",
+            "ha priorità",
+            "è stato richiesto da un timer"
+        ]
+    },
+    {
+        "id": "16",
+        "content": "Il numLettori viene usato per...",
+        "answer": [
+            "sapere quando scrivere",
+            "gestire l'accesso",
+            "disegnare grafici",
+            "inviare dati"
+        ]
     }
 ]

@@ -1,6 +1,6 @@
 
-import { Checkbox } from '@radix-ui/react-checkbox'
-import { Label } from '@radix-ui/react-label'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import React from 'react'
 import Hint from './Hint'
