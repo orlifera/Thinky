@@ -53,25 +53,27 @@ export default function UserLog({ existingUsernames, onConfirm }: {
     console.log("Existing usernames:", existingUsernames);
 
     const ISODate = new Date().toISOString()
-    console.log("ISODate", ISODate)
     const now = new Date();
-    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000).toISOString(); // ora attuale - 1 ora
-    console.log("oneHourAgo", oneHourAgo)
-
+    const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(); // ora attuale - 2 ore
     const trimmed = username.trim();
     const lower = trimmed.toLowerCase();
     const isProfane =
         filter.isProfane(lower) ||
         lower.split(/\s+/).some(word => filter.isProfane(word));
 
-
-
     function checkUsers(): boolean {
         return existingUsernames.some(user => {
-            return user.username === trimmed && user.date > oneHourAgo;
+            const userDate = new Date(user.date);
+            const twoHoursAgoDate = new Date(twoHoursAgo);
+            console.log(
+                `Checking username: ${user.username}, userDate: ${userDate}, twoHoursAgo: ${twoHoursAgoDate}, match: ${user.username === trimmed && userDate > twoHoursAgoDate}`
+            );
+            return (
+                user.username === trimmed &&
+                userDate > twoHoursAgoDate
+            );
         });
     }
-
 
 
     const handleSubmit = async () => {

@@ -73,8 +73,19 @@ export default function Home() {
   const handleConfirm = async (username: string, school: string, date: string): Promise<boolean> => {
     const newUser: User = { username, school, date };
 
-    try {
+    // Block only if username was used in the last 2 hours
+    const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
+    const taken = users.some(
+      (u) =>
+        u.username === username &&
+        new Date(u.date).getTime() > twoHoursAgo.getTime()
+    );
+    if (taken) {
+      setRegistrationError("Questo nome utente è già stato preso. Prova con un altro nome.");
+      return false;
+    }
 
+    try {
       setUser(null);
       sessionStorage.removeItem("user");
 
@@ -96,18 +107,7 @@ export default function Home() {
       setUser(null);
       sessionStorage.removeItem("user");
 
-      if (
-        typeof error === "object" &&
-        error !== null &&
-        "message" in error &&
-        typeof (error as { message?: unknown }).message === "string" &&
-        (error as { message: string }).message.includes("Username already exists")
-      ) {
-        setRegistrationError("Questo nome utente è già stato preso. Prova con un altro nome.");
-      } else {
-        setRegistrationError("Errore durante la registrazione. Riprova più tardi.");
-      }
-
+      setRegistrationError("Errore durante la registrazione. Riprova più tardi.");
       return false;
     }
   };

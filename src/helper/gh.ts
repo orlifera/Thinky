@@ -89,8 +89,13 @@ export const addUser = async (newUser: User): Promise<User> => {
             const currentContent = JSON.parse(atob(fileResponse.data.content));
 
             // Check if username already exists in the latest data
+            const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
+
             const usernameExists = currentContent.some(
-                (user: User) => user.username === newUser.username && user.school === newUser.school
+                (user: User) =>
+                    user.username === newUser.username &&
+                    user.school === newUser.school &&
+                    new Date(user.date).getTime() > twoHoursAgo.getTime()
             );
 
             if (usernameExists) {
