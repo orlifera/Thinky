@@ -28,7 +28,7 @@ export default async function AreaRiservata() {
     }
 
     return (
-        <div id='main-s' className='flex flex-col items-center min-h-[calc(100svh-22em)] h-full w-full mt-10'>
+        <div id='main-content' className='flex flex-col items-center min-h-[calc(100svh-22em)] h-full w-full mt-10'>
             <h1 className='text-3xl font-bold m-4'>Benvenuto nell&apos;area riservata</h1>
 
             <Tabs defaultValue="table" className="w-full">

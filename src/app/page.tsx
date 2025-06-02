@@ -215,7 +215,7 @@ export default function Home() {
               <AccordionItem value="item-1">
                 <AccordionTrigger className="w-full">È accessibile?</AccordionTrigger>
                 <AccordionContent>
-                  Si! Thinky è completamente accessibile rispettndo gli standard WCAG 2.1 e le linee guida WAI-ARIA.
+                  Si! Thinky è completamente accessibile rispettando gli standard WCAG 2.1 e le linee guida WAI-ARIA.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">

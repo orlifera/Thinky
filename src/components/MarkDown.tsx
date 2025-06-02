@@ -12,7 +12,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 // import { Copy, Check } from "lucide-react"; //uncomment for the copy icon
-import "highlight.js/styles/github-dark.css";
+import "highlight.js/styles/github-dark.css"; // import your preferred highlight.js theme
 
 
 
@@ -71,7 +71,7 @@ export default function MarkDown({ content }: { content: string }) {
 
                         return (
                             <div className="relative group">
-                                <pre className="dark:bg-muted bg-gray-700 w-full text-white p-4 rounded-lg border border-gray-700 text-wrap relative shadow-lg">
+                                <pre className="dark:bg-muted bg-gray-800 w-full text-white p-4 rounded-lg border border-gray-700 text-wrap relative shadow-lg" {...props}>
                                     {/* uncomment for prog. Language Label */}
                                     {/* <div className="flex justify-between items-center bg-gray-800 text-xs font-bold rounded">
                                         <p className="ml-3">{language}</p>
@@ -82,7 +82,7 @@ export default function MarkDown({ content }: { content: string }) {
                                             {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
                                         </button>
                                     </div> */}
-                                    <code className="block overflow-auto w-full" {...props}>{children}</code>
+                                    {children}
                                 </pre>
                             </div>
                         );

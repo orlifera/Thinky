@@ -32,7 +32,7 @@ export default function Accesso() {
     }
 
     return (
-        <main className='flex flex-col items-center h-[calc(100vh-22rem)] w-full mt-10'>
+        <div className='flex flex-col items-center h-[calc(100vh-22rem)] w-full mt-10'>
             <h1 className='text-3xl font-bold'>Accedi all&apos;area riservata</h1>
             <form onSubmit={handleSubmit} className='md:w-[50%] w-[80%] h-[40%] flex flex-col items-center justify-center gap-4 bg-primary/40 rounded-lg shadow-lg'>
                 <Label htmlFor="password">Password</Label>
@@ -46,6 +46,6 @@ export default function Accesso() {
                 />
                 <Button variant={"default"} type="submit">Entra</Button>
             </form>
-        </main>
+        </div>
     )
 }

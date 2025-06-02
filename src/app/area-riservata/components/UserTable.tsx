@@ -4,6 +4,7 @@ import { formatDate } from '@/helper/formatDate'
 import {
     Table,
     TableBody,
+    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -15,10 +16,14 @@ export default function UserTable({ users }: { users: User[] }) {
 
 
     return (
-        <>
+        <div id='main-content'>
+
 
             <h2 className='text-xl text-center font-extrabold'>Ecco la lista degli utenti registrati:</h2>
-            <Table className='w-[90%] m-auto text-center bg-foreground/2'>
+            <Table className='w-[90%] m-auto text-center bg-foreground/2' >
+                <TableCaption className='text-center text-muted-foreground'>
+                    Questa tabella mostra gli utenti registrati, la loro scuola e la data di registrazione.
+                </TableCaption>
                 <TableHeader id="table-header" className='bg-primary'>
                     <TableRow className='group'>
                         <TableHead className='w-[10%] text-center text-white group-hover:text-primary dark:group-hover:text-red-400'>#</TableHead>
@@ -38,6 +43,6 @@ export default function UserTable({ users }: { users: User[] }) {
                     ))}
                 </TableBody>
             </Table>
-        </>
+        </div>
     )
 }

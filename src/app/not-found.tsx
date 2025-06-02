@@ -26,7 +26,7 @@ function NotFound() {
                     <div className="bg-primary/70 p-4">
 
                         <h1 className="text-4xl font-bold">
-                            404 - Pagina non trovata <span role="decoration">😢</span>
+                            404 - Pagina non trovata <span>😢</span>
                         </h1>
                         <p className="text-lg mt-2 mb-4">La pagina che stai cercando non esiste</p>
                         <Button
