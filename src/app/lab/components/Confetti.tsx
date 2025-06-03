@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import confetti from 'canvas-confetti'
 import React, { useEffect } from 'react'
 
@@ -12,12 +13,13 @@ function Confetti() {
 
     return (
         <div className="">
-            <button
+            <Button
                 onClick={handleConfetti}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                variant={"default"}
+                className='p-8 text-lg'
             >
                 Celebrate!
-            </button>
+            </Button>
         </div>
     )
 }

@@ -12,7 +12,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 // import { Copy, Check } from "lucide-react"; //uncomment for the copy icon
-import "highlight.js/styles/github-dark.css"; // import your preferred highlight.js theme
+import "highlight.js/styles/a11y-dark.css";
 
 
 
