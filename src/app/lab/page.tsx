@@ -60,7 +60,7 @@ export default function Page() {
         <>
             <div className='flex flex-col justify-center items-center align-middle'>
                 <div className='flex justify-center items-center align-middle w-full'>
-                    0% <Progress value={percentage} className="m-4 w-[70%] flex flex-col" /> 100%
+                    0% <Progress value={percentage} className="m-4 w-[70%] flex flex-col" aria-label='progress bar' /> 100%
                 </div>
                 {percentage < 100 ? <h2>Laboratorio completato: {percentage} %</h2> : <h2 className='font-semibold text-lg'>Laboratorio completato! <span aria-hidden>🎉</span></h2>}
             </div>

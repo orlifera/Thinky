@@ -86,7 +86,7 @@ function Navbar() {
                             <li>
                                 <Link
                                     href="/"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/') ? 'bg-white text-primary font-bold' : ''
+                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/') ? 'bg-white text-primary font-bold' : 'visited:text-chart-5'
                                         }`}
 
                                 >
@@ -105,7 +105,7 @@ function Navbar() {
                             <li>
                                 <Link
                                     href="/lettori"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/lettori') ? 'bg-white text-primary font-bold' : ''
+                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/lettori') ? 'bg-white text-primary font-bold' : 'visited:text-chart-5'
                                         }`}
                                 >
                                     Problema dei lettori
@@ -114,7 +114,7 @@ function Navbar() {
                             <li>
                                 <Link
                                     href="/filosofi"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/filosofi') ? 'bg-white text-primary font-bold' : ''
+                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/filosofi') ? 'bg-white text-primary font-bold' : 'visited:text-chart-5'
                                         }`}
                                 >
                                     Problema dei filosofi
@@ -144,7 +144,7 @@ function Navbar() {
                                             ? (isVisible ? 'block' : 'hidden')
                                             : 'hidden group-hover:block group-focus-within:block'
                                             } -right-4 ${width > 768 ? 'top-5 mt-2' : 'bottom-full mb-2'
-                                            } bg-ring p-4 min-w-[18em] rounded-md text-white z-50`}
+                                            } bg-primary shadow-lg border-4 border-white p-4 min-w-[18em] rounded-md text-white z-50`}
                                         role="menu"
                                         aria-hidden={!isVisible}
                                     >
@@ -153,7 +153,7 @@ function Navbar() {
                                         <Link
                                             href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze'
                                             target='_blank'
-                                            className="flex items-center justify-center text-center underline rounded-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                                            className="flex items-center justify-center text-center underline rounded-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white visited:text-chart-5"
                                             tabIndex={0}
                                         >
                                             Dai un sguardo al corso di laurea
@@ -197,14 +197,14 @@ function Navbar() {
                             <li className='group' onClick={() => isMobile && setIsVisible(!isVisible)}>
                                 <Avatar username={user.username} />
                                 <div
-                                    className={`absolute  ${isMobile ? (isVisible ? 'block' : 'hidden') : 'hidden group-hover:block group-focus-within:block'} right-0 md:top-full md:mt-2 bottom-full mb-2 md:bottom-auto md:mb-0 bg-ring p-4 min-w-[15em] rounded-md text-white z-50`}
+                                    className={`absolute  ${isMobile ? (isVisible ? 'block' : 'hidden') : 'hidden group-hover:block group-focus-within:block'} right-0 md:top-full md:mt-2 bottom-full mb-2 md:bottom-auto md:mb-0 bg-primary shadow-md p-4 min-w-[15em] rounded-md text-white z-50`}
                                     role="menu"
                                     aria-hidden={!isVisible}
                                 >
 
                                     <p>Ciao {user.username}, benvenuto! <span>🎉</span></p>
                                     <p>{user.school}</p>
-                                    <Link href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze' target='_blank' className="flex items-center justify-center text-center underline rounded-md visited:text-purple-700 transition ">
+                                    <Link href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze' target='_blank' className="flex items-center justify-center text-center underline rounded-md visited:text-chart-5 transition ">
                                         Dai un sguardo al corso di laurea
                                         <SquareArrowOutUpRight className='items-center justify-center h-4 w-4' />
                                     </Link>

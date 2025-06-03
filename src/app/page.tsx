@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import UserLog from "@/components/UserLog";
 import { fetchUsers, addUser } from "@/helper/gh";
 import { User } from "@/types";
-import Loader from "@/components/ui/loader";
+// import Loader from "@/components/ui/loader";
 import useUser from "@/context/UserContext";
 import { Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
@@ -19,14 +19,14 @@ import Banner from "@/components/Banner";
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [registrationError, setRegistrationError] = useState<string | null>(null);
   const { user, setUser } = useUser(); // Get user and setUser from context
 
-  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  // const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   useEffect(() => {
-    const firstVisit = !sessionStorage.getItem("hasVisited");
+    // const firstVisit = !sessionStorage.getItem("hasVisited");
 
     // setta errore a null all'inizio
     setRegistrationError(null);
@@ -57,14 +57,14 @@ export default function Home() {
           }
         }
 
-        if (firstVisit) await sleep(500);
+        // if (firstVisit) await sleep(500);
 
-        sessionStorage.setItem("hasVisited", "true");
-        setLoading(false);
+        // sessionStorage.setItem("hasVisited", "true");
+        // setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching users:", err);
-        setLoading(false);
+        // setLoading(false);
         sessionStorage.removeItem("user");
         setUser(null);
       });
@@ -120,10 +120,10 @@ export default function Home() {
 
   return (
     <>
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
 
       {/*Se c'è statop errore, mostra questo */}
-      {registrationError && !loading && (
+      {registrationError && (
         <div className="bg-red-500 text-white p-4 text-center">
           {registrationError}
           <button
@@ -136,7 +136,7 @@ export default function Home() {
       )}
 
       {/* Mostra il forma solo se è la prima volta o se non è loggato */}
-      {!user && !loading && !registrationError && (
+      {!user && !registrationError && (
         <div className="w-full h-screen flex items-center justify-center">
           <UserLog
             existingUsernames={users}
@@ -146,7 +146,7 @@ export default function Home() {
       )}
 
       {/* mostra il contenuto principale solo se loggato correttamente */}
-      {user && !loading && !registrationError && (
+      {user && !registrationError && (
         <div className="flex md:mx-2 flex-col justify-center items-center bg-gradient-to-tl from-primary/90 to-secondary/50 h-auto min-h-screen">
           <Banner
             source="/thinky.png"

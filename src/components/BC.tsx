@@ -23,7 +23,7 @@ export default function BC({ currentPage }: BCProps) {
                             <BreadcrumbItem>
                                 <BreadcrumbLink
                                     href="#"
-                                    className="text-gray-600 dark:text-muted-foreground cursor-default pointer-events-none"
+                                    className="text-gray-700 dark:text-muted-foreground cursor-default pointer-events-none"
                                 >
                                     {currentPage}
                                 </BreadcrumbLink>

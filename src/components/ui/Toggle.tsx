@@ -19,7 +19,6 @@ export default function Toggle() {
             size="icon"
             onClick={toggleTheme}
             className="bg-background hover:bg-amber-100 dark:bg-blue-950 dark:hover:bg-blue-600"
-            aria-hidden="true"
             aria-label="Toggle theme"
         >
             {theme === "light" ? (

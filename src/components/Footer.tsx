@@ -21,7 +21,7 @@ function Footer() {
                         Via Trieste 63, Padova, 35129
                     </li>
                     <li>
-                        <Link href="/area-riservata" className='text-blue-600 underline visited:text-purple-600'>Area riservata</Link>
+                        <Link href="/area-riservata" className='text-blue-500 underline visited:text-chart-5'>Area riservata</Link>
                     </li>
 
                 </ul>
@@ -49,7 +49,7 @@ function Footer() {
                         Via trieste 63, Padova, 35129
                     </li>
                     <li>
-                        <Link href="/area-riservata" className='text-blue-600 underline visited:text-purple-600'>Area riservata</Link>
+                        <Link href="/area-riservata" className='text-blue-500 underline visited:text-chart-5'>Area riservata</Link>
                     </li>
 
                 </ul>
