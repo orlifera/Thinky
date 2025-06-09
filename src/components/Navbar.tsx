@@ -78,7 +78,7 @@ function Navbar() {
                 <nav className='bg-primary mt-2 mx-2 rounded-t-lg shadow-md shadow-primary/40 flex items-center justify-between p-2 top-2' role='menu navigazione' aria-label='navigazione'>
                     <div id="start" aria-hidden className='sr-only'>start</div>
 
-                    <div aria-label="Logo UniPD" className='w-[10em] h-full flex items-start justify-center p-2'>
+                    <div aria-label="Logo UniPD" className='w-[10em] h-full flex items-start justify-center'>
                         <Logo />
                     </div>
                     <div className='flex items-center m-4 gap-8'>

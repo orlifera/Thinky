@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 function Logo() {
     return (
-        <Image src="/info.png" width={60} height={60} alt='Università degli Studi di Padova' />
+        <Image src="/info.png" width={100} height={100} alt='Università degli Studi di Padova' />
     )
 }
 
