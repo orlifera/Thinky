@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from '@/components/ThemeProvider';
-import "./globals.css";
 import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { UserProvider } from "@/context/UserContext";
+import "@/app/globals.css";
 
 
 
 
 export const metadata: Metadata = {
-  title: "Università degli Studi di Padova",
+  title: "Laboratorio OpenDay",
   description: "WebApp per attività laboratoriali di OpenDay",
 };
 

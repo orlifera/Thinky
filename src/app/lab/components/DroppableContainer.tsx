@@ -19,7 +19,6 @@ export default function Container({
     const { setNodeRef } = useDroppable({ id })
 
     return (
-        //removed p-3 from first div
         <div
             ref={setNodeRef}
             className="flex h-full flex-col rounded-md border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/50">
@@ -27,7 +26,11 @@ export default function Container({
                 <SortableContext items={items.map((item) => item.id)} strategy={verticalListSortingStrategy}>
                     <ul className="flex flex-col gap-2">
                         {items.map((item) => (
-                            <Answer key={item.id} id={item.id} content={item.content} />
+                            <Answer
+                                key={item.id}
+                                id={item.id}
+                                content={item.content}
+                            />
                         ))}
                     </ul>
                 </SortableContext>
@@ -39,6 +42,5 @@ export default function Container({
                 )}
             </div>
         </div>
-
     )
 }

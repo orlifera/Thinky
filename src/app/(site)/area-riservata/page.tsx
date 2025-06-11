@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { fetchUsers } from '@/helper/gh'
 import { User } from '@/types'
 import UserTable from './components/UserTable'
-import Video from './components/Video'
+
 import StepPage from './components/StepPage'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -34,7 +34,6 @@ export default async function AreaRiservata() {
             <Tabs defaultValue="table" className="w-full">
                 <TabsList className='w-[80%] bg-primary flex m-auto'>
                     <TabsTrigger value="table">Tabella Utenti</TabsTrigger>
-                    <TabsTrigger value="video">Video</TabsTrigger>
                     <TabsTrigger value="step">Step & Grafico</TabsTrigger>
 
                 </TabsList>
@@ -49,9 +48,6 @@ export default async function AreaRiservata() {
                                 <p className='text-lg'>Controlla più tardi.</p>
                             </div>
                     }
-                </TabsContent>
-                <TabsContent value='video'>
-                    <Video />
                 </TabsContent>
                 <TabsContent value='step'>
                     <StepPage />

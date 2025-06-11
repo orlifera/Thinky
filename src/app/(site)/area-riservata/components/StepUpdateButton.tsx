@@ -39,8 +39,8 @@ export default function StepUpdateButton({ currentStep, onStepChange }: Step & {
         }
     }
 
-    const disabledAdvance = step >= 6; // Assuming 6 is the last step
-    const disableBack = step <= 0; // Prevent going back below step 0
+    const disabledAdvance = step >= 7;
+    const disableBack = step <= 0;
     const text = disabledAdvance ? "Ultimo step raggiunto" : `Avanza allo step ${step + 1}`;
     return (
         <div className="flex flex-col items-center justify-center h-full gap-8">

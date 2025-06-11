@@ -2,24 +2,49 @@ import { useDnD } from "@/helper/useDnd"
 import { KeyboardSensor, PointerSensor, useSensor, useSensors, closestCorners, DndContext } from "@dnd-kit/core"
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import DroppableContainer from "@/app/lab/components/DroppableContainer"
-import { useEffect, useState } from "react"
+import MarkDown from "@/components/MarkDown"
+
+
+const scrittoriCode = [
+    `\`\`\`txt
+    ripeti {
+        . . .
+
+        produce un elemento in appena_Prodotto;
+
+        . . .
+    \`\`\``,
+    `\`\`\`txt
+        . . .
+
+        inserisce nel Buffer l'elemento;
+
+        . . .
+    \`\`\``,
+
+
+    `\`\`\`txt
+} finché(condizioneVerificata);
+    \`\`\``,
+]
 
 const initialContainers = [
     { id: "prima", items: [] },
     { id: "seconda", items: [] },
+    { id: "terza", items: [] },
+    { id: "quarta", items: [] },
     {
         id: "risposte",
         items: [
-            { id: "task-5", content: "Risposta 1" },
-            { id: "task-1", content: "Risposta 2" },
+            { id: "wait-empty", content: "`SemaforoRosso(vuoto)`" },
+            { id: "wait-scaffale", content: "`SemaforoRosso(Scaffale)`" },
+            { id: "signal-vuoto", content: "`SemaforoVerde(Vuoto)`" },
+            { id: "signal-scaffale", content: "`SemaforoVerde(Scaffale)`" },
         ],
     },
 ]
 
-export default function StepThree() {
-    const [tutorialStep, setTutorialStep] = useState(0);
-    const [hasDragged, setHasDragged] = useState(false);
-
+export default function StepFour() {
     const {
         containers,
         handleDragStart,
@@ -27,14 +52,6 @@ export default function StepThree() {
         handleDragEnd,
     } = useDnD(initialContainers)
 
-    // Track tutorial progress
-    useEffect(() => {
-        // If an item has been dragged to the first container, update tutorial state
-        if (containers[0].items.length > 0 && !hasDragged) {
-            setHasDragged(true);
-            setTutorialStep(1);
-        }
-    }, [containers, hasDragged]);
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -51,24 +68,10 @@ export default function StepThree() {
     return (
         <div className="h-full min-h-[calc(100dvh-22rem)]">
             <div className="w-full mb-24">
-                <h1 className="text-2xl text-center font-bold m-8">Step 3: Drag and Drop tutorial</h1>
+                <h1 className="text-2xl text-center font-bold m-8">Step 3: Completa il comportamento del Produttore</h1>
                 <p className="text-center text-xl font-semibold mb-4">
-                    In questa sezione capirai come utilizzare il drag & drop, per svolgere poi l&apos;ultimo esercizio.
+                    Completa l&apos;esercizio trascinando le risposte nella colonna a sinistra.
                 </p>
-                <p className="text-center text-lg mb-4">
-                    Trascina le risposte nella colonna a sinistra, per completare l&apos;esercizio.
-                </p>
-
-                {tutorialStep === 0 && (
-                    <div className="text-center text-blue-600 animate-pulse font-bold">
-                        Prendi e trascina una risposta nella colonna a sinistra!
-                    </div>
-                )}
-                {tutorialStep === 1 && (
-                    <div className="text-center text-green-600 font-bold">
-                        Ottimo! Hai completato il tutorial di drag & drop! 👏
-                    </div>
-                )}
             </div>
 
             <DndContext
@@ -79,26 +82,40 @@ export default function StepThree() {
                 onDragEnd={handleDragEnd}
             >
                 <div className="flex mx-[2em] justify-between gap-4 items-start">
-                    <div className="w-[45%] flex flex-col">
+                    <div className="w-[45%] flex flex-col mb-8">
                         <h2 className="text-center font-bold text-xl m-4">Completa qua</h2>
-                        <div className={`border-2 ${containers[0].items.length === 0 ? 'border-dashed' : 'border-solid border-green-500'} rounded-lg p-4`}>
-                            <DroppableContainer
-                                id={containers[0].id}
-                                items={containers[0].items}
-                            />
-                        </div>
+
+                        <MarkDown content={scrittoriCode[0]} />
+                        <DroppableContainer
+                            id={containers[0].id}
+                            items={containers[0].items}
+                        />
+                        <DroppableContainer
+                            id={containers[1].id}
+                            items={containers[1].items}
+                        />
+                        <MarkDown content={scrittoriCode[1]} />
+                        <DroppableContainer
+                            id={containers[2].id}
+                            items={containers[2].items}
+                        />
+                        <DroppableContainer
+                            id={containers[3].id}
+                            items={containers[3].items}
+                        />
+                        <MarkDown content={scrittoriCode[2]} />
+
                     </div>
                     <div className="w-[45%] flex flex-col">
                         <h2 className="text-center font-bold text-xl m-4">Risposte</h2>
-                        <div className={`border-2 border-solid rounded-lg p-4 ${tutorialStep === 0 && !hasDragged ? 'border-pulse' : ''}`}>
-                            <DroppableContainer
-                                id={containers[2].id}
-                                items={containers[2].items}
-                            />
-                        </div>
+                        <DroppableContainer
+                            id={containers.find(container => container.id === "risposte")?.id || ""}
+                            items={containers.find(container => container.id === "risposte")?.items || [{ id: "error", content: "No answers found" }]}
+                        />
+
                     </div>
                 </div>
-            </DndContext>
+            </DndContext >
         </div >
     )
 }

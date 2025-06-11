@@ -5,49 +5,53 @@ import DroppableContainer from "@/app/lab/components/DroppableContainer"
 import MarkDown from "@/components/MarkDown"
 
 
+const scrittoriCode = [
+    `\`\`\`txt
+    ripeti {
+        . . .
+
+        rimuove  un elemento dal buffer e lo inserisce in daConsumare;
+
+        . . .
+    \`\`\``,
+    `\`\`\`txt
+        . . .
+
+        consuma l'elemento contenuto in daConsumare;
+
+        . . .
+    \`\`\``,
+
+
+    `\`\`\`txt
+} finché(condizioneVerificata);
+    \`\`\``,
+]
 
 const initialContainers = [
     { id: "prima", items: [] },
     { id: "seconda", items: [] },
     { id: "terza", items: [] },
+    { id: "quarta", items: [] },
     {
         id: "risposte",
         items: [
-            { id: "wait-scrittura", content: "`wait(scrittura)`", },
-            { id: "wait-lettura", content: "`wait(lettura)`" },
-            { id: "write", content: "`write()`" },
-            { id: "read", content: "`read()`" },
-            { id: "do-while", content: "`do { ... } while (true);`" },
-            { id: "signal-lettura", content: "`signal(lettura)`" },
-            { id: "signal-scrittura", content: "`signal(scrittura)`" },
-
-
+            { id: "wait-empty", content: "`SemaforoRosso(vuoto)`" },
+            { id: "wait-scaffale", content: "`SemaforoRosso(Scaffale)`" },
+            { id: "signal-vuoto", content: "`SemaforoVerde(Vuoto)`" },
+            { id: "signal-scaffale", content: "`SemaforoVerde(Scaffale)`" },
         ],
     },
 ]
 
-const scrittoriCode = [
-    `\`\`\`
-    txt
-    ripeti {
-    \`\`\`
-    `,
-    `\`\`\`
-        txt
-} finché(condizioneVerificata);
-    \`\`\`
-    `,
-]
-
-
 export default function StepFour() {
-
     const {
         containers,
         handleDragStart,
         handleDragOver,
         handleDragEnd,
     } = useDnD(initialContainers)
+
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -62,14 +66,11 @@ export default function StepFour() {
     )
 
     return (
-        <div className="h-full w-full min-h-[calc(100dvh-22rem)] mb-8">
+        <div className="h-full min-h-[calc(100dvh-22rem)]">
             <div className="w-full mb-24">
-                <h1 className="text-2xl text-center font-bold m-8">Step 4: Completa il comportamento dello scrittore</h1>
-                <p className="text-center text-xl font-semibold mb-4">
-                    Adesso che sai usare il drag and drop, dovrai compilare il comportamento corretto del processo scrittore.
-                </p>
-                <p className="text-center text-lg mb-4">
-                    Trascina le risposte nella colonna a sinistra, per completare l&apos;esercizio.
+                <h1 className="text-2xl text-center font-bold m-8">Step 4: Completa il comportamento del consumatore</h1>
+                <p className="text-center text-xl font-semibold mb-8">
+                    Completa l&apos;esercizio trascinando le risposte nella colonna a sinistra.
                 </p>
             </div>
 
@@ -81,8 +82,9 @@ export default function StepFour() {
                 onDragEnd={handleDragEnd}
             >
                 <div className="flex mx-[2em] justify-between gap-4 items-start">
-                    <div className="w-[45%] flex flex-col">
-                        <h2 className="text-center font-bold text-xl m-4 mb-4">Completa qua</h2>
+                    <div className="w-[45%] flex flex-col mb-8">
+                        <h2 className="text-center font-bold text-xl m-4">Completa qua</h2>
+
                         <MarkDown content={scrittoriCode[0]} />
                         <DroppableContainer
                             id={containers[0].id}
@@ -92,23 +94,28 @@ export default function StepFour() {
                             id={containers[1].id}
                             items={containers[1].items}
                         />
+                        <MarkDown content={scrittoriCode[1]} />
                         <DroppableContainer
                             id={containers[2].id}
                             items={containers[2].items}
                         />
-                        <MarkDown content={scrittoriCode[1]} />
+                        <DroppableContainer
+                            id={containers[3].id}
+                            items={containers[3].items}
+                        />
+                        <MarkDown content={scrittoriCode[2]} />
 
                     </div>
-                    <div className="w-[45%] flex flex-col mb-8">
+                    <div className="w-[45%] flex flex-col">
                         <h2 className="text-center font-bold text-xl m-4">Risposte</h2>
-
                         <DroppableContainer
                             id={containers.find(container => container.id === "risposte")?.id || ""}
                             items={containers.find(container => container.id === "risposte")?.items || [{ id: "error", content: "No answers found" }]}
                         />
+
                     </div>
                 </div>
-            </DndContext>
+            </DndContext >
         </div >
     )
 }

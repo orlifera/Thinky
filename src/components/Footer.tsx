@@ -8,12 +8,10 @@ function Footer() {
         <>
             <footer aria-label='footer' className='hidden md:flex justify-between static bottom-0 mb-[4em] md:mb-0 w-full bg-gray-900'>
                 <div className='flex flex-col items-center justify-center w-full p-4'>
-                    <Image src="/unipd.png" alt='Logo università di Padova' width={200} height={200} className=' m-auto' />
+                    <Image src="/math.png" alt='Dipartimenton di matematica' width={200} height={200} className=' m-auto' />
+
                 </div>
                 <ul className='flex flex-col w-full justify-center items-center gap-4 p-4 text-center text-white'>
-                    <li>
-                        Università degli Studi di Padova
-                    </li>
                     <li>
                         Dipartimento di Matematica
                     </li>
@@ -21,29 +19,34 @@ function Footer() {
                         Via Trieste 63, Padova, 35129
                     </li>
                     <li>
+                        Università degli Studi di Padova
+                    </li>
+                    <li>
                         <Link href="/area-riservata" className='text-blue-500 underline visited:text-chart-5'>Area riservata</Link>
                     </li>
 
                 </ul>
                 <div className='flex flex-col items-center justify-center w-full p-4'>
-                    <Image src="/math.png" alt='Dipartimenton di matematica' width={200} height={200} className=' m-auto' />
+                    <Image src="/unipd.png" alt='Logo università di Padova' width={200} height={200} className=' m-auto' />
                 </div>
             </footer >
             <footer aria-label='footer' className='flex flex-col md:hidden justify-between static bottom-0 mb-[4em] md:mb-0 w-full bg-gray-900'>
                 <div className='flex flex-row w-full'>
-                    <div className='flex flex-col items-center justify-center w-full p-4'>
-                        <Image src="/unipd.png" alt='Logo università di Padova' width={200} height={200} className=' m-auto' />
-                    </div>
+
                     <div className='flex flex-col items-center justify-center w-full p-4'>
                         <Image src="/math.png" alt='Dipartimenton di matematica' width={200} height={200} className=' m-auto' />
                     </div>
+                    <div className='flex flex-col items-center justify-center w-full p-4'>
+                        <Image src="/unipd.png" alt='Logo università di Padova' width={200} height={200} className=' m-auto' />
+                    </div>
+
                 </div>
                 <ul className='flex flex-col w-full justify-center items-center gap-4 p-4 text-center text-white'>
                     <li>
-                        Università degli Studi di Padova
+                        Dipartimento di Matematica
                     </li>
                     <li>
-                        Dipartimento di Matematica
+                        Università degli Studi di Padova
                     </li>
                     <li>
                         Via trieste 63, Padova, 35129

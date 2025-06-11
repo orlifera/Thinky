@@ -9,7 +9,7 @@ const colorMap: Record<string, string> = {
     Arancione: 'bg-orange-500',
     Gialla: 'bg-yellow-500',
     Grigio: 'bg-gray-400',
-    Bianco: 'bg-white',
+    Bianco: 'bg-stone-500 text-white',
     Marrone: 'bg-amber-950',
     Nero: 'bg-gray-600',
     Celeste: 'bg-sky-500',
@@ -24,7 +24,7 @@ const colorMap: Record<string, string> = {
     Rosa: 'bg-pink-500',
     Fucsia: 'bg-fuchsia-500',
     Sabbia: 'bg-stone-500',
-    Bianca: 'bg-white',
+    Bianca: 'bg-stone-500 text-white',
 };
 
 
@@ -46,7 +46,7 @@ export default function Banner({ source, title, text, username }: BannerProps) {
             <div className="absolute mb-8 inset-0 z-0 w-full" >
                 <Image
                     src={source}
-                    alt="Background"
+                    alt="Banner Background"
                     layout="fill"
                     objectFit="cover"
                     className="brightness-30"

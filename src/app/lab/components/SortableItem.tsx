@@ -5,13 +5,30 @@ import { UniqueIdentifier } from "@dnd-kit/core"
 import { CSS } from "@dnd-kit/utilities"
 import MarkDown from "@/components/MarkDown";
 
-export default function Answer({ id, content }: { id: UniqueIdentifier; content: string }) {
+// Map your item ids to the desired Tailwind classes
+const styleClass: Record<string, string> = {
+    "wait-empty": "bg-red-500 w-full rounded-lg dark:bg-red-600",
+    "wait-scaffale": "bg-red-500 w-full rounded-lg dark:bg-red-600",
+    "signal-vuoto": "bg-green-500 w-full rounded-lg dark:bg-green-500",
+    "signal-scaffale": "bg-green-500 w-full rounded-lg dark:bg-green-500",
+}
+
+export default function Answer({
+    id,
+    content,
+}: {
+    id: UniqueIdentifier;
+    content: string;
+}) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
     }
+
+    // Use the styleClass map, fallback to a default style if not found
+    const markdownClass = styleClass[id as string] || ""
 
     return (
         <li
@@ -20,10 +37,11 @@ export default function Answer({ id, content }: { id: UniqueIdentifier; content:
             {...attributes}
             style={style}
             className="rounded border bg-white dark:border-gray-700 dark:bg-gray-700"
-        >{/* p-3 can be removed */}
+        >
             <div className="flex items-center gap-3">
                 <span className="m-2 text-gray-500 dark:text-gray-400">⋮</span>
-                <MarkDown content={content} />
+                {/* Pass the computed class to MarkDown */}
+                <MarkDown content={content} className={markdownClass} />
             </div>
         </li>
     )

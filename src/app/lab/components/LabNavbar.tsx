@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Logo from './Logo'
+import Logo from '@/components/Logo'
 import Toggle from '@/components/ui/Toggle'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -18,7 +18,7 @@ import BC from '@/components/BC'
  * @returns {JSX.Element} Navbar component
  */
 
-function Navbar() {
+function LabNavbar() {
 
     const [width, setWidth] = useState<number>(0); // Iniziamo con valore 0 
     const [isMounted, setIsMounted] = useState<boolean>(false); // Stato per verificare se il componente è montato
@@ -82,99 +82,51 @@ function Navbar() {
                         <Logo />
                     </div>
                     <div className='flex items-center m-4 gap-8'>
-                        <ul className='flex items-center text-white gap-2'>
-                            <li>
-                                <Link
-                                    href="/"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/') ? 'bg-white text-primary font-bold cursor-default' : 'visited:text-chart-5'
-                                        }`}
+                        {user && (
+                            <li className='group relative flex items-baseline'>
+                                <button
+                                    className="focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
+                                    onClick={() => setIsVisible(!isVisible)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            setIsVisible(!isVisible);
+                                        }
+                                    }}
+                                    aria-haspopup="true"
+                                    aria-expanded={isVisible}
+                                    aria-label={`User menu for ${user.username}`}
+                                >
+                                    <Avatar username={user.username} />
+                                </button>
 
+                                {/* Dropdown menu */}
+                                <div
+                                    className={`absolute ${isMobile
+                                        ? (isVisible ? 'block' : 'hidden')
+                                        : 'hidden group-hover:block group-focus-within:block'
+                                        } -right-4 ${width > 768 ? 'top-5 mt-2' : 'bottom-full mb-2'
+                                        } bg-primary shadow-lg border-4 border-white p-4 min-w-[18em] rounded-md text-white z-50`}
+                                    role="menu"
+                                    aria-hidden={!isVisible}
                                 >
-                                    Home
-                                </Link>
-                            </li>
-                            {/* <li>
-                                <Link
-                                    href="/sync"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/sync') ? 'bg-white text-primary font-bold' : ''
-                                        }`}
-                                >
-                                    Problemi di sync
-                                </Link>
-                            </li> */}
-                            <li>
-                                <Link
-                                    href="/prod-cons"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/prod-cons') ? 'bg-white text-primary font-bold cursor-default' : 'visited:text-chart-5'
-                                        }`}
-                                >
-                                    Produttori e Consumatori
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/lettori"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/lettori') ? 'bg-white text-primary font-bold cursor-default' : 'visited:text-chart-5'
-                                        }`}
-                                >
-                                    Lettori e Scrittori
-                                </Link>
-                            </li>
-                            {/* <li>
-                                <Link
-                                    href="/filosofi"
-                                    className={`flex w-full h-full p-3 rounded-md transition ${isActive('/filosofi') ? 'bg-white text-primary font-bold cursor-default' : 'visited:text-chart-5'
-                                        }`}
-                                >
-                                    Problema dei filosofi
-                                </Link>
-                            </li> */}
-                            {user && (
-                                <li className='group relative flex items-baseline'>
-                                    <button
-                                        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
-                                        onClick={() => setIsVisible(!isVisible)}
-                                        onKeyDown={(e) => {
-                                            if (e.key === 'Enter' || e.key === ' ') {
-                                                e.preventDefault();
-                                                setIsVisible(!isVisible);
-                                            }
-                                        }}
-                                        aria-haspopup="true"
-                                        aria-expanded={isVisible}
-                                        aria-label={`User menu for ${user.username}`}
+                                    <p className=''>Ciao {user.username}, benvenuto! <span>🎉</span></p>
+                                    <p>{user.school}</p>
+                                    <Link
+                                        href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze'
+                                        target='_blank'
+                                        className="flex items-center justify-center text-center underline rounded-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white visited:text-chart-5"
+                                        tabIndex={0}
                                     >
-                                        <Avatar username={user.username} />
-                                    </button>
-
-                                    {/* Dropdown menu */}
-                                    <div
-                                        className={`absolute ${isMobile
-                                            ? (isVisible ? 'block' : 'hidden')
-                                            : 'hidden group-hover:block group-focus-within:block'
-                                            } -right-4 ${width > 768 ? 'top-5 mt-2' : 'bottom-full mb-2'
-                                            } bg-primary shadow-lg border-4 border-white p-4 min-w-[18em] rounded-md text-white z-50`}
-                                        role="menu"
-                                        aria-hidden={!isVisible}
-                                    >
-                                        <p className=''>Ciao {user.username}, benvenuto! <span>🎉</span></p>
-                                        <p>{user.school}</p>
-                                        <Link
-                                            href='https://www.unipd.it/offerta-didattica/corso-di-laurea/scienze?tipo=L&scuola=SC&ordinamento=2025&key=SC2987&cg=scienze'
-                                            target='_blank'
-                                            className="flex items-center justify-center text-center underline rounded-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white visited:text-chart-5"
-                                            tabIndex={0}
-                                        >
-                                            Dai un sguardo al corso di laurea
-                                            <SquareArrowOutUpRight className='ml-1 h-4 w-4' />
-                                        </Link>
-                                    </div>
-                                </li>
-                            )}
-                        </ul>
+                                        Dai un sguardo al corso di laurea
+                                        <SquareArrowOutUpRight className='ml-1 h-4 w-4' />
+                                    </Link>
+                                </div>
+                            </li>
+                        )}
                         <Toggle />
                     </div>
-                </nav>
+                </nav >
 
                 <BC currentPage={currentPage} />
             </>) :
@@ -226,5 +178,5 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default LabNavbar
 
