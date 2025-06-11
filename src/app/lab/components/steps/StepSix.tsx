@@ -49,7 +49,7 @@ const lettoriCode = [
     `
     \`\`\`
     txt
-        semaforoRosso(mutex);
+        semaforoRosso(lettura);
     \`\`\`
     `,
 
@@ -62,7 +62,7 @@ const lettoriCode = [
         txt
 }
 
-        semaforoVerde(mutex);
+        semaforoVerde(lettura);
 } while (true);
     \`\`\`
     `,
