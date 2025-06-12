@@ -21,10 +21,10 @@ export default function Container({
     return (
         <div
             ref={setNodeRef}
-            className="flex h-full flex-col rounded-md border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/50">
-            <div className="flex-1">
+            className="flex h-full flex-col rounded-md border w-full">
+            <div className="flex-1 w-full">
                 <SortableContext items={items.map((item) => item.id)} strategy={verticalListSortingStrategy}>
-                    <ul className="flex flex-col gap-2">
+                    <ul className="flex flex-col gap-2 w-full">
                         {items.map((item) => (
                             <Answer
                                 key={item.id}

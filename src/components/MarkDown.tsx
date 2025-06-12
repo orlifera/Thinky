@@ -37,20 +37,18 @@ export default function MarkDown({
             components={{
                 // Apply the className to the outermost element
                 div: ({ children, ...props }) => (
-                    <div {...props} >{children}</div>
+                    <div className="w-full" {...props} >{children}</div>
                 ),
                 // If you want to style <p> tags, use this:
-                p: ({ children }) => <div className={className}>{children}</div>,
+                p: ({ children }) => <div className={`${className} w-full text-wrap`}>{children}</div>,
                 code: ({ className: codeClassName, children, ...props }: { className?: string; children?: ReactNode }) => {
                     const match = /language-(\w+)/.exec(codeClassName || "");
                     const language = match ? match[1].toUpperCase() : "TXT";
                     void language;
                     return (
-                        <div className="relative group">
-                            <pre className={`${className ? { className } : "dark:bg-muted bg-gray-800"} text-white p-4 rounded-lg border border-gray-700 text-wrap relative shadow-lg`} {...props}>
-                                {children}
-                            </pre>
-                        </div>
+                        <pre className={`${className ? className : "dark:bg-muted bg-gray-800"} w-full text-white p-4 rounded-lg border border-gray-700 text-wrap overflow-hidden relative shadow-lg`} {...props}>
+                            {children}
+                        </pre>
                     );
                 }
             }}

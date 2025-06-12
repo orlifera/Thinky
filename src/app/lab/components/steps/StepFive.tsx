@@ -13,13 +13,13 @@ const initialContainers = [
     {
         id: "risposte",
         items: [
-            { id: "wait-scrittura", content: "`wait(scrittura)`", },
-            { id: "wait-lettura", content: "`wait(lettura)`" },
+            { id: "wait-scrittura", content: "`SemaforoRosso(scrittura)`", },
+            { id: "wait-lettura", content: "`SemaforoRosso(lettura)`" },
             { id: "write", content: "`write()`" },
             { id: "read", content: "`read()`" },
-            { id: "do-while", content: "`do { ... } while (true);`" },
-            { id: "signal-lettura", content: "`signal(lettura)`" },
-            { id: "signal-scrittura", content: "`signal(scrittura)`" },
+            { id: "do-while", content: "`ripeti { ... } finché (condizioneVerificata);`" },
+            { id: "signal-lettura", content: "`SemaforoVerde(lettura)`" },
+            { id: "signal-scrittura", content: "`SemaforoVerde(scrittura)`" },
 
 
         ],

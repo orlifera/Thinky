@@ -1,5 +1,5 @@
+import { AnswerData, User } from '@/types';
 import axios from 'axios';
-import { User } from '@/types';
 
 /**
  * @file gh.ts
@@ -12,6 +12,7 @@ const REPO: string = "data"; // Repo name
 const OWNER: string = "orlifera"; // Owner of the repo
 const FILE_PATH: string = "data/users.json"; // Path to the JSON file
 const STEP_FILE_PATH = "data/step.json";
+const ANS_FILE_PATH = "data/chartAnswer.json"; // Path to the answers file
 
 const BRANCH: string = "master"; // Branch name
 const MAX_RETRIES: number = 3; // Maximum number of retry attempts for handling conflicts
@@ -174,4 +175,35 @@ export const updateStep = async (newStep: number): Promise<void> => {
         throw new Error("Impossibile aggiornare lo step");
     }
 };
+
+export const fetchAnswers = async (): Promise<AnswerData> => {
+    try {
+        const answerCount = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${ANS_FILE_PATH}`);
+        const content = JSON.parse(atob(answerCount.data.content));
+        return content as AnswerData;
+    }
+    catch (error) {
+        console.error("Errore nel fetch delle risposte:", error);
+        throw new Error("Non è stato possibile recuperare i dati delle risposte");
+    }
+};
+
+export const updateAnswers = async (updatedAnswers: AnswerData): Promise<void> => {
+    try {
+        const response = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${ANS_FILE_PATH}`);
+        const sha = response.data.sha;
+
+        const content = btoa(JSON.stringify(updatedAnswers));
+        await githubApi.put(`/repos/${OWNER}/${REPO}/contents/${ANS_FILE_PATH}`, {
+            message: "Update answers count",
+            content,
+            sha,
+            branch: BRANCH,
+        });
+    }
+    catch (error) {
+        console.error("Errore durante l'aggiornamento delle risposte:", error);
+        throw new Error("Impossibile aggiornare le risposte");
+    }
+}
 

@@ -11,7 +11,7 @@ import StepFour from './components/steps/StepFour'
 import { Progress } from '@/components/ui/progress'
 import StepSix from './components/steps/StepSix'
 import StepSeven from './components/steps/StepSeven'
-// import DndStep from './components/steps/DndStep'
+import { useSendAnswersOnStepChange } from '@/helper/useSendAnswerOnStepChange'
 
 export default function Page() {
     const [currentStep, setCurrentStep] = useState<number | null>(null)
@@ -28,7 +28,6 @@ export default function Page() {
 
         loadStep()
 
-        // ✅ Poll for updates every 5 seconds
         const interval = setInterval(() => {
             fetchStep()
                 .then(setCurrentStep)
@@ -37,6 +36,9 @@ export default function Page() {
 
         return () => clearInterval(interval)
     }, [])
+
+    // <--- AGGIUNGI QUESTO HOOK!
+    useSendAnswersOnStepChange(currentStep ?? 0)
 
     if (currentStep === null) {
         return <div>Loading...</div>
@@ -51,9 +53,6 @@ export default function Page() {
         <StepFive key={5} />,
         <StepSix key={6} />,
         <StepSeven key={7} />,
-        // <DndStep key={6} />, da aggiungere se si vule complicare il gioco con il dnd completo di entrambi i processi insieme
-        // Aggiungi altri step qui se necessario
-
     ]
 
     const percentage: number = Number((currentStep * 14.28).toFixed())

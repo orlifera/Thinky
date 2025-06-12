@@ -188,6 +188,12 @@ function Navbar() {
                             </Link>
                         </li>
                         <li aria-label='nav item'>
+                            <Link href='/prod-cons' className={`w-full h-full p-3 rounded-md transition ${isActive('/prod-cons') ? 'bg-white text-primary font-bold' : ''
+                                }`}>
+                                Produttori e Consumatori
+                            </Link>
+                        </li>
+                        <li aria-label='nav item'>
                             <Link href='/lettori' className={`w-full h-full p-3 rounded-md transition ${isActive('/lettori') ? 'bg-white text-primary font-bold' : ''
                                 }`}>
                                 Lettori
@@ -196,12 +202,12 @@ function Navbar() {
                         <li aria-label='nav item' className='text-black'>
                             <Toggle />
                         </li>
-                        <li aria-label='nav item' >
+                        {/* <li aria-label='nav item' >
                             <Link href='/filosofi' className={`w-full h-full p-3 rounded-md transition ${isActive('/filosofi') ? 'bg-white text-primary font-bold' : ''
                                 }`}>
                                 Filosofi
                             </Link>
-                        </li>
+                        </li> */}
                         {user &&
                             <li className='group' onClick={() => isMobile && setIsVisible(!isVisible)}>
                                 <Avatar username={user.username} />

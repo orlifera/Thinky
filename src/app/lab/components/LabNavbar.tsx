@@ -83,7 +83,7 @@ function LabNavbar() {
                     </div>
                     <div className='flex items-center m-4 gap-8'>
                         {user && (
-                            <li className='group relative flex items-baseline'>
+                            <>
                                 <button
                                     className="focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
                                     onClick={() => setIsVisible(!isVisible)}
@@ -100,7 +100,7 @@ function LabNavbar() {
                                     <Avatar username={user.username} />
                                 </button>
 
-                                {/* Dropdown menu */}
+
                                 <div
                                     className={`absolute ${isMobile
                                         ? (isVisible ? 'block' : 'hidden')
@@ -122,7 +122,7 @@ function LabNavbar() {
                                         <SquareArrowOutUpRight className='ml-1 h-4 w-4' />
                                     </Link>
                                 </div>
-                            </li>
+                            </>
                         )}
                         <Toggle />
                     </div>

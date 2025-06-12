@@ -36,9 +36,9 @@ export default function Answer({
             {...listeners}
             {...attributes}
             style={style}
-            className="rounded border bg-white dark:border-gray-700 dark:bg-gray-700"
+            className="rounded border w-full bg-white dark:border-gray-700 dark:bg-gray-700"
         >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full">
                 <span className="m-2 text-gray-500 dark:text-gray-400">⋮</span>
                 {/* Pass the computed class to MarkDown */}
                 <MarkDown content={content} className={markdownClass} />

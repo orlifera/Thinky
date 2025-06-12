@@ -56,3 +56,11 @@ export type Item = {
 export type Hint = {
     id: string
 }
+
+export type StepAnswer = Record<string, Record<string, number>>;
+
+
+export interface AnswerData {
+    step1: StepAnswer;
+    step2: StepAnswer;
+}

@@ -33,7 +33,7 @@ const initialContainers = [
 const lettoriCode = [
     `\`\`\`
     txt
-    do {
+    ripeti {
     \`\`\`
     `,
     `\`\`\`
@@ -63,7 +63,7 @@ const lettoriCode = [
 }
 
         semaforoVerde(lettura);
-} while (true);
+} finché (condizioneVerificata);
     \`\`\`
     `,
 ]
@@ -121,8 +121,7 @@ export default function StepSix() {
                             id={containers[1].id}
                             items={containers[1].items}
                         />
-                        <MarkDown content="`if (numLettori == 1) {
-    `" />
+                        <MarkDown content={lettoriCode[1]} />
                         <DroppableContainer
                             id={containers[2].id}
                             items={containers[2].items}
