@@ -15,8 +15,8 @@ const initialContainers = [
         items: [
             { id: "wait-scrittura", content: "`SemaforoRosso(scrittura)`", },
             { id: "wait-lettura", content: "`SemaforoRosso(lettura)`" },
-            { id: "write", content: "`write()`" },
-            { id: "read", content: "`read()`" },
+            { id: "write", content: "`Leggo()`" },
+            { id: "read", content: "`Scrivo()`" },
             { id: "do-while", content: "`ripeti { ... } finché (condizioneVerificata);`" },
             { id: "signal-lettura", content: "`SemaforoVerde(lettura)`" },
             { id: "signal-scrittura", content: "`SemaforoVerde(scrittura)`" },

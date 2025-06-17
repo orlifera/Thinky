@@ -36,7 +36,7 @@ const initialContainers = [
     {
         id: "risposte",
         items: [
-            { id: "wait-empty", content: "`SemaforoRosso(vuoto)`" },
+            { id: "wait-empty", content: "`SemaforoRosso(Pieno)`" },
             { id: "wait-scaffale", content: "`SemaforoRosso(Scaffale)`" },
             { id: "signal-vuoto", content: "`SemaforoVerde(Vuoto)`" },
             { id: "signal-scaffale", content: "`SemaforoVerde(Scaffale)`" },

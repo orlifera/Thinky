@@ -18,12 +18,12 @@ const initialContainers = [
     {
         id: "risposte",
         items: [
-            { id: "semaforoRosso-mutex", content: "`semaforoRosso(mutex)`" },
+            { id: "semaforoRosso-contatoreLettori", content: "`semaforoRosso(contatoreLettori)`" },
             { id: "numLett", content: "`numLettori = numLettori + 1`" },
-            { id: "semaforoVerde-mutex", content: "`semaforoVerde(mutex)`" },
+            { id: "semaforoVerde-contatoreLettori", content: "`semaforoVerde(contatoreLettori)`" },
             { id: "semaforoRosso-s", content: "`semaforoRosso(scrittura)`" },
             { id: "numLett2", content: "`numLettori = numLettori - 1`" },
-            { id: "semaforoVerde-mutex2", content: "`semaforoVerde(mutex)`" },
+            { id: "semaforoVerde-contatoreLettori2", content: "`semaforoVerde(contatoreLettori)`" },
             { id: "semaforoVerde-s", content: "`semaforoVerde(scrittura)`" },
             { id: "read", content: "`read()`" },
         ],
@@ -49,7 +49,7 @@ const lettoriCode = [
     `
     \`\`\`
     txt
-        semaforoRosso(lettura);
+        semaforoRosso(contatoreLettori);
     \`\`\`
     `,
 
@@ -62,7 +62,7 @@ const lettoriCode = [
         txt
 }
 
-        semaforoVerde(lettura);
+        semaforoVerde(contatoreLettori);
 } finché (condizioneVerificata);
     \`\`\`
     `,
