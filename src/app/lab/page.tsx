@@ -1,7 +1,5 @@
 'use client'
-
-import { useEffect, useState } from 'react'
-import { fetchStep } from "@/helper/gh"
+import { useLiveStep } from "@/helper/useLiveStep"
 import StepZero from './components/steps/StepZero'
 import StepOne from './components/steps/StepOne'
 import StepTwo from './components/steps/StepTwo'
@@ -14,35 +12,14 @@ import StepSeven from './components/steps/StepSeven'
 import { useSendAnswersOnStepChange } from '@/helper/useSendAnswerOnStepChange'
 
 export default function Page() {
-    const [currentStep, setCurrentStep] = useState<number | null>(null)
+    const [currentStep] = useLiveStep()
 
-    useEffect(() => {
-        const loadStep = async () => {
-            try {
-                const step = await fetchStep()
-                setCurrentStep(step)
-            } catch (error) {
-                console.error("Failed to fetch step:", error)
-            }
-        }
-
-        loadStep()
-
-        const interval = setInterval(() => {
-            fetchStep()
-                .then(setCurrentStep)
-                .catch(console.error)
-        }, 5000)
-
-        return () => clearInterval(interval)
-    }, [])
-
-    // <--- AGGIUNGI QUESTO HOOK!
     useSendAnswersOnStepChange(currentStep ?? 0)
 
     if (currentStep === null) {
         return <div>Loading...</div>
     }
+
 
     const steps: React.ReactElement[] = [
         <StepZero key={0} />,

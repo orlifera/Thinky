@@ -1,26 +1,13 @@
 'use client'
 
-import { useEffect, useState } from "react"
-import { fetchStep } from "@/helper/gh"
+import { useLiveStep } from "@/helper/useLiveStep"
 import StepUpdateButton from "./StepUpdateButton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import StepOneChart from "./StepOneChart"
 import StepTwoChart from "./StepTwoChart"
 
 export default function StepPage() {
-    const [currentStep, setCurrentStep] = useState<number | null>(null)
-
-    useEffect(() => {
-        const loadStep = async () => {
-            try {
-                const step = await fetchStep()
-                setCurrentStep(step)
-            } catch (error) {
-                console.error("Errore nel caricamento dello step:", error)
-            }
-        }
-        loadStep()
-    }, [])
+    const [currentStep, updateStep] = useLiveStep()
 
     if (currentStep === null) {
         return <p>Caricamento...</p>
@@ -29,7 +16,7 @@ export default function StepPage() {
     return (
         <>
             <div className="flex w-full justify-center items-center mb-4">
-                <StepUpdateButton currentStep={currentStep} onStepChange={setCurrentStep} />
+                <StepUpdateButton currentStep={currentStep} onStepChange={updateStep} />
             </div>
             <Tabs defaultValue="step1" className="w-full">
                 <TabsList className='w-[80%] bg-primary flex m-auto'>

@@ -11,7 +11,6 @@ import axios from 'axios';
 const REPO: string = "data"; // Repo name
 const OWNER: string = "orlifera"; // Owner of the repo
 const FILE_PATH: string = "data/users.json"; // Path to the JSON file
-const STEP_FILE_PATH = "data/step.json";
 const ANS_FILE_PATH = "data/chartAnswer.json"; // Path to the answers file
 
 const BRANCH: string = "master"; // Branch name
@@ -135,45 +134,6 @@ export const addUser = async (newUser: User): Promise<User> => {
     };
 
     return attemptUpdate();
-};
-
-/**
- * Ottiene lo step corrente dal file step.json
- */
-export const fetchStep = async (): Promise<number> => {
-    try {
-        const response = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${STEP_FILE_PATH}`);
-        const content = JSON.parse(atob(response.data.content)); // Decode Base64
-        return content.currentStep;
-    } catch (error) {
-        console.error("Errore nel fetch dello step:", error);
-        throw new Error("Non è stato possibile recuperare lo step corrente");
-    }
-};
-
-/**
- * Aggiorna lo step corrente nel file step.json
- *
- * @param newStep - Lo step da impostare
- */
-export const updateStep = async (newStep: number): Promise<void> => {
-    try {
-        // Prende SHA attuale del file
-        const fileResponse = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${STEP_FILE_PATH}`);
-        const sha = fileResponse.data.sha;
-
-        const content = btoa(JSON.stringify({ currentStep: newStep }));
-
-        await githubApi.put(`/repos/${OWNER}/${REPO}/contents/${STEP_FILE_PATH}`, {
-            message: `Update step to ${newStep}`,
-            content,
-            sha,
-            branch: BRANCH,
-        });
-    } catch (error) {
-        console.error("Errore durante l'aggiornamento dello step:", error);
-        throw new Error("Impossibile aggiornare lo step");
-    }
 };
 
 export const fetchAnswers = async (): Promise<AnswerData> => {
