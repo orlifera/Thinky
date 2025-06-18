@@ -4,13 +4,12 @@ import { getFirestore } from "firebase/firestore";
 
 // La tua configurazione Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyDeKFQslMeKkmwLaTlRUWk56lFbvsaA8LM",
-    authDomain: "thinky-e99a2.firebaseapp.com",
-    projectId: "thinky-e99a2",
-    storageBucket: "thinky-e99a2.appspot.com",
-    messagingSenderId: "128227829993",
-    appId: "1:128227829993:web:a16879925627194f9d6878",
-    measurementId: "G-912W3907H0"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Inizializza l'app Firebase
