@@ -13,7 +13,7 @@ export default function StepTwoChart() {
 
     useEffect(() => {
         fetchAnswers().then((data: AnswerData) => {
-            setAnswers(data.step2)
+            setAnswers(data.step4)
         }).finally(() => setLoading(false))
     }, [])
 

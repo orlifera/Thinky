@@ -1,12 +1,37 @@
+'use client'
+
 import answers from '@/data/answer.json'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
 import Hint from '@/app/lab/components/steps/Hint'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import type { StepFourAnswers } from '@/types'
 
+const STORAGE_KEY = 'stepFourAnswers'
 
 export default function StepFour() {
+    const [stepFourAnswers, setStepFourAnswers] = useState<StepFourAnswers>({})
+
+    // Carica da localStorage
+    useEffect(() => {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (saved) setStepFourAnswers(JSON.parse(saved))
+    }, [])
+
+    // Salva su localStorage ogni volta che cambia
+    useEffect(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stepFourAnswers))
+    }, [stepFourAnswers])
+
+    // Aggiorna la risposta selezionata per una domanda
+    const handleSelect = (questionId: string, value: string) => {
+        setStepFourAnswers(prev => ({
+            ...prev,
+            [questionId]: value
+        }))
+    }
+
     const firstSection = answers.filter(answer => Number(answer.id) <= 8)
     const secondSection = answers.filter(answer => Number(answer.id) > 8 && Number(answer.id) <= 13)
     const thirdSection = answers.filter(answer => Number(answer.id) > 13)
@@ -16,15 +41,9 @@ export default function StepFour() {
             <h1 className="text-2xl font-bold mb-2">Step 4: Completa l&apos;esercizio</h1>
             <p className="text-lg mb-4">Questo step si divide in 3 categorie:</p>
             <ol className='list-decimal'>
-                <li>
-                    Associazione Ruolo -&gt; Comportamento
-                </li>
-                <li>
-                    Classificazione dei comportamenti (Sicuro, Pericoloso, Neutro)
-                </li>
-                <li>
-                    Completa la frase con la risposta corretta
-                </li>
+                <li>Associazione Ruolo -&gt; Comportamento</li>
+                <li>Classificazione dei comportamenti (Sicuro, Pericoloso, Neutro)</li>
+                <li>Completa la frase con la risposta corretta</li>
             </ol>
             <strong>Iniziamo</strong>
             <div className='w-full max-w-md mt-4 mb-16 ' aria-hidden>
@@ -35,12 +54,15 @@ export default function StepFour() {
                         <Label className="text-lg font-semibold mb-1" htmlFor={answer.id}>
                             {answer.content}
                         </Label>
-                        <Select defaultValue="">
+                        <Select
+                            value={stepFourAnswers[answer.id] ?? ""}
+                            onValueChange={(value) => handleSelect(answer.id, value)}
+                        >
                             <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
                                 <SelectValue placeholder="Scegli la risposta" />
                             </SelectTrigger>
                             <SelectContent>
-                                {answer.answer.map((option, id) => (
+                                {answer.answer.map((option: string, id: number) => (
                                     <SelectItem
                                         key={id}
                                         value={option}
@@ -63,12 +85,15 @@ export default function StepFour() {
                         <Label className="text-lg font-semibold mb-1" htmlFor={answer.id}>
                             {answer.content}
                         </Label>
-                        <Select defaultValue="">
+                        <Select
+                            value={stepFourAnswers[answer.id] ?? ""}
+                            onValueChange={(value) => handleSelect(answer.id, value)}
+                        >
                             <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
                                 <SelectValue placeholder="Scegli la risposta" />
                             </SelectTrigger>
                             <SelectContent>
-                                {answer.answer.map((option, id) => (
+                                {answer.answer.map((option: string, id: number) => (
                                     <SelectItem
                                         key={id}
                                         value={option}
@@ -91,12 +116,15 @@ export default function StepFour() {
                         <Label className="text-lg font-semibold mb-1" htmlFor={answer.id}>
                             {answer.content}
                         </Label>
-                        <Select defaultValue="">
+                        <Select
+                            value={stepFourAnswers[answer.id] ?? ""}
+                            onValueChange={(value) => handleSelect(answer.id, value)}
+                        >
                             <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
                                 <SelectValue placeholder="Scegli la risposta" />
                             </SelectTrigger>
                             <SelectContent>
-                                {answer.answer.map((option, id) => (
+                                {answer.answer.map((option: string, id: number) => (
                                     <SelectItem
                                         key={id}
                                         value={option}
@@ -112,22 +140,6 @@ export default function StepFour() {
                         </div>
                     </div>
                 ))}
-                {/* <Select defaultValue="">
-                    <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
-                        <SelectValue placeholder="Scegli la risposta" />
-                    </SelectTrigger>
-                    <SelectContent id="school">
-                        {answers.map((answer) => (
-                            <SelectItem
-                                key={answer.id}
-                                value={answer.content}
-                                className="bg-white text-black hover:text-white p-2 rounded"
-                            >
-                                {answer.content}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select> */}
             </div>
 
             <select className='sr-only' aria-label="Select answer">

@@ -13,7 +13,7 @@ export type StepOneAnswers = {
     'second-check': string[]
 }
 
-const STORAGE_KEY = 'stepOneAnswers'
+const STORAGE_KEY = 'stepThreeAnswers'
 
 export default function StepThree() {
     const [firstRadio, setFirstRadio] = useState('first-option-one')

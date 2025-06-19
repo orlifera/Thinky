@@ -9,12 +9,14 @@ import StepTwo from './components/steps/StepTwo'
 import { Progress } from '@/components/ui/progress'
 import StepSix from './components/steps/StepSix'
 import StepSeven from './components/steps/StepSeven'
-import { useSendAnswersOnStepChange } from '@/helper/useSendAnswerOnStepChange'
+import { useSendAnswersOnStepChange } from '@/helper/useSendStepThree'
+import { useSendStepFourAnswersOnStepChange } from '@/helper/useSendStepFour'
 
 export default function Page() {
     const [currentStep] = useLiveStep()
-
+    console.log("Current Step:", currentStep)
     useSendAnswersOnStepChange(currentStep ?? 0)
+    useSendStepFourAnswersOnStepChange(currentStep ?? 0) // stepFour
 
     if (currentStep === null) {
         return <div>Loading...</div>

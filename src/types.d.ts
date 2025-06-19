@@ -61,6 +61,10 @@ export type StepAnswer = Record<string, Record<string, number>>;
 
 
 export interface AnswerData {
-    step1: StepAnswer;
-    step2: StepAnswer;
+    step3: StepAnswer;
+    step4: StepAnswer;
+}
+
+export type StepFourAnswers = {
+    [questionId: string]: string // es: "1": "Lettore"
 }

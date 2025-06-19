@@ -63,7 +63,7 @@ export default function StepOneChart() {
 
     useEffect(() => {
         fetchAnswers().then((data: AnswerData) => {
-            setAnswers(data.step1)
+            setAnswers(data.step3)
         }).finally(() => setLoading(false))
     }, [])
 
