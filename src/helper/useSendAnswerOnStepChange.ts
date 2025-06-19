@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { fetchAnswers, updateAnswers } from "@/helper/gh"
-import type { StepOneAnswers } from "@/app/lab/components/steps/StepOne"
+import type { StepOneAnswers } from "@/app/lab/components/steps/StepThree"
 
 const ANSWERS_KEY = 'stepOneAnswers'
 const SENT_KEY = 'sentStepOneStep'
@@ -8,7 +8,7 @@ const SENT_KEY = 'sentStepOneStep'
 export function useSendAnswersOnStepChange(currentStep: number) {
     useEffect(() => {
         // Invia le risposte SOLO quando si passa dallo step 1 al 2
-        if (currentStep !== 2) return
+        if (currentStep !== 4) return
         // Previeni doppio invio
         const sent = localStorage.getItem(SENT_KEY)
         if (sent === String(currentStep)) return

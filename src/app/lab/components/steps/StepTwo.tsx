@@ -1,159 +1,121 @@
-import answers from '@/data/answer.json'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
-import Hint from '@/app/lab/components/steps/Hint'
-import React from 'react'
+import { useDnD } from "@/helper/useDnd"
+import { KeyboardSensor, PointerSensor, useSensor, useSensors, closestCorners, DndContext } from "@dnd-kit/core"
+import { sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import DroppableContainer from "@/app/lab/components/DroppableContainer"
+import MarkDown from "@/components/MarkDown"
 
+
+const scrittoriCode = [
+    `\`\`\`txt
+    ripeti {
+        . . .
+
+        rimuove  un elemento dal buffer e lo inserisce in daConsumare;
+
+        . . .
+    \`\`\``,
+    `\`\`\`txt
+        . . .
+
+        consuma l'elemento contenuto in daConsumare;
+
+        . . .
+    \`\`\``,
+
+
+    `\`\`\`txt
+} finché(condizioneVerificata);
+    \`\`\``,
+]
+
+const initialContainers = [
+    { id: "prima", items: [] },
+    { id: "seconda", items: [] },
+    { id: "terza", items: [] },
+    { id: "quarta", items: [] },
+    {
+        id: "risposte",
+        items: [
+            { id: "wait-empty", content: "`SemaforoRosso(Pieno)`" },
+            { id: "wait-scaffale", content: "`SemaforoRosso(Scaffale)`" },
+            { id: "signal-vuoto", content: "`SemaforoVerde(Vuoto)`" },
+            { id: "signal-scaffale", content: "`SemaforoVerde(Scaffale)`" },
+        ],
+    },
+]
 
 export default function StepTwo() {
-    const firstSection = answers.filter(answer => Number(answer.id) <= 8)
-    const secondSection = answers.filter(answer => Number(answer.id) > 8 && Number(answer.id) <= 13)
-    const thirdSection = answers.filter(answer => Number(answer.id) > 13)
+    const {
+        containers,
+        handleDragStart,
+        handleDragOver,
+        handleDragEnd,
+    } = useDnD(initialContainers)
+
+
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                tolerance: 5,
+                delay: 50,
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    )
 
     return (
-        <div className="flex flex-col items-center justify-center h-full ">
-            <h1 className="text-2xl font-bold mb-2">Step 2</h1>
-            <p className="text-lg mb-4">Questo step si divide in 3 categorie:</p>
-            <ol className='list-decimal'>
-                <li>
-                    Associazione Ruolo -&gt; Comportamento
-                </li>
-                <li>
-                    Classificazione dei comportamenti (Sicuro, Pericoloso, Neutro)
-                </li>
-                <li>
-                    Completa la frase con la risposta corretta
-                </li>
-            </ol>
-            <strong>Iniziamo</strong>
-            <div className='w-full max-w-md mt-4 mb-16 ' aria-hidden>
-                <hr className='border-t-2 border-primary mb-4' />
-                <h3 className='text-lg font-semibold mb-4 text-center'>Associazione Ruolo -&gt; Comportamento</h3>
-                {firstSection.map((answer) => (
-                    <div key={answer.id} className="mb-8 p-4 rounded bg-input">
-                        <Label className="text-lg font-semibold mb-1" htmlFor={answer.id}>
-                            {answer.content}
-                        </Label>
-                        <Select defaultValue="">
-                            <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
-                                <SelectValue placeholder="Scegli la risposta" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {answer.answer.map((option, id) => (
-                                    <SelectItem
-                                        key={id}
-                                        value={option}
-                                        className="bg-white text-black hover:text-white p-2 my-2 overflow-hidden rounded"
-                                    >
-                                        {option}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        <div className='mt-2 w-full'>
-                            <Hint id={answer.id} />
-                        </div>
-                    </div>
-                ))}
-                <hr className='border-t-2 border-primary mb-4' />
-                <h3 className='text-lg font-semibold mb-4 text-center'>Classificazione dei comportamenti</h3>
-                {secondSection.map((answer) => (
-                    <div key={answer.id} className="mb-8 p-4 rounded bg-input">
-                        <Label className="text-lg font-semibold mb-1" htmlFor={answer.id}>
-                            {answer.content}
-                        </Label>
-                        <Select defaultValue="">
-                            <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
-                                <SelectValue placeholder="Scegli la risposta" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {answer.answer.map((option, id) => (
-                                    <SelectItem
-                                        key={id}
-                                        value={option}
-                                        className="bg-white text-black hover:text-white p-2 my-2 overflow-hidden rounded"
-                                    >
-                                        {option}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        <div className='mt-2 w-full'>
-                            <Hint id={answer.id} />
-                        </div>
-                    </div>
-                ))}
-                <hr className='border-t-2 border-primary mb-4' />
-                <h3 className='text-lg font-semibold mb-4 text-center'>Completa la frase con la risposta corretta</h3>
-                {thirdSection.map((answer) => (
-                    <div key={answer.id} className="mb-8 p-4 rounded bg-input">
-                        <Label className="text-lg font-semibold mb-1" htmlFor={answer.id}>
-                            {answer.content}
-                        </Label>
-                        <Select defaultValue="">
-                            <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
-                                <SelectValue placeholder="Scegli la risposta" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {answer.answer.map((option, id) => (
-                                    <SelectItem
-                                        key={id}
-                                        value={option}
-                                        className="bg-white text-black hover:text-white p-2 my-2 overflow-hidden rounded"
-                                    >
-                                        {option}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        <div className='mt-2 w-full'>
-                            <Hint id={answer.id} />
-                        </div>
-                    </div>
-                ))}
-                {/* <Select defaultValue="">
-                    <SelectTrigger className="w-full mt-2 text-black dark:text-white bg-white p-2 rounded" id="school-label" >
-                        <SelectValue placeholder="Scegli la risposta" />
-                    </SelectTrigger>
-                    <SelectContent id="school">
-                        {answers.map((answer) => (
-                            <SelectItem
-                                key={answer.id}
-                                value={answer.content}
-                                className="bg-white text-black hover:text-white p-2 rounded"
-                            >
-                                {answer.content}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select> */}
+        <div className="h-full min-h-[calc(100dvh-22rem)]">
+            <div className="w-full mb-24">
+                <h1 className="text-2xl text-center font-bold m-8">Step 2: Completa il comportamento del consumatore</h1>
+                <p className="text-center text-xl font-semibold mb-8">
+                    Completa l&apos;esercizio trascinando le risposte nella colonna a sinistra.
+                </p>
             </div>
 
-            <select className='sr-only' aria-label="Select answer">
-                <option defaultValue="" disabled >Seleziona una risposta</option>
-                {firstSection.map((answer) => (
-                    <option key={answer.id} value={answer.content} aria-label={answer.content}>
-                        {answer.content}
-                    </option>
-                ))}
-            </select>
-            <select className='sr-only' aria-label="Select answer">
-                <option defaultValue="" disabled >Seleziona una risposta</option>
-                {secondSection.map((answer) => (
-                    <option key={answer.id} value={answer.content} aria-label={answer.content}>
-                        {answer.content}
-                    </option>
-                ))}
-            </select>
-            <select className='sr-only' aria-label="Select answer">
-                <option defaultValue="" disabled >Seleziona una risposta</option>
-                {thirdSection.map((answer) => (
-                    <option key={answer.id} value={answer.content} aria-label={answer.content}>
-                        {answer.content}
-                    </option>
-                ))}
-            </select>
+            <DndContext
+                sensors={sensors}
+                collisionDetection={closestCorners}
+                onDragStart={handleDragStart}
+                onDragOver={handleDragOver}
+                onDragEnd={handleDragEnd}
+            >
+                <div className="flex mx-[2em] justify-between gap-4 items-start">
+                    <div className="w-[45%] flex flex-col mb-8">
+                        <h2 className="text-center font-bold text-xl m-4">Completa qua</h2>
 
+                        <MarkDown content={scrittoriCode[0]} />
+                        <DroppableContainer
+                            id={containers[0].id}
+                            items={containers[0].items}
+                        />
+                        <DroppableContainer
+                            id={containers[1].id}
+                            items={containers[1].items}
+                        />
+                        <MarkDown content={scrittoriCode[1]} />
+                        <DroppableContainer
+                            id={containers[2].id}
+                            items={containers[2].items}
+                        />
+                        <DroppableContainer
+                            id={containers[3].id}
+                            items={containers[3].items}
+                        />
+                        <MarkDown content={scrittoriCode[2]} />
+
+                    </div>
+                    <div className="w-[45%] flex flex-col">
+                        <h2 className="text-center font-bold text-xl m-4">Risposte</h2>
+                        <DroppableContainer
+                            id={containers.find(container => container.id === "risposte")?.id || ""}
+                            items={containers.find(container => container.id === "risposte")?.items || [{ id: "error", content: "No answers found" }]}
+                        />
+
+                    </div>
+                </div>
+            </DndContext >
         </div >
     )
 }

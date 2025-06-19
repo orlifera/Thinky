@@ -20,8 +20,8 @@ export default function StepPage() {
             </div>
             <Tabs defaultValue="step1" className="w-full">
                 <TabsList className='w-[80%] bg-primary flex m-auto'>
-                    <TabsTrigger value="step1">Risposte Step 1</TabsTrigger>
-                    <TabsTrigger value="step2">Risposte Step 2</TabsTrigger>
+                    <TabsTrigger value="step1">Risposte Step 3</TabsTrigger>
+                    <TabsTrigger value="step2">Risposte Step 4</TabsTrigger>
                 </TabsList>
                 <TabsContent value="step1">
                     <StepOneChart />
