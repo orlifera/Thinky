@@ -31,7 +31,7 @@ const markdown = [
 
         semaforoVerde(vuoto); // segnala che il buffer non è vuoto
         semaforoVerde(scaffale); // segnala che il buffer non è pieno
-} finché(condizioneVerificata);
+};
     \`\`\``,
 
     `\`\`\`cpp
@@ -55,7 +55,7 @@ const markdown = [
         
         . . .
 
-} finché(condizioneVerificata);
+};
     \`\`\``,
 ];
 

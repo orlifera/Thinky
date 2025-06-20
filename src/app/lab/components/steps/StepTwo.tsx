@@ -24,7 +24,7 @@ const scrittoriCode = [
 
 
     `\`\`\`txt
-} finché(condizioneVerificata);
+};
     \`\`\``,
 ]
 

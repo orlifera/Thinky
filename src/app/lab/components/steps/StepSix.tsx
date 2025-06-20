@@ -63,7 +63,7 @@ const lettoriCode = [
 }
 
         semaforoVerde(contatoreLettori);
-} finché (condizioneVerificata);
+};
     \`\`\`
     `,
 ]
