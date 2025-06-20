@@ -69,7 +69,7 @@ export default function StepThree() {
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="first-option-one" id="first-option-one" />
                             <Label htmlFor="first-option-one">
-                                Possono accedere solo se non ci sono altri processi
+                                Possono accedere solo se non ci sono altri lettori o scrittori
                             </Label>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -81,7 +81,7 @@ export default function StepThree() {
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="first-option-three" id="first-option-three" />
                             <Label htmlFor="first-option-three">
-                                Bloccano gli altri processi
+                                Bloccano gli altri lettori o scrittori
                             </Label>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -218,7 +218,7 @@ export default function StepThree() {
                                 onCheckedChange={checked => handleCheck(!!checked, "conflitti", setSecondCheck)}
                             />
                             <Label htmlFor="conflitti" className="font-semibold">
-                                Per evitare conflitti tra processi
+                                Per evitare conflitti tra lettori o scrittori
                             </Label>
                         </div>
                     </div>

@@ -45,6 +45,10 @@ export default function StepFour() {
                 <li>Classificazione dei comportamenti (Sicuro, Pericoloso, Neutro)</li>
                 <li>Completa la frase con la risposta corretta</li>
             </ol>
+            <blockquote className="bg-gray-300 dark:bg-gray-800 p-4 rounded m-4">
+                <p className="text-lg mb-4 text-center">Si consideri la seguente definizione di processo: </p>
+                <p className="text-lg italic">Un processo è un insieme di attività correlate o interagenti che trasformano input in output.</p>
+            </blockquote>
             <strong>Iniziamo</strong>
             <div className='w-full max-w-md mt-4 mb-16 ' aria-hidden>
                 <hr className='border-t-2 border-primary mb-4' />

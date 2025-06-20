@@ -135,15 +135,5 @@
             "ha priorità",
             "è stato richiesto da un timer"
         ]
-    },
-    {
-        "id": "16",
-        "content": "Il numLettori viene usato per...",
-        "answer": [
-            "sapere quando scrivere",
-            "gestire l'accesso",
-            "disegnare grafici",
-            "inviare dati"
-        ]
     }
 ]
