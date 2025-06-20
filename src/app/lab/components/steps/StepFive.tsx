@@ -53,7 +53,7 @@ export default function StepFive() {
         useSensor(PointerSensor, {
             activationConstraint: {
                 tolerance: 5,
-                delay: 50,
+                delay: 10,
             },
         }),
         useSensor(KeyboardSensor, {
