@@ -10,7 +10,7 @@ const scrittoriCode = [
     ripeti {
         . . .
 
-        rimuove  un elemento dal buffer e lo inserisce in daConsumare;
+        rimuove  un elemento dallo scaffale e lo inserisce in daConsumare;
 
         . . .
     \`\`\``,

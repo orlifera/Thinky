@@ -25,7 +25,7 @@ const initialContainers = [
             { id: "numLett2", content: "`numLettori = numLettori - 1`" },
             { id: "semaforoVerde-contatoreLettori2", content: "`semaforoVerde(contatoreLettori)`" },
             { id: "semaforoVerde-s", content: "`semaforoVerde(scrittura)`" },
-            { id: "read", content: "`read()`" },
+            { id: "read", content: "`Leggo()`" },
         ],
     },
 ]

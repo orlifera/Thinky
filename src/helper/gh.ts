@@ -8,13 +8,12 @@ import axios from 'axios';
  * @author [Orlando Ferazzani]
  */
 
-const REPO: string = "data"; // Repo name
-const OWNER: string = "orlifera"; // Owner of the repo
-const FILE_PATH: string = "data/users.json"; // Path to the JSON file
-const ANS_FILE_PATH = "data/chartAnswer.json"; // Path to the answers file
-
+const REPO: string = "data"; // Nome repo
+const OWNER: string = "orlifera"; // Proprietario repo
+const FILE_PATH: string = "data/users.json"; // Path del file users.json
+const ANS_FILE_PATH = "data/chartAnswer.json"; // Path del file chartAnswer.json
 const BRANCH: string = "master"; // Branch name
-const MAX_RETRIES: number = 3; // Maximum number of retry attempts for handling conflicts
+const MAX_RETRIES: number = 3; //numero massimo di tentativi in caso di conflitto
 
 // controlla se la variabile d'ambiente è definita
 if (!process.env.NEXT_PUBLIC_GITHUB_TOKEN) {
@@ -31,7 +30,7 @@ const githubApi = axios.create({
 });
 
 /**
- * Fetches users.json from the GitHub repository.
+ * Fetch users dalla repo
  */
 export const fetchUsers = async (): Promise<User[]> => {
     try {
@@ -83,12 +82,13 @@ export const addUser = async (newUser: User): Promise<User> => {
 
     const attemptUpdate = async (): Promise<User> => {
         try {
-            // Get the latest file data and SHA
+            // Prende il file e lo sha
             const fileResponse = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
             const currentSha = fileResponse.data.sha;
             const currentContent = JSON.parse(atob(fileResponse.data.content));
 
-            // Check if username already exists in the latest data
+            // Controlla se l'username esiste già
+            // e se è stato creato nelle ultime 2 ore
             const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
 
             const usernameExists = currentContent.some(
@@ -102,15 +102,15 @@ export const addUser = async (newUser: User): Promise<User> => {
                 throw new Error("Username already exists and was created recently");
             }
 
-            // Add the new user to the current list
+            // aggiunge il nuovo utente alla lista
             const updatedContent = [...currentContent, newUser];
 
-            // Update the file with optimistic locking (SHA)
+            // Aggiorna il file users.json con il nuovo utente
             await updateUsers(updatedContent, currentSha);
 
             return newUser;
         } catch (error) {
-            // Handle conflict errors (HTTP 409)
+            //Catch per i vari errori
             if (
                 typeof error === "object" &&
                 error !== null &&
@@ -127,14 +127,18 @@ export const addUser = async (newUser: User): Promise<User> => {
                 await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 700));
                 return attemptUpdate();
             }
-
-            // Rethrow any error so it propagates properly
             throw error;
         }
     };
 
     return attemptUpdate();
 };
+
+/**
+ * Prende le risposte del file chartAnswer.json.
+ * 
+ * @returns Le risposte del file chartAnswer.json
+ */
 
 export const fetchAnswers = async (): Promise<AnswerData> => {
     try {
@@ -148,6 +152,11 @@ export const fetchAnswers = async (): Promise<AnswerData> => {
     }
 };
 
+/**
+ * Aggirna il file chartAnswer.json con le risposte aggiornate.
+ * 
+ * @param updatedAnswers - Le risposte aggiornate da salvare nel file chartAnswer.json
+ */
 export const updateAnswers = async (updatedAnswers: AnswerData): Promise<void> => {
     try {
         const response = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${ANS_FILE_PATH}`);
@@ -167,3 +176,44 @@ export const updateAnswers = async (updatedAnswers: AnswerData): Promise<void> =
     }
 }
 
+
+/**
+    Azzera i dati delle risposte impostando tutto a 0.
+ */
+function resetAnswerData(obj: AnswerData): AnswerData {
+    const result: AnswerData = {} as AnswerData;
+    for (const stepKey in obj) {
+        const stepSection = obj[stepKey as keyof AnswerData];
+        if (typeof stepSection === "object" && stepSection) {
+            const sectionResult: Record<string, Record<string, number>> = {};
+            for (const questionKey in stepSection) {
+                const questionSection = stepSection[questionKey];
+                // Se è un oggetto (es: { "Scrittore": 2, "Lettore": 1 })
+                if (typeof questionSection === "object" && questionSection) {
+                    const answerResult: Record<string, number> = {};
+                    for (const answerKey in questionSection) {
+                        answerResult[answerKey] = 0;
+                    }
+                    sectionResult[questionKey] = answerResult;
+                }
+            }
+            result[stepKey as keyof AnswerData] = sectionResult;
+        }
+    }
+    return result;
+}
+
+/**
+ * Resetta tutte le statistiche delle risposte e cancella tutti gli utenti.
+ */
+export async function resetStatsAndUsers(): Promise<void> {
+    // 1. Reset statistiche risposte
+    const stats = await fetchAnswers();
+    const resetStats = resetAnswerData(stats);
+    await updateAnswers(resetStats);
+
+    // 2. Reset utenti
+    const fileResponse = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
+    const sha: string = fileResponse.data.sha;
+    await updateUsers([], sha); // lista utenti vuota
+}

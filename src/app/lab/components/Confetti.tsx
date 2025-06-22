@@ -18,7 +18,7 @@ function Confetti() {
                 variant={"default"}
                 className='p-8 text-lg'
             >
-                Celebrate!
+                Festeggia!
             </Button>
         </div>
     )

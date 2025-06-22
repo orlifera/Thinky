@@ -14,7 +14,7 @@ const markdown = [
 \`\`\`
 cpp
 // Semaforo binario
-Semaforo scrittura, mutex;
+Semaforo Scrittura, Lettura;
 
 // Contatore dei lettori inizializzato a 0
 int numLettori = 0;
@@ -24,23 +24,23 @@ int numLettori = 0;
 \`\`\`
 cpp
 do {
-    wait(mutex);
+    wait(Lettura);
     numLettori++;
     if (numLettori == 1) {
-        wait(scrittura);
+        wait(Scrittura);
     }
-    signal(mutex);
+    signal(Lettura);
 
     // ...
     // Operazioni di lettura
     // ...
 
-    wait(mutex);
+    wait(Lettura);
     numLettori--;
     if (numLettori == 0) {
         signal(scrittore);
     }
-    signal(mutex);
+    signal(Lettura);
 } while (true);
 \`\`\`
 `,
@@ -48,13 +48,13 @@ do {
 \`\`\`
 cpp
 do {
-    wait(scrittura);
+    wait(Scrittura);
 
     // ...
-    // Operazioni di scrittura
+    // Operazioni di Scrittura
     // ...
 
-    signal(scrittura);
+    signal(Scrittura);
 } while (true);
 \`\`\`
 `,
@@ -111,7 +111,7 @@ function page() {
                     </div>
                     <div className='flex items-center justify-center w-[50%] min-h-[10em] text-wrap'>
                         <p className='w-[80%] text-lg'>
-                            Le operazioni di lettura avvengono in un ciclo (in questo caso, infinito per scopi dimostrativi), in cui il lettore attende di accedere alla base di dati (wait(mutex)). Quando un lettore entra nella sezione critica, incrementa il contatore dei lettori e, se è il primo lettore, attende il semaforo binario scrittura. Quando un lettore esce dalla sezione critica, decrementa il contatore e, se è l&apos;ultimo lettore, rilascia il semaforo binario scrittura, segnalando che la base di dati è libera.
+                            Le operazioni di lettura avvengono in un ciclo (in questo caso, infinito per scopi dimostrativi), in cui il lettore attende di accedere alla base di dati (wait(Lettura)). Quando un lettore entra nella sezione critica, incrementa il contatore dei lettori e, se è il primo lettore, attende il semaforo binario Scrittura. Quando un lettore esce dalla sezione critica, decrementa il contatore e, se è l&apos;ultimo lettore, rilascia il semaforo binario Scrittura, segnalando che la base di dati è libera.
                         </p>
                     </div>
 
@@ -119,7 +119,7 @@ function page() {
                 <div className='w-full flex gap-4 m-4 p-4'>
                     <div className=' flex items-center justify-center w-[50%] min-h-[10em] text-wrap'>
                         <p className='w-[80%] text-lg'>
-                            Il processo di scrittura è simile, ma in questo caso il semaforo binario scrittura viene atteso all&apos;inizio e rilasciato alla fine. In questo modo, un lettore non può accedere alla base di dati mentre uno scrittore è in esecuzione.
+                            Il processo di Scrittura è simile, ma in questo caso il semaforo binario Scrittura viene atteso all&apos;inizio e rilasciato alla fine. In questo modo, un lettore non può accedere alla base di dati mentre uno scrittore è in esecuzione.
                         </p>
                     </div>
                     <div className='min-h-[10em] w-[50%] p-4'>

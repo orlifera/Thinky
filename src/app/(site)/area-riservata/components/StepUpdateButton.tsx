@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
+import { resetStatsAndUsers } from "@/helper/gh"
 
 interface Props {
     currentStep: number
@@ -33,13 +34,14 @@ export default function StepUpdateButton({ currentStep, onStepChange }: Props) {
                     {text}
                 </Button>
                 <Button
-                    className="bg-red-500 hover:bg-red-600 text-white"
+                    className="cursor-pointer"
                     disabled={disableBack}
                     onClick={handleBack}
                 >
                     Torna indietro allo step {currentStep - 1}
                 </Button>
-                <Button onClick={handleReset}>Resetta gli step</Button>
+                <Button onClick={handleReset} className="cursor-pointer">Resetta gli step</Button>
+                <Button onClick={() => { resetStatsAndUsers() }} className="cursor-pointer">Azzera le stats</Button>
             </div>
         </div>
     )

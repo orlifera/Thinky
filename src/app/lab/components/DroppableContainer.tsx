@@ -2,7 +2,7 @@
 
 import { useDroppable } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import Answer from "./SortableItem"
+import Answer from "./Answer"
 
 export interface Item {
     id: string
