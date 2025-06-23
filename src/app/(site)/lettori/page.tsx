@@ -19,7 +19,7 @@ const markdown = [
 \`\`\`
 cpp
 // Semaforo binario
-Semaforo Scrittura, Lettura;
+Semaforo Scrittura, contaLettori;
 
 // Contatore dei lettori inizializzato a 0
 int numLettori = 0;
@@ -29,23 +29,23 @@ int numLettori = 0;
 \`\`\`
 cpp
 ripeti {
-    semaforoRosso(Lettura);
+    semaforoRosso(contaLettori);
     numLettori = numLettori + 1;
     se numLettori = 1 {
         semaforoRosso(Scrittura);
     }
-    semaforoVerde(Lettura);
+    semaforoVerde(contaLettori);
 
     // ...
-    // Operazioni di lettura
+    // Operazioni di contaLettori
     // ...
 
-    semaforoRosso(Lettura);
+    semaforoRosso(contaLettori);
     numLettori = numLettori - 1;
     se numLettori = 0 {
         semaforoVerde(scrittore);
     }
-    semaforoVerde(Lettura);
+    semaforoVerde(contaLettori);
 };
 \`\`\`
 `,
@@ -116,7 +116,7 @@ function page() {
                     </div>
                     <div className='flex items-center justify-center w-[50%] min-h-[10em] text-wrap'>
                         <p className='w-[80%] text-lg'>
-                            Le operazioni di lettura avvengono in un ciclo (in questo caso, infinito per scopi dimostrativi), in cui il lettore attende di accedere alla base di dati (wait(Lettura)). Quando un lettore entra nella sezione critica, incrementa il contatore dei lettori e, se è il primo lettore, attende il semaforo binario Scrittura. Quando un lettore esce dalla sezione critica, decrementa il contatore e, se è l&apos;ultimo lettore, rilascia il semaforo binario Scrittura, segnalando che la base di dati è libera.
+                            Le operazioni di Lettura avvengono in un ciclo, in cui il lettore attende di accedere alla base di dati (semaforoRosso(contaLettori)). Quando un lettore entra nella sezione critica, incrementa il contatore dei lettori e, se è il primo lettore, attende il semaforo binario Scrittura. Quando un lettore esce dalla sezione critica, decrementa il contatore e, se è l&apos;ultimo lettore, rilascia il semaforo binario Scrittura, segnalando che la base di dati è libera.
                         </p>
                     </div>
 
