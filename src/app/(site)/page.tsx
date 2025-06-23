@@ -19,25 +19,23 @@ import Banner from "@/components/Banner";
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
-  // const [loading, setLoading] = useState(true);
   const [registrationError, setRegistrationError] = useState<string | null>(null);
   const { user, setUser } = useUser(); // Get user and setUser from context
 
-  // const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 
   useEffect(() => {
-    // const firstVisit = !sessionStorage.getItem("hasVisited");
-
     // setta errore a null all'inizio
     setRegistrationError(null);
 
     fetchUsers()
       .then(async (data) => {
         setUsers(data);
-
         const saved = sessionStorage.getItem("user");
         if (saved) {
           try {
+            //Setta il titolo della pagina
+            document.title = `Benvenuto ${user?.username ? user?.username : "Utente"} `;
             const parsed = JSON.parse(saved) as User;
             const exists = data.some(
               (u) => u.username === parsed.username && u.school === parsed.school
@@ -57,10 +55,6 @@ export default function Home() {
           }
         }
 
-        // if (firstVisit) await sleep(500);
-
-        // sessionStorage.setItem("hasVisited", "true");
-        // setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching users:", err);
@@ -68,7 +62,7 @@ export default function Home() {
         sessionStorage.removeItem("user");
         setUser(null);
       });
-  }, [setUser]);
+  }, [setUser, user?.username]);
 
   const handleConfirm = async (username: string, school: string, date: string): Promise<boolean> => {
     const newUser: User = { username, school, date };

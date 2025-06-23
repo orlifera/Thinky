@@ -18,12 +18,11 @@ const initialContainers = [
     {
         id: "risposte",
         items: [
-            { id: "semaforoRosso-contatoreLettori", content: "`semaforoRosso(contatoreLettori)`" },
+            { id: "semaforoRosso-contatoreLettori", content: "`semaforoRosso(Lettura)`" },
             { id: "numLett", content: "`numLettori = numLettori + 1`" },
-            { id: "semaforoVerde-contatoreLettori", content: "`semaforoVerde(contatoreLettori)`" },
+            { id: "semaforoVerde-contatoreLettori", content: "`semaforoVerde(Lettura)`" },
             { id: "semaforoRosso-s", content: "`semaforoRosso(scrittura)`" },
             { id: "numLett2", content: "`numLettori = numLettori - 1`" },
-            { id: "semaforoVerde-contatoreLettori2", content: "`semaforoVerde(contatoreLettori)`" },
             { id: "semaforoVerde-s", content: "`semaforoVerde(scrittura)`" },
             { id: "read", content: "`Leggo()`" },
         ],
@@ -38,7 +37,7 @@ const lettoriCode = [
     `,
     `\`\`\`
     txt
-    if (numLettori = 1) {
+     se numLettori = 1 {
     \`\`\`
     `,
     `\`\`\`
@@ -49,20 +48,20 @@ const lettoriCode = [
     `
     \`\`\`
     txt
-        semaforoRosso(contatoreLettori);
+        semaforoRosso(Lettura);
     \`\`\`
     `,
 
     `\`\`\`
     txt
-        if (numLettori = 0) {
+        se numLettori = 0 {
                 \`\`\`
     `,
     `\`\`\`
         txt
 }
 
-        semaforoVerde(contatoreLettori);
+        semaforoVerde(Lettura);
 };
     \`\`\`
     `,
@@ -93,7 +92,7 @@ export default function StepSix() {
     return (
         <div className="h-full w-full min-h-[calc(100dvh-22rem)] mb-8">
             <div className="w-full mb-24">
-                <h1 className="text-2xl text-center font-bold m-8">Step 4: Completa il comportamento del lettore</h1>
+                <h1 className="text-2xl text-center font-bold m-8">Step 6: Completa il comportamento del lettore</h1>
                 <p className="text-center text-xl font-semibold mb-4">
                     Adesso che sai usare il drag and drop, dovrai compilare il comportamento corretto del processo lettore.
                 </p>

@@ -1,18 +1,8 @@
-import type { Metadata } from "next";
 import { ThemeProvider } from '@/components/ThemeProvider';
 import LabNavbar from "./components/LabNavbar";
 import { UserProvider } from "@/context/UserContext";
 import Footer from "@/components/Footer";
 import "@/app/globals.css";
-
-
-
-
-
-export const metadata: Metadata = {
-    title: "Università degli Studi di Padova",
-    description: "WebApp per attività laboratoriali di OpenDay",
-};
 
 
 // Ho preso spunto dal sito womenincs per i colori e la struttura visto che comunque sarà qualcosa di "istituzionale", tutto è modificabile ovviamente

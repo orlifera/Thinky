@@ -4,10 +4,15 @@
  */
 
 
-
 import React from 'react'
 import MarkDown from '@/components/MarkDown'
 import Banner from '@/components/Banner'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Lettori e Scrittori',
+    description: 'Il problema di sincronizzazione dei lettori e degli scrittori',
+}
 
 const markdown = [
     `
@@ -23,39 +28,39 @@ int numLettori = 0;
     `
 \`\`\`
 cpp
-do {
-    wait(Lettura);
-    numLettori++;
-    if (numLettori == 1) {
-        wait(Scrittura);
+ripeti {
+    semaforoRosso(Lettura);
+    numLettori = numLettori + 1;
+    se numLettori = 1 {
+        semaforoRosso(Scrittura);
     }
-    signal(Lettura);
+    semaforoVerde(Lettura);
 
     // ...
     // Operazioni di lettura
     // ...
 
-    wait(Lettura);
-    numLettori--;
-    if (numLettori == 0) {
-        signal(scrittore);
+    semaforoRosso(Lettura);
+    numLettori = numLettori - 1;
+    se numLettori = 0 {
+        semaforoVerde(scrittore);
     }
-    signal(Lettura);
-} while (true);
+    semaforoVerde(Lettura);
+};
 \`\`\`
 `,
     `
 \`\`\`
 cpp
-do {
-    wait(Scrittura);
+ripeti {
+    semaforoRosso(Scrittura);
 
     // ...
     // Operazioni di Scrittura
     // ...
 
-    signal(Scrittura);
-} while (true);
+    semaforoVerde(Scrittura);
+};
 \`\`\`
 `,
 ];

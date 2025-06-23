@@ -3,11 +3,14 @@ import { redirect } from 'next/navigation'
 import { fetchUsers } from '@/helper/gh'
 import { User } from '@/types'
 import UserTable from './components/UserTable'
-
+import { Metadata } from 'next'
 import StepPage from './components/StepPage'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-
+export const metadata: Metadata = {
+    title: 'Area Riservata',
+    description: 'Benvenuto nell\'area riservata',
+}
 
 export default async function AreaRiservata() {
     const cookieStore = await cookies()

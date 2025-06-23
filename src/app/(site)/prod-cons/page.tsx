@@ -9,6 +9,13 @@ import React from 'react'
 import MarkDown from '@/components/MarkDown'
 import Banner from '@/components/Banner'
 import Image from 'next/image'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Produttore e Consumatore',
+    description: 'Il problema di sincronizzazione del produttore e consumatore con memoria limitata.',
+}
+
 
 const markdown = [
     `\`\`\`cpp

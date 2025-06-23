@@ -32,6 +32,10 @@ export default function UserLog({ existingUsernames, onConfirm }: {
     const errorRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false); //setta lo stato di visibilità
 
+    useEffect(() => {
+        document.title = "Registrazione Utente - Laboratorio";
+    }, []);
+
     const filter = new Filter();
     filter.addWords(...badWords);
 

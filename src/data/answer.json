@@ -121,9 +121,9 @@
         "content": "Un lettore può accedere alla risorsa quando...",
         "answer": [
             "nessun altro è attivo",
-            " non ci sono scrittori",
+            "non ci sono scrittori",
             "è il primo nel turno",
-            "ha il lock globale"
+            "ha priorità su tutto il resto"
         ]
     },
     {

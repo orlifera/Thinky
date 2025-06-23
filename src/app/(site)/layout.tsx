@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
@@ -6,14 +5,6 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { UserProvider } from "@/context/UserContext";
 import "@/app/globals.css";
-
-
-
-
-export const metadata: Metadata = {
-  title: "Laboratorio OpenDay",
-  description: "WebApp per attività laboratoriali di OpenDay",
-};
 
 
 // Ho preso spunto dal sito womenincs per i colori e la struttura visto che comunque sarà qualcosa di "istituzionale", tutto è modificabile ovviamente
