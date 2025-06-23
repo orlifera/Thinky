@@ -18,9 +18,9 @@ const initialContainers = [
     {
         id: "risposte",
         items: [
-            { id: "semaforoRosso-contatoreLettori", content: "`semaforoRosso(Lettura)`" },
+            { id: "semaforoRosso-contatoreLettori", content: "`semaforoRosso(contaLettori)`" },
             { id: "numLett", content: "`numLettori = numLettori + 1`" },
-            { id: "semaforoVerde-contatoreLettori", content: "`semaforoVerde(Lettura)`" },
+            { id: "semaforoVerde-contatoreLettori", content: "`semaforoVerde(contaLettori)`" },
             { id: "semaforoRosso-s", content: "`semaforoRosso(scrittura)`" },
             { id: "numLett2", content: "`numLettori = numLettori - 1`" },
             { id: "semaforoVerde-s", content: "`semaforoVerde(scrittura)`" },
@@ -48,7 +48,7 @@ const lettoriCode = [
     `
     \`\`\`
     txt
-        semaforoRosso(Lettura);
+        semaforoRosso(contaLettori);
     \`\`\`
     `,
 
@@ -61,7 +61,7 @@ const lettoriCode = [
         txt
 }
 
-        semaforoVerde(Lettura);
+        semaforoVerde(contaLettori);
 };
     \`\`\`
     `,
@@ -134,7 +134,7 @@ export default function StepSix() {
                             id={containers[4].id}
                             items={containers[4].items}
                         />
-                        <MarkDown content={lettoriCode[3]} />
+                        <MarkDown content={lettoriCode[3]} className="bg-red-500 dark:bg-red-600" />
                         <DroppableContainer
                             id={containers[5].id}
                             items={containers[5].items}
@@ -144,7 +144,7 @@ export default function StepSix() {
                             id={containers[6].id}
                             items={containers[6].items}
                         />
-                        <MarkDown content={lettoriCode[5]} />
+                        <MarkDown content={lettoriCode[5]} className="bg-green-500 dark:bg-green-600" />
                     </div>
                     <div className="w-[45%] flex flex-col mb-8">
                         <h2 className="text-center font-bold text-xl m-4">Risposte</h2>

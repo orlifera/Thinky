@@ -5,7 +5,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -14,7 +15,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -23,7 +25,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -32,7 +35,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -41,7 +45,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -50,7 +55,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -59,7 +65,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -68,7 +75,8 @@
         "answer": [
             "Lettore",
             "Scrittore",
-            "Nessuno"
+            "Nessuno",
+            "Entrambi"
         ]
     },
     {
@@ -76,8 +84,7 @@
         "content": "Due scrittori scrivono contemporaneamente",
         "answer": [
             "Pericoloso",
-            "Sicuro",
-            "Neutro"
+            "Sicuro"
         ]
     },
     {
@@ -85,39 +92,19 @@
         "content": "Due lettori leggono contemporaneamente.",
         "answer": [
             "Pericoloso",
-            "Sicuro",
-            "Neutro"
+            "Sicuro"
         ]
     },
     {
         "id": "11",
-        "content": "Uno scrittore aspetta che nessuno legga prima di scrivere.",
+        "content": "Lettori che leggono in sequenza uno alla volta.",
         "answer": [
             "Pericoloso",
-            "Sicuro",
-            "Neutro"
+            "Sicuro"
         ]
     },
     {
         "id": "12",
-        "content": "Un lettore legge mentre uno scrittore scrive.",
-        "answer": [
-            "Pericoloso",
-            "Sicuro",
-            "Neutro"
-        ]
-    },
-    {
-        "id": "13",
-        "content": "Lettori che leggono in sequenza uno alla volta.",
-        "answer": [
-            "Pericoloso",
-            "Sicuro",
-            "Neutro"
-        ]
-    },
-    {
-        "id": "14",
         "content": "Un lettore può accedere alla risorsa quando...",
         "answer": [
             "nessun altro è attivo",
@@ -127,12 +114,11 @@
         ]
     },
     {
-        "id": "15",
+        "id": "13",
         "content": "Uno scrittore può accedere alla risorsa solo se...",
         "answer": [
             "ci sono lettori",
             "nessuno sta leggendo o scrivendo",
-            "ha priorità",
             "è stato richiesto da un timer"
         ]
     }

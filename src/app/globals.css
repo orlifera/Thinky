@@ -167,19 +167,6 @@
   }
 }
 
-#inizia {
-  color: white
-}
-
-#inizia:visited:hover {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-#inizia:visited {
-  color: white;
-}
-
 @keyframes borderPulse {
 
   0%,

@@ -17,7 +17,7 @@ const scrittoriCode = [
     `\`\`\`txt
         . . .
 
-        inserisce nel Buffer l'elemento;
+        inserisce nello scaffale l'elemento;
 
         . . .
     \`\`\``,

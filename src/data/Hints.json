@@ -5,7 +5,7 @@
     },
     {
         "id": "second-radio",
-        "content": "💡 Cosa potrebbe succedere se due processi scrivono contemporaneamente nello stesso spazio di memoria?"
+        "content": "💡 Se due persone scrivono contemporaneamente sulla stessa riga di un foglio, cosa succede?"
     },
     {
         "id": "first-check",
@@ -57,22 +57,14 @@
     },
     {
         "id": "11",
-        "content": "💡 Serve evitare conflitti tra chi legge e chi scrive?"
-    },
-    {
-        "id": "12",
-        "content": "💡 Cosa rischia di leggere il lettore in questo caso?"
-    },
-    {
-        "id": "13",
         "content": "💡 È sicuro, ma stai usando bene le risorse?"
     },
     {
-        "id": "14",
+        "id": "12",
         "content": "💡 Il lettore può leggere se non rischia di leggere dati in fase di modifica."
     },
     {
-        "id": "15",
+        "id": "13",
         "content": "💡 Per evitare conflitti, serve esclusività totale"
     }
 ]

@@ -37,7 +37,7 @@ export default function Container({
 
                 {items.length === 0 && (
                     <div className="flex h-20 items-center justify-center rounded-md border border-dashed border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-800/30">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Drop items here</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Rilascia qua!</p>
                     </div>
                 )}
             </div>

@@ -14,10 +14,10 @@ const initialContainers = [
         id: "risposte",
         items: [
             { id: "wait-scrittura", content: "`SemaforoRosso(scrittura)`", },
-            { id: "wait-lettura", content: "`SemaforoRosso(lettura)`" },
+            { id: "wait-lettura", content: "`SemaforoRosso(contaLettori)`" },
             { id: "write", content: "`Leggo()`" },
             { id: "read", content: "`Scrivo()`" },
-            { id: "signal-lettura", content: "`SemaforoVerde(lettura)`" },
+            { id: "signal-lettura", content: "`SemaforoVerde(contaLettori)`" },
             { id: "signal-scrittura", content: "`SemaforoVerde(scrittura)`" },
 
 
