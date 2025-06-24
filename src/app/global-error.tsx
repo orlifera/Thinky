@@ -10,10 +10,8 @@ import { Button } from "@/components/ui/button"
 
 export default function GlobalError({
     error,
-    reset,
 }: {
-    error: Error & { digest?: string }
-    reset: () => void
+    error: Error & { name?: string, message?: string, digest?: string }
 }) {
     return (
         <html>
@@ -26,7 +24,7 @@ export default function GlobalError({
                             C&apos;è stato un errore, per favore prova di nuovo.
                         </AlertDescription>
                     </Alert>
-                    <Button onClick={() => reset()} className="mt-4 items-center">
+                    <Button onClick={() => window.location.reload()} className="mt-4 items-center">
                         Prova di nuovo
                     </Button>
                 </div>
