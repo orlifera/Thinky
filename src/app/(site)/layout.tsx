@@ -4,8 +4,7 @@ import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { UserProvider } from "@/context/UserContext";
-import "@/app/globals.css";
-
+import "@/app/globals.css"
 
 // Ho preso spunto dal sito womenincs per i colori e la struttura visto che comunque sarà qualcosa di "istituzionale", tutto è modificabile ovviamente
 export default function RootLayout({

@@ -32,9 +32,11 @@ export default function GlobalError({
                 </div>
                 <div className="mt-4">
                     More info:
-                    {error.name}
-                    {error.digest}
-                    {error.message}
+                    <ul>
+                        <li>{error.name}</li>
+                        <li> {error.digest}</li>
+                        <li>{error.message}</li>
+                    </ul>
                 </div>
             </body>
         </html>

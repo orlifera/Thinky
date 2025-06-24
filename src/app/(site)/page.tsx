@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import UserLog from "@/components/UserLog";
 import { fetchUsers, addUser } from "@/helper/gh";
 import { User } from "@/types";
-// import Loader from "@/components/ui/loader";
 import useUser from "@/context/UserContext";
 import { Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
@@ -15,6 +14,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import Banner from "@/components/Banner";
+
+
+throw new Error("Errore dimostrativo")
 
 
 export default function Home() {
@@ -146,7 +148,7 @@ export default function Home() {
             source="/thinky.png"
             title="BENVENUTO IN THINKY"
             text=" La prima piattaforma interattiva per farti conoscere il mondo della programmazione interamente sviluppata da UniPD."
-            username={user.username}
+            username={user?.username}
           />
           <div className="h-full w-full flex flex-col items-center justify-center gap-4">
 
@@ -194,7 +196,6 @@ export default function Home() {
 
               </div>
             </div>
-
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white mt-4 text-center">Inizia subito!</h2>
