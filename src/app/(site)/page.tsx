@@ -15,10 +15,6 @@ import {
 } from "@/components/ui/accordion"
 import Banner from "@/components/Banner";
 
-
-throw new Error("Errore dimostrativo")
-
-
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const [registrationError, setRegistrationError] = useState<string | null>(null);
