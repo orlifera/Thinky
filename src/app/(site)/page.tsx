@@ -148,6 +148,15 @@ export default function Home() {
           />
           <div className="h-full w-full flex flex-col items-center justify-center gap-4">
 
+            <div className="flex flex-col items-center justify-center w-full max-w-2xl m-4 p-4">
+              <h2 className="text-2xl font-bold text-white mt-4 text-center">Inizia subito!</h2>
+              {/* <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl bg-primary hover:bg-gradient-to-br hover:from-white/50 hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg  items-center justify-center visited:hover:text-primary">
+              <LinkIcon className="m-1" /> Vai al laboratorio
+            </Link> */}
+              <Link href="/lab" className="flex p-3 m-4 rounded bg-primary hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg items-center justify-center visited:text-green-500">
+                <LinkIcon className="m-1" /> Vai al laboratorio
+              </Link>
+            </div>
 
             <div className="grid grid-rows-3 grid-flow-col gap-[3em] w-[90%] m-auto text-center text-wrap">
               <div className="md:w-[80%] md:min-h-[10em] m-auto bg-gradient-to-r  from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 flex flex-col md:flex-row md:items-center md:justify-center">
@@ -163,6 +172,7 @@ export default function Home() {
                   />
                 </div>
               </div>
+
               <div className="md:w-[80%] md:min-h-[10em] m-auto bg-gradient-to-r  from-primary/50 to-secondary/50 rounded-lg shadow-lg p-4 flex flex-col md:flex-row md:items-center md:justify-center">
                 <p className="w-full md:w-[60%] items-center md:mx-2">
                   Metti alla prova le tue abilità con esercizi pratici: trascina blocchi, completa pseudocodice e risolvi sfide pensate per te. Ogni passo ti avvicina al mondo reale dello sviluppo software!
@@ -193,16 +203,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div>
-            <h2 className="text-2xl font-bold text-white mt-4 text-center">Inizia subito!</h2>
-            {/* <Link id="inizia" href="/lab" className="flex p-3 m-4 rounded bg-gradient-to-tl bg-primary hover:bg-gradient-to-br hover:from-white/50 hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg  items-center justify-center visited:hover:text-primary">
-              <LinkIcon className="m-1" /> Vai al laboratorio
-            </Link> */}
-            <Link href="/lab" className="flex p-3 m-4 rounded bg-primary hover:bg-white hover:text-primary hover:translate-1 hover:shadow-lg items-center justify-center visited:text-green-500">
-              <LinkIcon className="m-1" /> Vai al laboratorio
-            </Link>
-          </div>
-
 
           <div id="faq" className="flex flex-col items-center justify-center gap-4 w-full max-w-2xl m-4 p-4">
             <Accordion type="single" collapsible className="w-full max-w-2xl p-4 text-lg bg-secondary/50 rounded-lg shadow-md m-4">

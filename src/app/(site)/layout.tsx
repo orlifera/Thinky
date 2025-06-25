@@ -15,38 +15,25 @@ export default function RootLayout({
 
   return (
     <>
-      <html lang="en" suppressHydrationWarning className="scroll-smooth">
-        <head />
-        <body>
-          {/* Skip Link */}
-          <a
-            href="#main-content"
-            tabIndex={0}
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:outline-2 focus:outline-blue-500 focus:rounded"
-          >
-            Vai al contenuto
-          </a>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <UserProvider>
-              <div className="md:hidden block">
-                <Header />
-              </div>
-              <Navbar />
-              <main id="main-content" tabIndex={-1}>
-                {children}
-              </main>
-              <BackToTop />
-              <Footer />
-            </UserProvider>
-          </ThemeProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <UserProvider>
+          <div className="md:hidden block">
+            <Header />
+          </div>
+          <Navbar />
+          <div id="main-content" tabIndex={-1}>
+            {children}
+          </div>
+          <BackToTop />
+          <Footer />
+        </UserProvider>
+      </ThemeProvider>
 
-        </body>
-      </html>
     </>
   )
 }

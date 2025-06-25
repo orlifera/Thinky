@@ -13,6 +13,8 @@ const scrittoriCode = [
         produce un elemento in appena_Prodotto;
 
         . . .
+
+        semaforoRosso(Vuoto); 
     \`\`\``,
     `\`\`\`txt
         . . .
@@ -20,9 +22,9 @@ const scrittoriCode = [
         inserisce nello scaffale l'elemento;
 
         . . .
+
+        semaforoVerde(Pieno);
     \`\`\``,
-
-
     `\`\`\`txt
 } ;
     \`\`\``,
@@ -31,14 +33,10 @@ const scrittoriCode = [
 const initialContainers = [
     { id: "prima", items: [] },
     { id: "seconda", items: [] },
-    { id: "terza", items: [] },
-    { id: "quarta", items: [] },
     {
         id: "risposte",
         items: [
-            { id: "wait-empty", content: "`SemaforoRosso(Vuoto)`" },
             { id: "wait-scaffale", content: "`SemaforoRosso(Scaffale)`" },
-            { id: "signal-vuoto", content: "`SemaforoVerde(Pieno)`" },
             { id: "signal-scaffale", content: "`SemaforoVerde(Scaffale)`" },
         ],
     },
@@ -90,18 +88,11 @@ export default function StepOne() {
                             id={containers[0].id}
                             items={containers[0].items}
                         />
+
+                        <MarkDown content={scrittoriCode[1]} />
                         <DroppableContainer
                             id={containers[1].id}
                             items={containers[1].items}
-                        />
-                        <MarkDown content={scrittoriCode[1]} />
-                        <DroppableContainer
-                            id={containers[2].id}
-                            items={containers[2].items}
-                        />
-                        <DroppableContainer
-                            id={containers[3].id}
-                            items={containers[3].items}
                         />
                         <MarkDown content={scrittoriCode[2]} />
 

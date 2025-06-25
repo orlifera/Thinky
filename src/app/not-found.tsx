@@ -7,10 +7,9 @@ import { Button } from '@/components/ui/button'
 function NotFound() {
     return (
         <div>
-            <div className="relative w-full h-[calc(100vh-4rem)] pb-16">
-
+            <div className="relative w-full h-[100dvh]">
                 {/* Background Image */}
-                <div className="m-4 p-4">
+                <div>
                     <Image
                         src="/404.png"
                         alt="404"

@@ -12,24 +12,49 @@ import StepSeven from './components/steps/StepSeven'
 import { useSendAnswersOnStepChange } from '@/helper/useSendStepThree'
 import { useSendStepFourAnswersOnStepChange } from '@/helper/useSendStepFour'
 import { useEffect } from "react"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
+import { AlertCircle } from "lucide-react"
 
 
 
 export default function Page() {
 
-    const [currentStep] = useLiveStep()
+    const [currentStep, updateStep, error] = useLiveStep()
+    void updateStep // Per evitare warning su variabile non usata
     console.log("Current Step:", currentStep)
     useSendAnswersOnStepChange(currentStep ?? 0)
     useSendStepFourAnswersOnStepChange(currentStep ?? 0) // stepFour
 
     useEffect(() => {
-        document.title = `${currentStep == 0 ? 'Iniziamo!' : 'Step ' + currentStep}`
+        document.title = `${currentStep == 0 ? 'Iniziamo!' : 'Step ' + currentStep + '- Lab OpenDay - Dipartimento di Matematica , UniPd'}`
     }, [currentStep])
 
-    if (currentStep === null) {
-        return <div>Loading...</div>
+    if (!currentStep && error) {
+        return (
+            <div className="h-[calc(100vh-20em)] flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center">
+                    <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>
+                            C&apos;è stato un errore, per favore prova di nuovo.
+                        </AlertDescription>
+                    </Alert>
+                    <Button onClick={() => window.location.reload()} className="mt-4 items-center">
+                        Prova di nuovo
+                    </Button>
+                </div>
+                <div className="mt-4">
+                    More info:
+                    <ul>
+                        <li>{error?.name}</li>
+                        <li>{error?.message}</li>
+                    </ul>
+                </div>
+            </div>
+        )
     }
-
 
     const steps: React.ReactElement[] = [
         <StepZero key={0} />,
@@ -42,7 +67,7 @@ export default function Page() {
         <StepSeven key={7} />,
     ]
 
-    const percentage: number = Number((currentStep * 14.28).toFixed())
+    const percentage: number = Number(((currentStep ?? 0) * 14.28).toFixed())
 
     return (
         <>
@@ -52,7 +77,11 @@ export default function Page() {
                 </div>
                 {percentage < 100 ? <h2>Laboratorio completato: {percentage} %</h2> : <h2 className='font-semibold text-lg'>Laboratorio completato! <span aria-hidden>🎉</span></h2>}
             </div>
-            {steps[currentStep] || <div>Step non trovato</div>}
+            {
+                currentStep
+                    ? steps[currentStep]
+                    : <div>Step non trovato</div>
+            }
         </>
     )
 }
