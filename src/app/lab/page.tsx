@@ -22,7 +22,6 @@ export default function Page() {
 
     const [currentStep, updateStep, error] = useLiveStep()
     void updateStep // Per evitare warning su variabile non usata
-    console.log("Current Step:", currentStep)
     useSendAnswersOnStepChange(currentStep ?? 0)
     useSendStepFourAnswersOnStepChange(currentStep ?? 0) // stepFour
 

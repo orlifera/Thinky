@@ -59,7 +59,6 @@ export default function UserLog({ existingUsernames, onConfirm }: {
             .map(user => user.username.trim().toLowerCase());
 
         const available = randomUsername.filter(u => !recentlyUsed.includes(u.trim().toLowerCase()));
-        console.log("Available usernames:", available);
         if (available.length === 0) return "UtenteRandom"; // fallback value
         return available[Math.floor(Math.random() * available.length)];
     };

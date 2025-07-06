@@ -31,8 +31,6 @@ function LabNavbar() {
     const pathname = usePathname() //per controllare dove sono 
     const currentPage: string = pathname.split('/')[1]; // Ottieni la pagina corrente
 
-    console.log('Current page:', currentPage);
-
     const isActive = (path: string) => pathname === path
 
     useEffect(() => {

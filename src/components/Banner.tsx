@@ -40,7 +40,6 @@ function getTailwindColorClass(username?: string): string {
 
 export default function Banner({ source, title, text, username }: BannerProps) {
     const textColor = getTailwindColorClass(username);
-    console.log(getTailwindColorClass(username)); // Output: text-blue-500
     return (
         <div className="relative mx-2 px-2 w-full h-[25em] md:h-[35em] flex items-center justify-center text-white">
             <div className="absolute mb-8 inset-0 z-0 w-full" >

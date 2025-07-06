@@ -122,7 +122,6 @@ export const addUser = async (newUser: User): Promise<User> => {
                 retryCount < MAX_RETRIES
             ) {
                 retryCount++;
-                console.log(`Conflict detected, retrying... (Attempt ${retryCount} of ${MAX_RETRIES})`);
                 // Wait a small random amount of time before retrying to reduce chance of another conflict
                 await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 700));
                 return attemptUpdate();
