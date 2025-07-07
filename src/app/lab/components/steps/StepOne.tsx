@@ -14,7 +14,6 @@ const scrittoriCode = [
 
         . . .
 
-        semaforoRosso(Vuoto); 
     \`\`\``,
     `\`\`\`txt
         . . .
@@ -23,7 +22,6 @@ const scrittoriCode = [
 
         . . .
 
-        semaforoVerde(Pieno);
     \`\`\``,
     `\`\`\`txt
 } ;
