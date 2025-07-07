@@ -10,14 +10,14 @@ const scrittoriCode = [
     ripeti {
         . . .
 
-        rimuove  un elemento dallo scaffale e lo inserisce in daConsumare;
+        rimuove  un elemento dallo scaffale;
 
         . . .
     \`\`\``,
     `\`\`\`txt
         . . .
 
-        consuma l'elemento contenuto in daConsumare;
+        consuma l'elemento;
 
         . . .
     \`\`\``,
@@ -36,9 +36,7 @@ const initialContainers = [
     {
         id: "risposte",
         items: [
-            { id: "wait-empty", content: "`SemaforoRosso(Pieno)`" },
             { id: "wait-scaffale", content: "`SemaforoRosso(Scaffale)`" },
-            { id: "signal-vuoto", content: "`SemaforoVerde(Vuoto)`" },
             { id: "signal-scaffale", content: "`SemaforoVerde(Scaffale)`" },
         ],
     },
