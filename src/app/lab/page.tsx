@@ -77,7 +77,7 @@ export default function Page() {
                 {percentage < 100 ? <h2>Laboratorio completato: {percentage} %</h2> : <h2 className='font-semibold text-lg'>Laboratorio completato! <span aria-hidden>🎉</span></h2>}
             </div>
             {
-                currentStep
+                currentStep !== null
                     ? steps[currentStep]
                     : <div>Step non trovato</div>
             }
