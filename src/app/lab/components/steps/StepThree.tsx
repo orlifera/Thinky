@@ -65,7 +65,7 @@ export default function StepThree() {
                     <p className='font-semibold'>
                         1. Quale delle seguenti affermazioni riguardo ai lettori è corretta?
                     </p>
-                    <RadioGroup className='m-4' defaultValue={firstRadio} onValueChange={setFirstRadio}>
+                    <RadioGroup className='m-4' onValueChange={setFirstRadio}>
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="first-option-one" id="first-option-one" />
                             <Label htmlFor="first-option-one">
@@ -98,7 +98,7 @@ export default function StepThree() {
                     <p className='font-semibold'>
                         2. Quale è il rischio principale se più scrittori modificano una risorsa condivisa contemporaneamente?
                     </p>
-                    <RadioGroup className='m-4' defaultValue={secondRadio} onValueChange={setSecondRadio}>
+                    <RadioGroup className='m-4' onValueChange={setSecondRadio}>
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="second-option-one" id="second-option-one" />
                             <Label htmlFor="second-option-one">
