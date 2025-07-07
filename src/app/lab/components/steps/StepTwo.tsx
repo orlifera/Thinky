@@ -88,8 +88,8 @@ export default function StepTwo() {
                         />
                         <MarkDown content={scrittoriCode[1]} />
                         <DroppableContainer
-                            id={containers[2].id}
-                            items={containers[2].items}
+                            id={containers[1].id}
+                            items={containers[1].items}
                         />
                         <MarkDown content={scrittoriCode[2]} />
 
