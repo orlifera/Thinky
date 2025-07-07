@@ -10,7 +10,7 @@ const scrittoriCode = [
     ripeti {
         . . .
 
-        produce un elemento in appena_Prodotto;
+        produce un elemento;
 
         . . .
 
