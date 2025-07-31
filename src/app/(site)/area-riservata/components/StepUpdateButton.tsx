@@ -1,11 +1,18 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { resetStatsAndUsers } from "@/helper/gh"
+import { resetAllUsers } from "@/helper/User"
+import { resetStats } from "@/helper/gh"
 
 interface Props {
     currentStep: number
     onStepChange: (step: number) => Promise<void>
+}
+
+function resetStatsAndUsers() {
+    resetAllUsers();
+    resetStats();
+
 }
 
 export default function StepUpdateButton({ currentStep, onStepChange }: Props) {

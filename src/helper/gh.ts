@@ -13,14 +13,12 @@ const OWNER: string = "orlifera"; // Proprietario repo
 const FILE_PATH: string = "data/users.json"; // Path del file users.json
 const ANS_FILE_PATH = "data/chartAnswer.json"; // Path del file chartAnswer.json
 const BRANCH: string = "master"; // Branch name
-const MAX_RETRIES: number = 3; //numero massimo di tentativi in caso di conflitto
+const MAX_RETRIES: number = 3; // numero massimo di tentativi in caso di conflitto
 
-// controlla se la variabile d'ambiente è definita
 if (!process.env.NEXT_PUBLIC_GITHUB_TOKEN) {
     throw new Error("GitHub token is missing. Make sure NEXT_PUBLIC_GITHUB_TOKEN is set.");
 }
 
-// crea un'istanza di axios per l'API di GitHub
 const githubApi = axios.create({
     baseURL: "https://api.github.com",
     headers: {
@@ -34,8 +32,12 @@ const githubApi = axios.create({
  */
 export const fetchUsers = async (): Promise<User[]> => {
     try {
-        const response = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
-        const content = JSON.parse(atob(response.data.content)); // Decode Base64
+        const response = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`, {
+            headers: {
+                'Cache-Control': 'no-cache'
+            }
+        });
+        const content = JSON.parse(atob(response.data.content));
         return content.map((user: User) => ({
             ...user,
             date: user.date,
@@ -72,25 +74,38 @@ export const updateUsers = async (users: User[], sha: string): Promise<{ newSha:
     }
 };
 
+// Lock per evitare richieste parallele
+let isUpdating = false;
+
 /**
- * Helper function: prende automaticamente il file users.json e lo aggiorna con un nuovo utente.
+ * Aggiunge un nuovo utente, gestendo conflitti e duplicati recenti.
  *
  * @param newUser - The new user to add to the list
  */
 export const addUser = async (newUser: User): Promise<User> => {
+    if (isUpdating) {
+        console.warn("Update already in progress — rejecting duplicate addUser call.");
+        return Promise.reject("Update already in progress");
+    }
+
+    isUpdating = true;
     let retryCount = 0;
 
     const attemptUpdate = async (): Promise<User> => {
         try {
-            // Prende il file e lo sha
-            const fileResponse = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
+            const fileResponse = await githubApi.get(
+                `/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`,
+                {
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                }
+            );
+
             const currentSha = fileResponse.data.sha;
-            const currentContent = JSON.parse(atob(fileResponse.data.content));
+            const currentContent: User[] = JSON.parse(atob(fileResponse.data.content));
 
-            // Controlla se l'username esiste già
-            // e se è stato creato nelle ultime 2 ore
             const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
-
             const usernameExists = currentContent.some(
                 (user: User) =>
                     user.username.trim().toLowerCase() === newUser.username.trim().toLowerCase() &&
@@ -102,15 +117,11 @@ export const addUser = async (newUser: User): Promise<User> => {
                 throw new Error("Username already exists and was created recently");
             }
 
-            // aggiunge il nuovo utente alla lista
             const updatedContent = [...currentContent, newUser];
-
-            // Aggiorna il file users.json con il nuovo utente
             await updateUsers(updatedContent, currentSha);
 
             return newUser;
         } catch (error) {
-            //Catch per i vari errori
             if (
                 typeof error === "object" &&
                 error !== null &&
@@ -122,11 +133,15 @@ export const addUser = async (newUser: User): Promise<User> => {
                 retryCount < MAX_RETRIES
             ) {
                 retryCount++;
-                // Wait a small random amount of time before retrying to reduce chance of another conflict
+                console.warn(`Conflict 409 on attempt ${retryCount}, retrying...`);
                 await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 700));
                 return attemptUpdate();
             }
+
+            console.error("Fatal error in addUser:", error);
             throw error;
+        } finally {
+            isUpdating = false;
         }
     };
 
@@ -205,14 +220,8 @@ function resetAnswerData(obj: AnswerData): AnswerData {
 /**
  * Resetta tutte le statistiche delle risposte e cancella tutti gli utenti.
  */
-export async function resetStatsAndUsers(): Promise<void> {
-    // 1. Reset statistiche risposte
+export async function resetStats(): Promise<void> {
     const stats = await fetchAnswers();
     const resetStats = resetAnswerData(stats);
     await updateAnswers(resetStats);
-
-    // 2. Reset utenti
-    const fileResponse = await githubApi.get(`/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`);
-    const sha: string = fileResponse.data.sha;
-    await updateUsers([], sha); // lista utenti vuota
 }

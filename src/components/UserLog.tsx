@@ -13,13 +13,6 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { User } from "@/types";
-/**
- * @description Componente del popup per la registrazione dell'utente.
- * 
- * @returns {JSX.Element} UserLog component
- */
-
-
 
 export default function UserLog({ existingUsernames, onConfirm }: {
     existingUsernames: User[];
@@ -30,7 +23,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
     const [school, setSchool] = useState("");
     const [error, setError] = useState("");
     const errorRef = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false); //setta lo stato di visibilità
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         document.title = "Registrazione Utente - Laboratorio";
@@ -45,7 +38,6 @@ export default function UserLog({ existingUsernames, onConfirm }: {
         }
     }, [error]);
 
-    //ritorna un nome casuale tra quelli della lista che non sia già in uso
     const getRandomUsername = () => {
         const now = new Date();
         const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
@@ -59,7 +51,7 @@ export default function UserLog({ existingUsernames, onConfirm }: {
             .map(user => user.username.trim().toLowerCase());
 
         const available = randomUsername.filter(u => !recentlyUsed.includes(u.trim().toLowerCase()));
-        if (available.length === 0) return "UtenteRandom"; // fallback value
+        if (available.length === 0) return "UtenteRandom";
         return available[Math.floor(Math.random() * available.length)];
     };
 
@@ -71,21 +63,18 @@ export default function UserLog({ existingUsernames, onConfirm }: {
         lower.split(/\s+/).some(word => filter.isProfane(word));
 
     function checkUsers(): boolean {
-        // Only block usernames used in the last 2 hours (case-insensitive)
         const now = new Date();
         const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
 
         return existingUsernames.some(user => {
             if (!user.username || !user.date) return false;
             const userDate = new Date(user.date);
-            // Compare usernames case-insensitively
             return (
                 user.username.trim().toLowerCase() === (username ?? "").trim().toLowerCase() &&
                 userDate > twoHoursAgo
             );
         });
     }
-
 
     const handleSubmit = async () => {
         if (!trimmed || !school) {

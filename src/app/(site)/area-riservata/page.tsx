@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { fetchUsers } from '@/helper/gh'
+import { fetchUsers } from '@/helper/User'
 import { User } from '@/types'
 import UserTable from './components/UserTable'
 import { Metadata } from 'next'

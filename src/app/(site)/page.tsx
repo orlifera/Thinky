@@ -1,7 +1,7 @@
-"use client";
+'use client'
 import { useEffect, useState } from "react";
 import UserLog from "@/components/UserLog";
-import { fetchUsers, addUser } from "@/helper/gh";
+import { fetchUsers, addUser } from "@/helper/User"; // <-- usa firebase
 import { User } from "@/types";
 import useUser from "@/context/UserContext";
 import { Link as LinkIcon } from "lucide-react";
@@ -18,12 +18,9 @@ import Banner from "@/components/Banner";
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const [registrationError, setRegistrationError] = useState<string | null>(null);
-  const { user, setUser } = useUser(); // Get user and setUser from context
-
-
+  const { user, setUser } = useUser();
 
   useEffect(() => {
-    // setta errore a null all'inizio
     setRegistrationError(null);
 
     fetchUsers()
@@ -32,31 +29,26 @@ export default function Home() {
         const saved = sessionStorage.getItem("user");
         if (saved) {
           try {
-            //Setta il titolo della pagina
             document.title = `Benvenuto ${user?.username ? user?.username : "Utente"} `;
             const parsed = JSON.parse(saved) as User;
             const exists = data.some(
               (u) => u.username === parsed.username && u.school === parsed.school
             );
             if (exists) {
-              setUser(parsed); // update context only
+              setUser(parsed);
             } else {
-              // se l'utente non esiste più, rimuovilo da sessionStorage
               sessionStorage.removeItem("user");
               setUser(null);
             }
           } catch (e) {
-            //controlla se l'oggetto salvato è valido
             console.error("Invalid user data in session storage", e);
             sessionStorage.removeItem("user");
             setUser(null);
           }
         }
-
       })
       .catch((err) => {
         console.error("Error fetching users:", err);
-        // setLoading(false);
         sessionStorage.removeItem("user");
         setUser(null);
       });
@@ -65,41 +57,26 @@ export default function Home() {
   const handleConfirm = async (username: string, school: string, date: string): Promise<boolean> => {
     const newUser: User = { username, school, date };
 
-    // Block only if username was used in the last 2 hours
-    const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
-    const taken = users.some(
-      (u) =>
-        u.username === username &&
-        new Date(u.date).getTime() > twoHoursAgo.getTime()
-    );
-    if (taken) {
-      setRegistrationError("Questo nome utente è già stato preso. Prova con un altro nome.");
-      return false;
-    }
-
     try {
-      setUser(null);
-      sessionStorage.removeItem("user");
-
-      // Prova a registrare l'utente
       await addUser(newUser);
-
-      // Se la registrazione ha successo, aggiorna lo stato dell'utente
       setUser(newUser);
       sessionStorage.setItem("user", JSON.stringify(newUser));
-
-      // Aggiorna la lista degli utenti
-      const updatedUsers = await fetchUsers();
-      setUsers(updatedUsers);
-      setRegistrationError(null);
-
       return true;
-    } catch (error) {
-      console.error("Registration error:", error);
+    } catch (error: unknown) {
       setUser(null);
       sessionStorage.removeItem("user");
 
-      setRegistrationError("Errore durante la registrazione. Riprova più tardi.");
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as { message?: string }).message === "string" &&
+        (error as { message: string }).message.includes("already exists")
+      ) {
+        setRegistrationError("Questo nome utente è già stato preso ora da un altro partecipante. Scegli un altro nome.");
+      } else {
+        setRegistrationError("Errore durante la registrazione. Riprova più tardi.");
+      }
       return false;
     }
   };
@@ -129,6 +106,7 @@ export default function Home() {
 
       {/* Mostra il forma solo se è la prima volta o se non è loggato */}
       {!user && !registrationError && (
+        console.log(users),
         <div className="w-full h-screen flex items-center justify-center">
           <UserLog
             existingUsernames={users}
